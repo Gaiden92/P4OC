@@ -120,11 +120,15 @@ class PlayerView:
         return column if verify_column_to_update(column) else self.ask_column_update()
     
 
-    def ask_data(self, column_name)->str or function:
+    def ask_data(self, column_name:str)->str or function:
         """Demande à l'utilisateur d'entrer la nouvelle caractéristique du joueur
 
+        Arguments:
+            column_name -- la caractéristique à modifier
+             
         Returns:
             str or function: le choix de l'utilisateur si entrée valide sinon la fonction est rappellée.
+
         """
         data = input("Entrer la nouvelle donnée :  ")
         return data if verify_data(column_name, data ) else self.ask_data(column_name)
