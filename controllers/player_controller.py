@@ -29,8 +29,10 @@ class PlayerController:
 
     def list_players(self):
         players = self.model.get_all_players()
-        self.view.display_all_players(players)
-
+        if players:
+            self.view.display_all_players(players)
+        else:
+            self.view.no_existing_players_view()
 
 
     def create_player(self):
@@ -80,9 +82,9 @@ class PlayerController:
         if not verify_column_to_update(column_number):
             return self.view.ask_column_update()
         
-        update = self.view.ask_data_to_update(column_number)
+        update = self.view.ask_data(column_number)
         if not verify_data(column_number, update):
-            return self.view.ask_data_to_update(column_number)
+            return self.view.ask_data(column_number)
 
         column_name = get_column_name_by_number(column_number)
 
@@ -104,12 +106,8 @@ class PlayerController:
         lastname  = lastname.capitalize()
         firstname = firstname.capitalize()
 
-        if self.is_exist(lastname, firstname):
-            self.model.delete_player(lastname, firstname)
+        if self.model.delete_player(lastname, firstname):
             self.view.success_remove_player_view()
         else:
             self.view.player_no_exist_view()
         
-
-    def is_exist(self, lastname, firstname):
-        return True if self.model.player_table.get((self.model.player_query.lastname == lastname) and (self.model.player_query.firstname == firstname)) else False

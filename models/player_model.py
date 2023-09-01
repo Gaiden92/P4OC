@@ -63,5 +63,8 @@ class PlayerModel:
         
 
     def delete_player(self, lastname, firstname):
-        self.player_table.remove((self.player_query.lastname == lastname) and (self.player_query.firstname == firstname))
+        if self.player_table.remove((self.player_query.lastname == lastname) and (self.player_query.firstname == firstname)):
+            return True
+        else:
+            False
         

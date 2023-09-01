@@ -1,34 +1,5 @@
 {
-    "players": {
-        "4": {
-            "lastname": "Danho",
-            "firstname": "Akrey",
-            "gender": "h",
-            "birthdate": "18-09-1970",
-            "rank": "5"
-        },
-        "5": {
-            "lastname": "Pottier",
-            "firstname": "Eddi",
-            "gender": "h",
-            "birthdate": "06-10-1950",
-            "rank": "3"
-        },
-        "6": {
-            "lastname": "Derfoufi",
-            "firstname": "Morgan",
-            "gender": "h",
-            "birthdate": "06-10-1987",
-            "rank": "2"
-        },
-        "7": {
-            "lastname": "Fouchal",
-            "firstname": "Sami",
-            "gender": "h",
-            "birthdate": "02-08-1987",
-            "rank": "0"
-        }
-    },
+    "players": {},
     "tournois": {
         "1": {
             "name": "tournoi",
