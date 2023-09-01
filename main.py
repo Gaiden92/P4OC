@@ -1,6 +1,6 @@
 from controllers.tournament_controller import TournamentController
 from controllers.player_controller import PlayerController
-
+import tableprint  as tp
 
 def main():
     database = "db.json"
@@ -8,7 +8,7 @@ def main():
     player_controller = PlayerController(database)
 
     while True:
-        print("=== MAIN MENU ===")
+        tp.banner("MAIN MENU          ")
         print("1. Manage Tournaments")
         print("2. Manage Players")
         print("3. Reports")

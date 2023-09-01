@@ -1,5 +1,5 @@
-from functions.functions import *
-
+import functions as f
+import tableprint  as tp
 class PlayerView:
     
     def display_players_menu(self)->str:
@@ -8,7 +8,8 @@ class PlayerView:
         Returns:
             str: le choix de l'utilisateur.
         """
-        print("=== PLAYERS MENU ===")
+        tp.banner("PLAYERS MENU         ")
+
         print("1. Create new player")
         print("2. List all players")
         print("3. Edit existing player")
@@ -29,10 +30,12 @@ class PlayerView:
             players (list): une liste d'objets <joueur>.
         """
         nb_player = len(players)
-        print(f"Liste des joueurs ({nb_player}): ")
+        print(f"Nombre de joueurs total : {nb_player}")
+        headers = tp.header(['Nom', 'Prénom', 'Genre', 'Né le', 'Classement'],20)
+        print(headers)
         for player in players:
-            print(player)
-            
+            print(tp.row([player.lastname, player.firstname, player.gender, player.birthdate, player.rank], 20))
+        print(tp.bottom(5, 20))
 
     def get_player(self, player:object)->None:
         """Affiche les caractéristiques d'un joueur présent en base de donnée.
@@ -53,7 +56,7 @@ class PlayerView:
         """
         lastname = input("Quel est le nom du joueur? ")
 
-        return lastname  if information_is_ok(lastname) else self.ask_lastname()
+        return lastname  if f.information_is_ok(lastname) else self.ask_lastname()
             
         
     def ask_firstname(self)->str or function:
@@ -64,7 +67,7 @@ class PlayerView:
         """
         firstname = input("Quel est le prénom du joueur? ")
 
-        return firstname if information_is_ok(firstname) else self.ask_firstname()
+        return firstname if f.information_is_ok(firstname) else self.ask_firstname()
 
     def ask_gender(self)->str or function:
         """Demande à l'utilisateur son genre
@@ -74,7 +77,7 @@ class PlayerView:
         """
         gender = input("Quel est votre sexe (masculin ou féminin) ? \n [H/F]")
         
-        return gender if gender_is_ok(gender) else self.ask_gender()
+        return gender if f.gender_is_ok(gender) else self.ask_gender()
 
 
     def ask_birth_date(self)->str or function:
@@ -85,7 +88,7 @@ class PlayerView:
         """
         birth_date = input("Quel est votre date de naissance (format dd-mm-yyyy) ? ")
     
-        return birth_date if birth_is_ok(birth_date) else self.ask_birth_date()
+        return birth_date if f.birth_is_ok(birth_date) else self.ask_birth_date()
     
     def ask_rank(self)->str or function:
         """Demande à l'utilisateur son classement
@@ -95,7 +98,7 @@ class PlayerView:
         """
         rank = input("Quel est le rang du joueur ? ")
 
-        return rank if ranking_is_ok(rank) else self.ask_rank()
+        return rank if f.ranking_is_ok(rank) else self.ask_rank()
 
 
     def ask_add_another_player(self)->str or function:
@@ -106,7 +109,7 @@ class PlayerView:
         """
         continu =  input("Voulez-vous ajouter un autre joueur ? [y/n] ")
 
-        return continu if verify_continu(continu) else self.ask_add_another_player() 
+        return continu if f.verify_continu(continu) else self.ask_add_another_player() 
     
 
     def ask_column_update(self)->str or function:
@@ -117,13 +120,13 @@ class PlayerView:
         """
         column = input("Quelle colonne souhaitez vous modifier : \n 1. Nom\n 2. Prénom\n 3. Genre\n 4. Birthdate\n 5. Rank`\n ")
     
-        return column if verify_column_to_update(column) else self.ask_column_update()
+        return column if f.verify_column_to_update(column) else self.ask_column_update()
     
 
     def ask_data(self, column_name:str)->str or function:
         """Demande à l'utilisateur d'entrer la nouvelle caractéristique du joueur
 
-        Arguments:
+        Args:
             column_name -- la caractéristique à modifier
              
         Returns:
@@ -131,7 +134,7 @@ class PlayerView:
 
         """
         data = input("Entrer la nouvelle donnée :  ")
-        return data if verify_data(column_name, data ) else self.ask_data(column_name)
+        return data if f.verify_data(column_name, data ) else self.ask_data(column_name)
             
     def success_add_player_view(self)->None:
         """Informe l'utilisateur que le joueur a été créé avec succès

@@ -1,5 +1,41 @@
 {
-    "players": {},
+    "players": {
+        "1": {
+            "lastname": "Fouchal",
+            "firstname": "Sami",
+            "gender": "h",
+            "birthdate": "02-08-1987",
+            "rank": "1"
+        },
+        "2": {
+            "lastname": "Agouassey",
+            "firstname": "Akrey",
+            "gender": "h",
+            "birthdate": "30-09-1970",
+            "rank": "1"
+        },
+        "3": {
+            "lastname": "Fouchal",
+            "firstname": "Ouahid",
+            "gender": "h",
+            "birthdate": "03-05-1983",
+            "rank": "2"
+        },
+        "4": {
+            "lastname": "Pottier",
+            "firstname": "Hedi",
+            "gender": "h",
+            "birthdate": "01-12-1980",
+            "rank": "2"
+        },
+        "5": {
+            "lastname": "Van Damme",
+            "firstname": "Jean Claude",
+            "gender": "h",
+            "birthdate": "01-01-1990",
+            "rank": "5"
+        }
+    },
     "tournois": {
         "1": {
             "name": "tournoi",

@@ -1,6 +1,6 @@
 from models.player_model import PlayerModel, Player
 from views.player_view import PlayerView
-from functions.functions import *
+import functions as f
 
 class PlayerController:
     def __init__(self, database ) -> None:
@@ -38,23 +38,23 @@ class PlayerController:
     def create_player(self):
 
         lastname = self.view.ask_lastname()
-        if not information_is_ok(lastname):
+        if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
         
-        firstname   = self.view.ask_firstname()    
-        if not information_is_ok(firstname):
+        firstname = self.view.ask_firstname()    
+        if not f.information_is_ok(firstname):
             return self.view.ask_firstname()
         
-        gender      = self.view.ask_gender()
-        if not gender_is_ok(gender):
+        gender = self.view.ask_gender()
+        if not f.gender_is_ok(gender):
             return self.view.ask_gender()
         
-        birthdate   = self.view.ask_birth_date() 
-        if not birth_is_ok(birthdate):
+        birthdate = self.view.ask_birth_date() 
+        if not f.birth_is_ok(birthdate):
             return self.view.ask_birth_date()
         
-        rank        = self.view.ask_rank()
-        if not ranking_is_ok(rank):
+        rank = self.view.ask_rank()
+        if not f.ranking_is_ok(rank):
             return self.view.ask_rank()
 
         
@@ -71,22 +71,22 @@ class PlayerController:
     def update_player(self):
         
         lastname = self.view.ask_lastname()
-        if not information_is_ok(lastname):
+        if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
         
         firstname = self.view.ask_firstname()
-        if not information_is_ok(firstname):
+        if not f.information_is_ok(firstname):
             return self.view.ask_firstname()
         
         column_number = self.view.ask_column_update()
-        if not verify_column_to_update(column_number):
+        if not f.verify_column_to_update(column_number):
             return self.view.ask_column_update()
         
         update = self.view.ask_data(column_number)
-        if not verify_data(column_number, update):
+        if not f.verify_data(column_number, update):
             return self.view.ask_data(column_number)
 
-        column_name = get_column_name_by_number(column_number)
+        column_name = f.get_column_name_by_number(column_number)
 
         if self.model.update_player(update, column_name, lastname, firstname):
             return self.view.success_editing_player_view()
@@ -95,15 +95,15 @@ class PlayerController:
         
 
     def remove_player(self):
-        lastname    = self.view.ask_lastname()
-        if not information_is_ok(lastname):
+        lastname = self.view.ask_lastname()
+        if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
         
-        firstname   = self.view.ask_firstname()
-        if not information_is_ok(firstname):
+        firstname = self.view.ask_firstname()
+        if not f.information_is_ok(firstname):
             return self.view.ask_firstname()
         
-        lastname  = lastname.capitalize()
+        lastname = lastname.capitalize()
         firstname = firstname.capitalize()
 
         if self.model.delete_player(lastname, firstname):

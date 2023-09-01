@@ -11,13 +11,13 @@ class Player:
 
 
     def __str__(self) -> str:
-        return  f'Nom : {self.lastname}\n'\
-                f'Prénom : {self.firstname}\n'\
-                f'Date de naissance : {self.birthdate}\n'\
-                f'Sexe : {self.gender}\n'\
-                f'Classement : {self.rank}\n'
+        return  f"{self.lastname} | {self.firstname} | {self.birthdate} | {self.gender} | {self.rank} |"
 
-
+        # f'Nom : {self.lastname}\n'\
+        #         f'Prénom : {self.firstname}\n'\
+        #         f'Date de naissance : {self.birthdate}\n'\
+        #         f'Sexe : {self.gender}\n'\
+        #         f'Classement : {self.rank}\n'
 
 
 
@@ -42,7 +42,7 @@ class PlayerModel:
 
     def get_all_players(self):
         all_players = self.player_table.all()
-
+        
         all_players_list = [ Player( player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank'] ) for player in all_players ]
         
         return all_players_list
