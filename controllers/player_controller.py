@@ -68,25 +68,29 @@ class PlayerController:
             
     def update_player(self):
         
-        lastname          = self.view.ask_lastname()
+        lastname = self.view.ask_lastname()
         if not information_is_ok(lastname):
             return self.view.ask_lastname()
         
-        firstname         = self.view.ask_firstname()
+        firstname = self.view.ask_firstname()
         if not information_is_ok(firstname):
             return self.view.ask_firstname()
         
-        column_number     = self.view.ask_column_update()
+        column_number = self.view.ask_column_update()
         if not verify_column_to_update(column_number):
             return self.view.ask_column_update()
         
-        update            = self.view.ask_data_to_update(column_number)
+        update = self.view.ask_data_to_update(column_number)
         if not verify_data(column_number, update):
             return self.view.ask_data_to_update(column_number)
 
         column_name = get_column_name_by_number(column_number)
 
-        self.model.update_player(update, column_name, lastname, firstname) 
+        if self.model.update_player(update, column_name, lastname, firstname):
+            return self.view.success_editing_player_view()
+        else:
+            return self.view.failed_editing_player_view()
+        
 
     def remove_player(self):
         lastname    = self.view.ask_lastname()

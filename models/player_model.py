@@ -11,11 +11,11 @@ class Player:
 
 
     def __str__(self) -> str:
-        print(f"Nom : {self.lastname}")
-        print(f"Prénom : {self.firstname}")
-        print(f"Date de naissance : {self.birthdate}")
-        print(f"Sexe : {self.gender}")
-        print(f"Rang : {self.rank}")
+        return  f'Nom : {self.lastname}\n'\
+                f'Prénom : {self.firstname}\n'\
+                f'Date de naissance : {self.birthdate}\n'\
+                f'Sexe : {self.gender}\n'\
+                f'Classement : {self.rank}\n'
 
 
 
@@ -41,10 +41,11 @@ class PlayerModel:
 
 
     def get_all_players(self):
-        players = self.player_table.all()
+        all_players = self.player_table.all()
 
-        return [ Player( player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank'] ) for player in players ]
-
+        all_players_list = [ Player( player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank'] ) for player in all_players ]
+        
+        return all_players_list
 
 
     def get_player(self, lastname):
@@ -52,11 +53,14 @@ class PlayerModel:
         if player:
             return Player(player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank']) 
         else:
-            None    
+            return None    
 
     def update_player(self, updates, column, lastname, firstname):
-        self.player_table.update({column : updates}, (self.player_query.lastname == lastname) and (self.player_query.firstname == firstname))
-        print("colonne = ",column, "data = ", updates )
+        if self.player_table.update({column : updates}, (self.player_query.lastname == lastname) and (self.player_query.firstname == firstname)):
+            return True
+        else:
+            return False
+        
 
     def delete_player(self, lastname, firstname):
         self.player_table.remove((self.player_query.lastname == lastname) and (self.player_query.firstname == firstname))

@@ -18,10 +18,11 @@ class PlayerView:
 #         
 
     def display_all_players(self, players):
-        print("Liste des joueurs : ")
+        nb_player = len(players)
+        print(f"Liste des joueurs ({nb_player}): ")
         for player in players:
-            print(f"- {player.lastname} {player.firstname} ")
-
+            print(player)
+            
         
 
     def get_player(self, player):
@@ -59,7 +60,7 @@ class PlayerView:
 
 
     def ask_add_another_player(self):
-        continu =  input("Voulez vous ajouter un autre joueur ? [y/n] ")
+        continu =  input("Voulez-vous ajouter un autre joueur ? [y/n] ")
 
         return continu if verify_continu(continu) else self.ask_add_another_player() 
     
@@ -71,11 +72,17 @@ class PlayerView:
     
 
     def ask_data_to_update(self, column_name):
-        data = input("Entrer la nouvelle donnée. ")
+        data = input("Entrer la nouvelle donnée :  ")
         return data if verify_data(column_name, data ) else self.ask_data_to_update(column_name)
             
     def success_add_player_view(self):
         print(f"Le joueur a été ajouté avec succès ! ")
+
+    def success_editing_player_view(self):
+        print(f"Le joueur a été modifié avec succès ! ")
+
+    def failed_editing_player_view(self):
+        print(f"Le joueur n'a pas pu être modifié.")
 
     def success_remove_player_view(self):
         print(f"Le joueur a été supprimé avec succès ! ")

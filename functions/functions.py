@@ -34,8 +34,6 @@ def verify_column_to_update(variable)-> bool:
     return False if not variable.isnumeric() or int(variable) > 5 or int(variable) == 0 else True
 
 def verify_data(column_name:str, data)->bool:
-    print(column_name)
-
     match column_name:
         case  "1":
             return False if  not information_is_ok(data) else True
