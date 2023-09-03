@@ -3,21 +3,25 @@ from views.player_view import PlayerView
 import functions as f
 
 class PlayerController:
-    def __init__(self, database ) -> None:
+    def __init__(self, database)->None:
         self.model = PlayerModel(database)
         self.view = PlayerView()
 
-    def get_players_menu(self):
+    def get_players_menu(self)->None:
+        """Contrôle les entrées du menu joueur
+        """
         choice = self.view.display_players_menu()
 
         match choice:
             case "1":
                 self.create_player()
             case "2":
-                self.list_players()
+                self.list_player_controller()
             case "3":
-                self.update_player()
+                self.list_players_controller()
             case "4":
+                self.update_player()
+            case "5":
                 self.remove_player()
             case "b":
                 return 
@@ -25,9 +29,20 @@ class PlayerController:
                 print("Choix invalide. Veuillez réessayer.")
 
         
+    def list_player_controller(self)->None:
+        """Contrôle si un joueur est présent dans la base de donnée
+        """
+        lastname = self.view.ask_lastname()
+        firstname = self.view.ask_firstname()
+        player = self.model.get_player(lastname, firstname)
+        if player:
+            self.view.display_player_view(player)
+        else:
+            self.view.no_existing_players_view()
 
-
-    def list_players(self):
+    def list_players_controller(self)->None :
+        """Contrôle si un/des joueur(s) est/sont présent(s) dans la base de donnée
+        """
         players = self.model.get_all_players()
         if players:
             self.view.display_all_players(players)

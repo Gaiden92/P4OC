@@ -1,5 +1,6 @@
 from functions import *
 from datetime import date, datetime
+import tableprint as tp
 class TournamentView:
 
     def display_tournaments_menu(self):
@@ -56,16 +57,26 @@ class TournamentView:
     def display_rounds(self, rounds):
         for round in rounds:
             matchs = round['matchs']
-            print(f" - Round n°{round['name']} : ") 
-            for i, match in enumerate(matchs):
-                print(f"    {i+1}. ", end="")
-                for index, player in enumerate(match):
-                    print("", end="") if index == 0 else print("", end="")
-                    print(f'{player[0]["lastname"]} {player[0]["firstname"]} (points cumulés: {player[0]["score"]})', end="")
-                    print(" VS ", end="") if index == 0 else print("", end="")
-                    print(" (match terminé) ", end='') if len(player) >= 2 and index == 1 else print("", end='')
-                print()
-            print(f"    Ce round est terminé.") if self.is_round_finish(round) else print(f"    Round en cours.")
+            status = "terminé" if self.is_round_finish(round) else "en cours"
+            tp.banner(f'RONDE N°{round["name"]} ({status})              ', 50)
+            header = tp.header(["Match"], 50, align="center")
+            print(header)
+            for match in matchs:
+                match_str = ""
+                for index, informations_player in enumerate(match):
+                    
+                    player_name = informations_player[0]
+                    player_score = informations_player[1]
+                    if index == len(match)-1:
+                        match_str += f"{player_name}"
+                    else:
+                        
+                        match_str += f"{player_name} VS "
+
+                row = tp.row(match_str.split(","), 50, align="center")
+                print(row)                   
+            
+            print(tp.bottom(1, 50))
 
 
     def is_round_finish(self, round):
@@ -75,8 +86,10 @@ class TournamentView:
         return True if tournament.end_date != "" else False
 
     def success_creation_tournament(self):
-        print("Le tournoi a été crée avec succès")
+        print("Le tournoi a été crée avec succès ! ")
 
+    def failed_creation_tournament(self):
+        print("La création du tournoi a échoué ! ")
 
     def ask_name_tournament(self):
         name = input("Entrer le nom du tournoi : ")
@@ -108,13 +121,18 @@ class TournamentView:
     def ask_results(self, matchs_list):
         nb_match = 1
         while nb_match <= len(matchs_list):
-            match = matchs_list[int(nb_match)-1]
-                    
-            print(f'Vous allez entrer les résultats du match n°{nb_match} : {match[0][0]["lastname"]} {match[0][0]["firstname"]} VS {match[1][0]["lastname"]} {match[1][0]["firstname"]}')
-            for i,value in enumerate(match):
+            player = matchs_list[int(nb_match)-1]
+            player1 = player[0]
+            player2 = player[1]
+            player1_name = player1[0]
+            player2_name = player2[0]
+
+            print(f'Vous allez entrer les résultats du match n°{nb_match} : {player1_name} VS {player2_name} ')
+            for index,value in enumerate(player):
                 
-                score = input(f'Entrez le score du joueur {value[0]["lastname"]} : ')
-                value[0]["score"] += float(score)
+                score = input(f'Entrez le score du joueur {player[index][0]} : ')
+
+                player[index][1] += float(score)
 
             nb_match+=1
         return matchs_list
@@ -122,7 +140,7 @@ class TournamentView:
 
     def tournament_is_over(self, winner):
         print("Le tournoi est fini ! ")
-        print(f"le vainqueur du tournoi est : {winner}")
+        print(f'le vainqueur du tournoi est : {winner["name"]} avec un score final de {winner["score"]}')
 
     def forbidden_modify_tournament(self, tournament):
         print(f'Le tournoi "{tournament.name}" est terminé. Vous ne pouvez plus entrer de résulats.')
@@ -131,5 +149,8 @@ class TournamentView:
         print("Il n'y a aucun tournoi en base de donnée !")
 
     def display_tournament_results(self, results):
-        for results in results:
-            print(results)
+        header = tp.header(["Nom", "Score", "Classement"], 15)
+        print(header)
+        for index, player in enumerate(results):
+                print(tp.row([player["name"], player["score"], index+1 ],15))
+        print(tp.bottom(3,15))

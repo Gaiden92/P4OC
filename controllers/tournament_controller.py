@@ -52,11 +52,12 @@ class TournamentController:
                     print("Choix invalide. Veuillez réessayer.")
 
     def create_tournament(self):
-        name        = self.view.ask_name_tournament()
+        # vérification des entrées de l'utilisateur
+        name = self.view.ask_name_tournament()
         if not information_is_ok(name):
             return self.view.ask_name_tournament()
         
-        location    = self.view.ask_location_tournament()
+        location = self.view.ask_location_tournament()
         if not information_is_ok(location):
             return self.view.ask_location_tournament()
         
@@ -64,24 +65,33 @@ class TournamentController:
         if not information_is_ok(description):
             return self.view.ask_description_tournament()
         
-        nb_turns    = self.view.ask_nb_turns()
+        nb_turns = self.view.ask_nb_turns()
         if not ranking_is_ok(nb_turns):
             return self.view.ask_nb_turns()
         
-        # players = [player.doc_id for player in self.player_model.player_table.all()]
-        players = [{"lastname" : player.lastname, "firstname" : player.firstname, "rank" : player.rank, "score" : 0} for i, player in enumerate(self.player_model.get_all_players())]
+        list_players = []
+        list_players_serialized = []
+        #players = [player.doc_id for player in self.player_model.player_table.all()]
+
+        # ajout des joueurs au tournoi
+        for player in self.player_model.get_all_players():
+            list_players.append(player)
+            list_players_serialized.append(player.serialize_player())
+
+        # création du 1er round
         rounds_list = []
-        rounds = Round(nb_turns)
-        
-        rounds.matches = rounds.generate_swiss_pairing(players)
-        rounds = rounds.serialize_round()
-        rounds_list.append(rounds)
-        players_ids = [player.doc_id for player in self.player_model.player_table.all()]
+        rounds = Round()
+        rounds.matchs = rounds.generate_first_round(list_players)
+        rounds_serialize = rounds.serialize_round()
+        rounds_list.append(rounds_serialize)
 
-        tournament = Tournament(name, location, rounds_list, players,description, nb_turns)
 
-        self.model.create_tournament(tournament)
-        self.view.success_creation_tournament()
+        tournament = Tournament(name, location, rounds_list, list_players_serialized, description, nb_turns)
+
+        if self.model.create_tournament(tournament):
+            self.view.success_creation_tournament()
+        else:
+            self.view.failed_creation_tournament()
         
 
     def list_tournaments(self):
@@ -125,7 +135,7 @@ class TournamentController:
             if tournament.end_date != "":
                 self.view.forbidden_modify_tournament(tournament)
             else:
-                self.view.display_tournament(tournament)
+                self.view.display_rounds(tournament.rounds)
                 
                 for round in tournament.rounds:
                     if round["end_date"] == "":
@@ -137,8 +147,8 @@ class TournamentController:
 
                 if round["name"] == int(tournament.nb_turn):
                     tournament.end_date = str(date.today())
-                    winner = self.get_tournament_results_by_tournament(tournament)[0]
-                    self.view.tournament_is_over(winner)
+                    tournament_winner = self.get_tournament_results_by_tournament(tournament)[0]
+                    self.view.tournament_is_over(tournament_winner)
                     self.model.update_round_tournament(tournament, tournament.name)
                 else:
                     # création du prochain round
@@ -155,7 +165,7 @@ class TournamentController:
         round = Round()
         matchs_previous_round = previous_round["matchs"]
         round.name = previous_round['name']
-        round.matchs = round.generate_swiss_pairing_bis(matchs_previous_round)
+        round.matchs = round.generate_swiss_pairing(matchs_previous_round)
 
         return round
 
@@ -163,13 +173,15 @@ class TournamentController:
     def get_tournament_results_by_tournament(self, tournament):
         last_round = tournament.rounds[-1]
         matchs = last_round["matchs"]
-        tab_results = []
+        list_tournament_results = []
         for match in matchs:
-            for players in match:
-                for player in players:
-                    tab_results.append(f'{player["lastname"]} {player["firstname"]} avec un score total de {player["score"]} points.')
-         
-        return tab_results
+            for player_informations in match:
+                player_name  = player_informations[0]
+                player_final_score = player_informations[1]
+                list_tournament_results.append({"name" : player_name, "score" : player_final_score})
+        list_tournament_results_sort = sorted(list_tournament_results, key= lambda player : player["score"], reverse=True)
+
+        return list_tournament_results_sort
 
 
 

@@ -30,7 +30,7 @@ class TournamentModel:
         retourne = booleen
         """
         
-        self.tournament_table.insert(
+        if self.tournament_table.insert(
                                         {
 
                                             'name': tournament.name,
@@ -42,7 +42,10 @@ class TournamentModel:
                                             'date': tournament.date,
                                             'end_date' : tournament.end_date
                                         }
-                                    )
+                                    ):
+            return True
+        else:
+            return False
         
     
     

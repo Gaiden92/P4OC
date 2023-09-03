@@ -1,10 +1,10 @@
-from models.match_model import M
+from models.match_model import MatchModel
 import random as r
 class MatchController:
     def __init__(self, players:list) -> None:
         self.players = players
         self.model  = MatchModel()
-        self.view   = MatchView()
+
 
     def generate_match(self):
         """

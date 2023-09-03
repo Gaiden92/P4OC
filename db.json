@@ -34,440 +34,381 @@
             "gender": "h",
             "birthdate": "01-01-1990",
             "rank": "5"
+        },
+        "6": {
+            "lastname": "Couchy",
+            "firstname": "Terry",
+            "gender": "h",
+            "birthdate": "06-07-1987",
+            "rank": "2"
         }
     },
     "tournois": {
         "1": {
-            "name": "tournoi",
+            "name": "tournoi des reines",
             "localisation": "Suresnes",
-            "nb_turn": "4",
+            "nb_turn": "8",
             "players": [
-                {
-                    "lastname": "Agouassey",
-                    "firstname": "Akrey",
-                    "rank": "5",
-                    "score": 0
-                },
-                {
-                    "lastname": "Pottier",
-                    "firstname": "Eddi",
-                    "rank": "3",
-                    "score": 0
-                },
-                {
-                    "lastname": "Derfoufi",
-                    "firstname": "Morgan",
-                    "rank": "2",
-                    "score": 0
-                },
                 {
                     "lastname": "Fouchal",
                     "firstname": "Sami",
-                    "rank": "0",
-                    "score": 0
+                    "gender": "h",
+                    "birthdate": "02-08-1987",
+                    "rank": "1"
+                },
+                {
+                    "lastname": "Agouassey",
+                    "firstname": "Akrey",
+                    "gender": "h",
+                    "birthdate": "30-09-1970",
+                    "rank": "1"
+                },
+                {
+                    "lastname": "Fouchal",
+                    "firstname": "Ouahid",
+                    "gender": "h",
+                    "birthdate": "03-05-1983",
+                    "rank": "2"
+                },
+                {
+                    "lastname": "Pottier",
+                    "firstname": "Hedi",
+                    "gender": "h",
+                    "birthdate": "01-12-1980",
+                    "rank": "2"
+                },
+                {
+                    "lastname": "Van Damme",
+                    "firstname": "Jean Claude",
+                    "gender": "h",
+                    "birthdate": "01-01-1990",
+                    "rank": "5"
+                },
+                {
+                    "lastname": "Couchy",
+                    "firstname": "Terry",
+                    "gender": "h",
+                    "birthdate": "06-07-1987",
+                    "rank": "2"
                 }
             ],
             "rounds": [
                 {
                     "name": 1,
-                    "start_date": "2023-07-20",
-                    "start_hour": "18:48:07",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:39:54",
+                    "start_date": "2023-09-03",
+                    "start_hour": "18:45:16",
+                    "end_date": "2023-09-03",
+                    "end_hour": "18:51:17",
                     "matchs": [
                         [
                             [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 3.0
-                                }
+                                "Akrey",
+                                1.0
                             ],
                             [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 1.5
-                                }
+                                "Sami",
+                                0.0
                             ]
                         ],
                         [
                             [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
+                                "Ouahid",
+                                0.5
                             ],
                             [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 1.0
-                                }
+                                "Jean Claude",
+                                0.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Hedi",
+                                0.5
+                            ],
+                            [
+                                "Terry",
+                                0.5
                             ]
                         ]
                     ]
                 },
                 {
                     "name": 2,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:39:54",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:40:09",
+                    "start_date": "2023-09-03",
+                    "start_hour": "18:51:17",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:09:11",
                     "matchs": [
                         [
                             [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 3.0
-                                }
+                                "Akrey",
+                                2.0
                             ],
                             [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 1.0
-                                }
+                                "Ouahid",
+                                0.5
                             ]
                         ],
                         [
                             [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 1.5
-                                }
+                                "Jean Claude",
+                                1.0
                             ],
                             [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
+                                "Hedi",
+                                1.0
+                            ]
+                        ],
+                        [
+                            [
+                                "Terry",
+                                1.5
+                            ],
+                            [
+                                "Sami",
+                                0.0
                             ]
                         ]
                     ]
                 },
                 {
                     "name": 3,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:40:09",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:40:16",
+                    "start_date": "2023-09-03",
+                    "start_hour": "19:09:11",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:09:27",
                     "matchs": [
                         [
                             [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 3.0
-                                }
+                                "Akrey",
+                                3.0
                             ],
                             [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 1.0
-                                }
+                                "Terry",
+                                1.5
                             ]
                         ],
                         [
                             [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 1.5
-                                }
+                                "Jean Claude",
+                                1.5
                             ],
                             [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
+                                "Hedi",
+                                1.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Ouahid",
+                                0.5
+                            ],
+                            [
+                                "Sami",
+                                1.0
                             ]
                         ]
                     ]
                 },
                 {
                     "name": 4,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:40:16",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:45:08",
+                    "start_date": "2023-09-03",
+                    "start_hour": "19:09:27",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:09:38",
                     "matchs": [
                         [
                             [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 4.0
-                                }
+                                "Akrey",
+                                4.0
                             ],
                             [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 1.5
-                                }
+                                "Terry",
+                                1.5
                             ]
                         ],
                         [
                             [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 2.0
-                                }
+                                "Jean Claude",
+                                2.5
                             ],
                             [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
+                                "Hedi",
+                                1.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Sami",
+                                2.0
+                            ],
+                            [
+                                "Ouahid",
+                                0.5
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": 5,
+                    "start_date": "2023-09-03",
+                    "start_hour": "19:09:38",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:09:52",
+                    "matchs": [
+                        [
+                            [
+                                "Akrey",
+                                4.0
+                            ],
+                            [
+                                "Jean Claude",
+                                3.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Sami",
+                                2.5
+                            ],
+                            [
+                                "Terry",
+                                2.0
+                            ]
+                        ],
+                        [
+                            [
+                                "Hedi",
+                                2.0
+                            ],
+                            [
+                                "Ouahid",
+                                1.0
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": 6,
+                    "start_date": "2023-09-03",
+                    "start_hour": "19:09:52",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:10:03",
+                    "matchs": [
+                        [
+                            [
+                                "Akrey",
+                                5.0
+                            ],
+                            [
+                                "Jean Claude",
+                                3.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Sami",
+                                3.0
+                            ],
+                            [
+                                "Terry",
+                                2.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Hedi",
+                                2.0
+                            ],
+                            [
+                                "Ouahid",
+                                2.0
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": 7,
+                    "start_date": "2023-09-03",
+                    "start_hour": "19:10:03",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:10:14",
+                    "matchs": [
+                        [
+                            [
+                                "Akrey",
+                                6.0
+                            ],
+                            [
+                                "Jean Claude",
+                                3.5
+                            ]
+                        ],
+                        [
+                            [
+                                "Sami",
+                                3.5
+                            ],
+                            [
+                                "Terry",
+                                3.0
+                            ]
+                        ],
+                        [
+                            [
+                                "Hedi",
+                                2.5
+                            ],
+                            [
+                                "Ouahid",
+                                2.5
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": 8,
+                    "start_date": "2023-09-03",
+                    "start_hour": "19:10:14",
+                    "end_date": "2023-09-03",
+                    "end_hour": "19:10:23",
+                    "matchs": [
+                        [
+                            [
+                                "Akrey",
+                                6.5
+                            ],
+                            [
+                                "Jean Claude",
+                                4.0
+                            ]
+                        ],
+                        [
+                            [
+                                "Sami",
+                                4.5
+                            ],
+                            [
+                                "Terry",
+                                3.0
+                            ]
+                        ],
+                        [
+                            [
+                                "Hedi",
+                                2.5
+                            ],
+                            [
+                                "Ouahid",
+                                3.5
                             ]
                         ]
                     ]
                 }
             ],
-            "description": "aucune",
-            "date": "2023-07-20",
-            "end_date": "2023-07-20"
-        },
-        "2": {
-            "name": "Tournoi des rois",
-            "localisation": "Puteaux",
-            "nb_turn": "4",
-            "players": [
-                {
-                    "lastname": "Agouassey",
-                    "firstname": "Akrey",
-                    "rank": "5",
-                    "score": 0
-                },
-                {
-                    "lastname": "Pottier",
-                    "firstname": "Eddi",
-                    "rank": "3",
-                    "score": 0
-                },
-                {
-                    "lastname": "Derfoufi",
-                    "firstname": "Morgan",
-                    "rank": "2",
-                    "score": 0
-                },
-                {
-                    "lastname": "Fouchal",
-                    "firstname": "Sami",
-                    "rank": "0",
-                    "score": 0
-                }
-            ],
-            "rounds": [
-                {
-                    "name": 1,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:10:24",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:26:35",
-                    "matchs": [
-                        [
-                            [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 1.0
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 0.0
-                                }
-                            ]
-                        ],
-                        [
-                            [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.0
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 1.0
-                                }
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 2,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:26:35",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:28:16",
-                    "matchs": [
-                        [
-                            [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 2.0
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 2.5
-                                }
-                            ]
-                        ],
-                        [
-                            [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 3.0
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 3,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:28:16",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:28:24",
-                    "matchs": [
-                        [
-                            [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 2.5
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 2.0
-                                }
-                            ]
-                        ],
-                        [
-                            [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 3.0
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 4,
-                    "start_date": "2023-07-20",
-                    "start_hour": "19:28:24",
-                    "end_date": "2023-07-20",
-                    "end_hour": "19:28:49",
-                    "matchs": [
-                        [
-                            [
-                                {
-                                    "lastname": "Fouchal",
-                                    "firstname": "Sami",
-                                    "rank": "0",
-                                    "score": 2.5
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Derfoufi",
-                                    "firstname": "Morgan",
-                                    "rank": "2",
-                                    "score": 3.0
-                                }
-                            ]
-                        ],
-                        [
-                            [
-                                {
-                                    "lastname": "Agouassey",
-                                    "firstname": "Akrey",
-                                    "rank": "5",
-                                    "score": 2.0
-                                }
-                            ],
-                            [
-                                {
-                                    "lastname": "Pottier",
-                                    "firstname": "Eddi",
-                                    "rank": "3",
-                                    "score": 0.5
-                                }
-                            ]
-                        ]
-                    ]
-                }
-            ],
-            "description": "aucune",
-            "date": "2023-07-20",
-            "end_date": "2023-07-20"
+            "description": "blitz",
+            "date": "2023-09-03",
+            "end_date": "2023-09-03"
         }
     }
 }

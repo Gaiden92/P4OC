@@ -1,5 +1,5 @@
 from datetime import *
-
+from random import shuffle
 
 class Round:
 
@@ -37,40 +37,36 @@ class Round:
     
 
     
-    def generate_swiss_pairing(self, list_players):
-        liste_trier = sorted(list_players, key= lambda player : int(player["rank"]), reverse=True)
-
-        taille = len(liste_trier)
-        coupe = round(taille / 2)
-        mid_inf = liste_trier[0:coupe]
-        mid_sup = liste_trier[coupe:taille] 
+    def generate_first_round(self, list_players):
+        shuffle(list_players)
+        length_sorted_list = len(list_players)
         
-        for player1, player2 in zip(mid_inf, mid_sup):
-            match = Match(player1, player2).match_serialized()
-            
+        index = 0
+        while index < length_sorted_list:
+            score1 = 0
+            score2 = 0
+            match = Match([list_players[index].firstname, score1], [list_players[index+1].firstname, score2]).match_serialized()
             self.matchs.append(match)
+            index+=2
 
         return self.matchs
+    
 
-    def generate_swiss_pairing_bis(self, matchs):
+
+    def generate_swiss_pairing(self, matchs):
         list_players = []
-        for match in matchs:
-            for players in match:
-                for player in players:
-                    list_players.append(player)
-        
-
-        liste_trier_par_score = sorted(list_players, key= lambda player : float(player["score"]), reverse=True)
-
-        index = 0
-        while index < len(liste_trier_par_score):
-            player1 = liste_trier_par_score[index]
-            player2 = liste_trier_par_score[index+1]
-            match = Match(player1, player2).match_serialized()
+        for index, match in enumerate(matchs):
+            for player in match:
+                list_player = [player[0], player[1]]
+                list_players.append(list_player)
             
-            self.matchs.append(match)
-            index += 2
 
+        liste_trier_par_score = sorted(list_players, key= lambda player : float(player[1]), reverse=True)
+
+        index= 0
+        while index < len(liste_trier_par_score):
+            self.matchs.append([liste_trier_par_score[index], liste_trier_par_score[index+1]])
+            index += 2
 
         return self.matchs
         
@@ -84,8 +80,8 @@ class Match:
     
     def match_serialized(self):
         list_match =    (
-                            [self.player1],
-                            [self.player2]
+                            self.player1,
+                            self.player2
                         )
 
         return list_match
@@ -93,10 +89,14 @@ class Match:
                         
 
 class Result:
-    def __init__(self, score1, score2) -> None:
+    def __init__(self, score1=0, score2=0) -> None:
         self.score1 = score1
         self.score2 = score2
 
 
-
-
+    def serialized(self):
+        result =    {
+                        "Score1" : self.score1,
+                        "Score2" : self.score2 
+                    }
+        return result

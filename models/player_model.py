@@ -19,7 +19,16 @@ class Player:
         #         f'Sexe : {self.gender}\n'\
         #         f'Classement : {self.rank}\n'
 
+    def serialize_player(self):
 
+        player =   {
+                        'lastname'  : self.lastname,
+                        'firstname' : self.firstname,
+                        'gender'    : self.gender,
+                        'birthdate' : self.birthdate,
+                        'rank'      : self.rank
+                    }
+        return player
 
 class PlayerModel:
     def __init__(self, database) -> None:
@@ -41,15 +50,23 @@ class PlayerModel:
 
 
     def get_all_players(self):
-        all_players = self.player_table.all()
-        
-        all_players_list = [ Player( player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank'] ) for player in all_players ]
-        
+        all_players_list = []
+        for player in self.player_table.all():
+            all_players_list.append(
+                                        Player( 
+                                                    player['lastname'], 
+                                                    player['firstname'], 
+                                                    player['gender'], 
+                                                    player['birthdate'], 
+                                                    player['rank']
+                                                )
+                                    )
+                              
         return all_players_list
 
 
-    def get_player(self, lastname):
-        player = self.player_table.get(self.player_query.lastname == lastname)
+    def get_player(self, lastname, firstname):
+        player = self.player_table.get(self.player_query.lastname == lastname and self.player_query.firstname == firstname)
         if player:
             return Player(player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank']) 
         else:

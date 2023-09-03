@@ -1,5 +1,7 @@
 import functions as f
 import tableprint  as tp
+
+
 class PlayerView:
     
     def display_players_menu(self)->str:
@@ -11,9 +13,10 @@ class PlayerView:
         tp.banner("PLAYERS MENU         ")
 
         print("1. Create new player")
-        print("2. List all players")
-        print("3. Edit existing player")
-        print("4. Remove player")
+        print("2. List one player")
+        print("3. List all players")
+        print("4. Edit existing player")
+        print("5. Remove player")
 
 
         print("[b] Back to main menu")
@@ -31,20 +34,56 @@ class PlayerView:
         """
         nb_player = len(players)
         print(f"Nombre de joueurs total : {nb_player}")
-        headers = tp.header(['Nom', 'Prénom', 'Genre', 'Né le', 'Classement'],20)
+        headers = tp.header(
+                                [
+                                    'Nom', 
+                                    'Prénom', 
+                                    'Genre', 
+                                    'Né le', 
+                                    'Classement'
+                                ],
+                                20, 
+                                align="center"
+                            )
         print(headers)
         for player in players:
-            print(tp.row([player.lastname, player.firstname, player.gender, player.birthdate, player.rank], 20))
+            print(
+                    tp.row(
+                                [
+                                    player.lastname, 
+                                    player.firstname, 
+                                    player.gender, 
+                                    player.birthdate, 
+                                    player.rank
+                                ], 
+                                20, 
+                                align="left"
+                            )
+                )
         print(tp.bottom(5, 20))
 
-    def get_player(self, player:object)->None:
+    def display_player_view(self, player:object)->None:
         """Affiche les caractéristiques d'un joueur présent en base de donnée.
 
         Args:
             player (object): le joueur dont les caractéristiques doivent être affichés
         """
-        print(f"Voici les infos du joueurs {player.lastname} {player.firstname} : ")
-        print(player)
+        headers = tp.header(
+                                ["Nom", "Prénom", "Genre", "Né le", "Classement"], 
+                                20, 
+                                align="center"
+                            )
+        
+        row = tp.row(
+                        [player.lastname, player.firstname, player.gender, player.birthdate, player.rank], 
+                        20, 
+                        align="left"
+                    )
+        print(headers)
+        print(row)
+        print(tp.bottom(5, 20))
+
+        
 
     
     
