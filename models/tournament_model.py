@@ -110,7 +110,6 @@ class TournamentModel:
                                         {
                                             'name': tournament.name,
                                             'localisation': tournament.localisation,
-                                            'nb_turn' : tournament.nb_turn,
                                             'players' : tournament.players,
                                             'rounds' : tournament.rounds,
                                             'description' : tournament.description,

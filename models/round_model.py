@@ -1,11 +1,10 @@
 from datetime import *
 from random import shuffle
-
+from functions import already_played_together
 class Round:
 
-    def __init__(self, nb_round=0) -> None:
-        self.name                   = 1
-        self.nb_round               = nb_round
+    def __init__(self, name=0) -> None:
+        self.name                   = name
         self.start_date             = str(date.today())
         self.start_hour             = str(datetime.now().time().strftime("%H:%M:%S"))
         self.end_date               = ""
@@ -14,8 +13,7 @@ class Round:
         self.matchs                = []
         
     
-    def incremente_number(self):
-       self.name += 1
+
 
     def __str__(self) -> str:
         message = f"{self.name} :"
@@ -51,24 +49,8 @@ class Round:
 
         return self.matchs
     
-
-
-    def generate_swiss_pairing(self, matchs):
-        list_players = []
-        for index, match in enumerate(matchs):
-            for player in match:
-                list_player = [player[0], player[1]]
-                list_players.append(list_player)
-            
-
-        liste_trier_par_score = sorted(list_players, key= lambda player : float(player[1]), reverse=True)
-
-        index= 0
-        while index < len(liste_trier_par_score):
-            self.matchs.append([liste_trier_par_score[index], liste_trier_par_score[index+1]])
-            index += 2
-
-        return self.matchs
+    
+    
         
 
 class Match:

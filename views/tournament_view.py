@@ -1,6 +1,7 @@
 from functions import *
 from datetime import date, datetime
 import tableprint as tp
+import random as r
 class TournamentView:
 
     def display_tournaments_menu(self):
@@ -63,15 +64,18 @@ class TournamentView:
             print(header)
             for match in matchs:
                 match_str = ""
+                colors = ["blancs", "noirs"]
                 for index, informations_player in enumerate(match):
                     
                     player_name = informations_player[0]
                     player_score = informations_player[1]
+                    player_chess_piece_color = r.choice(colors)
                     if index == len(match)-1:
-                        match_str += f"{player_name}"
+                        match_str += f"{player_name} ({player_chess_piece_color})"
                     else:
                         
-                        match_str += f"{player_name} VS "
+                        match_str += f"{player_name} ({player_chess_piece_color}) VS "
+                    colors.remove(player_chess_piece_color)
 
                 row = tp.row(match_str.split(","), 50, align="center")
                 print(row)                   

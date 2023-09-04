@@ -80,7 +80,7 @@ class TournamentController:
 
         # création du 1er round
         rounds_list = []
-        rounds = Round()
+        rounds = Round(1)
         rounds.matchs = rounds.generate_first_round(list_players)
         rounds_serialize = rounds.serialize_round()
         rounds_list.append(rounds_serialize)
@@ -152,8 +152,7 @@ class TournamentController:
                     self.model.update_round_tournament(tournament, tournament.name)
                 else:
                     # création du prochain round
-                    next_round = self.generate_next_round(round)
-                    next_round.incremente_number()
+                    next_round = self.generate_next_round(tournament.rounds)
                     round_serialized = next_round.serialize_round()
                     tournament.rounds.append(round_serialized)
                     self.model.update_round_tournament(tournament, tournament.name)
@@ -161,13 +160,38 @@ class TournamentController:
             
 
         
-    def generate_next_round(self, previous_round):
-        round = Round()
-        matchs_previous_round = previous_round["matchs"]
-        round.name = previous_round['name']
-        round.matchs = round.generate_swiss_pairing(matchs_previous_round)
+    def generate_next_round(self, rounds:list)->object:
+        previous_round = rounds[-1]
+        new_round = Round(previous_round["name"]+1)
+        list_players = []
+        for match in previous_round["matchs"]:
 
-        return round
+            for player in match:
+
+                list_player = [player[0], player[1]]
+                list_players.append(list_player)
+
+        # trier par score
+        liste_trier_par_score = sorted(list_players, key= lambda player : float(player[1]), reverse=True)
+
+
+        for i in range(0, len(liste_trier_par_score), 2):
+            player1 = liste_trier_par_score[i]
+            player2 = None
+        
+            # recherche d'un partenaire pour player1
+            for j in range(i + 1, len(liste_trier_par_score)):
+                candidate = liste_trier_par_score[j]
+                
+                # vérifie si player1 et le candidat n'ont pas déjà joué ensemble
+                if not already_played_together(rounds, [player1, candidate]):
+                    player2 = candidate
+                    break
+
+                
+            if player2 is not None:
+                new_round.matchs.append([player1, candidate])
+        return new_round
 
 
     def get_tournament_results_by_tournament(self, tournament):
