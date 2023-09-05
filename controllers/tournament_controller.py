@@ -30,26 +30,30 @@ class TournamentController:
 
 
     def get_tournament_menu(self):
-        name = self.view.ask_name_tournament()
-        tournament = self.model.get_tournament_by_name(name)
+        if self.not_tournament_in_database():
+            self.view.display_not_tournament_in_db()
+        else:
+            name = self.view.ask_name_tournament()
+            tournament = self.model.get_tournament_by_name(name)
+            if tournament:
+                while True:
+                    choice = self.view.display_tournament_menu(tournament)
+                    match choice:
+                        case "1":
+                            self.enter_match_result(tournament)
+                        case "2":
+                            self.list_results(tournament)
+                        case "3":
+                            self.list_tournament_by_name(name)
+                        case "4":
+                            self.update_tournament(name)
+                        case "5":
+                            self.delete_tournament()
+                        case "b":
+                            return
+                        case _other:
+                            print("Choix invalide. Veuillez réessayer.")
 
-        while True:
-            choice = self.view.display_tournament_menu(tournament)
-            match choice:
-                case "1":
-                    self.enter_match_result(tournament)
-                case "2":
-                    self.list_results(tournament)
-                case "3":
-                    self.list_tournament_by_name(name)
-                case "4":
-                    self.update_tournament(name)
-                case "5":
-                    self.delete_tournament()
-                case "b":
-                    return
-                case _other:
-                    print("Choix invalide. Veuillez réessayer.")
 
     def create_tournament(self):
         # vérification des entrées de l'utilisateur
@@ -71,7 +75,7 @@ class TournamentController:
         
         list_players = []
         list_players_serialized = []
-        #players = [player.doc_id for player in self.player_model.player_table.all()]
+
 
         # ajout des joueurs au tournoi
         for player in self.player_model.get_all_players():
@@ -112,7 +116,7 @@ class TournamentController:
 
     def update_tournament(self, name=""):
         if self.not_tournament_in_database():
-            return self.view.display_not_tournament_in_db()
+            self.view.display_not_tournament_in_db()
         else:
             name = self.view.ask_name_tournament() if name == "" else name
             update = self.view.ask_update_tournament()
@@ -200,8 +204,17 @@ class TournamentController:
             for player_informations in match:
                 player_name  = player_informations[0]
                 player_final_score = player_informations[1]
-                list_tournament_results.append({"name" : player_name, "score" : player_final_score})
-        list_tournament_results_sort = sorted(list_tournament_results, key= lambda player : player["score"], reverse=True)
+                list_tournament_results.append( 
+                                                    {
+                                                        "name" : player_name, 
+                                                        "score" : player_final_score
+                                                    }
+                                                )
+        list_tournament_results_sort = sorted(
+                                                list_tournament_results, 
+                                                key= lambda player : player["score"], 
+                                                reverse=True
+                                            )
 
         return list_tournament_results_sort
 

@@ -1,4 +1,4 @@
-from datetime import *
+from datetime import date, datetime
 from random import shuffle
 class Round:
 
@@ -62,18 +62,3 @@ class Match:
                         )
 
         return list_match
-                            
-                        
-
-class Result:
-    def __init__(self, score1=0, score2=0) -> None:
-        self.score1 = score1
-        self.score2 = score2
-
-
-    def serialized(self):
-        result =    {
-                        "Score1" : self.score1,
-                        "Score2" : self.score2 
-                    }
-        return result

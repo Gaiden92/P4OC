@@ -1,5 +1,7 @@
 from models.match_model import MatchModel
 import random as r
+
+
 class MatchController:
     def __init__(self, players:list) -> None:
         self.players = players
@@ -18,7 +20,6 @@ class MatchController:
 
         return self.players
     
-
     
     def match_result(self, list_players:list):
         """
@@ -26,7 +27,6 @@ class MatchController:
         paramètres : liste de 2 joueurs
         retourne   : 2 chaine de caractère
         """
-        
         
         if self.is_there_a_winner(list_players):
             liste_trier = sorted(list_players, key=lambda player : player['score'], reverse=True)
@@ -52,12 +52,4 @@ class MatchController:
         else:
 
             return False
-
-    
-
-match = MatchController([{'lastname': "Fouchal", "firstname" : "Ouahid"}, {"lastname" : "Fouchal", "firstname" : "Sami"}])
-
-result = match.generate_match()
-print(result)
-print(match.match_result(result))
 
