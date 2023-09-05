@@ -21,7 +21,7 @@ class TournamentView:
     
 
     def display_tournament_menu(self, tournament):
-        tp.banner(f"Manage Tournament : {tournament.name}       ")
+        tp.banner(f"Manage : {tournament.name}     ")
         print("1. Enter match results")
         print("2. See Tournament classement")
         print("3. List Tournament")
