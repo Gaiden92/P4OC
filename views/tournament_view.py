@@ -37,21 +37,29 @@ class TournamentView:
 
     def display_tournaments(self, tournaments):
         # Display all tournaments #
-        print("== LISTE DES TOURNOIS ==")
+        tp.banner("LISTE DES TOURNOIS                                       ", width=99)
         for tournament in tournaments:
             self.display_tournament(tournament)
             print("="*100)
             print()
     
     def display_tournament(self, tournament):
+        header = tp.header(["Nom", "Lieu", "Date de début", "Date de fin", "Description"], width=17)
+        bottom = tp.bottom(5, 17)
+        print(header)
         # Display one tournament by his name #
-        print(f"Nom : {tournament.name}")
-        print(f"- Lieu : {tournament.localisation}")
-        print(f"- Date de début : {tournament.date} ")
-        print(f"- Date de fin : {tournament.end_date} ") if self.is_tournament_finish(tournament) else print(f"- Date de fin : tournoi en cours.. ")
-        print(f"- Description : {tournament.description}" )
-        print(f"Rondes : " )
-        
+        row = tp.row(
+                        [   
+                            tournament.name, 
+                            tournament.localisation,
+                            tournament.date,
+                            tournament.end_date if self.is_tournament_finish(tournament) else "en cours", 
+                            tournament.description
+                         ],
+                         17
+                    )
+        print(row)
+        print(bottom)
         self.display_rounds(tournament.rounds)
 
                 
@@ -59,8 +67,8 @@ class TournamentView:
         for round in rounds:
             matchs = round['matchs']
             status = "terminé" if self.is_round_finish(round) else "en cours"
-            tp.banner(f'RONDE N°{round["name"]} ({status})              ', 50)
-            header = tp.header(["Match"], 50, align="center")
+            tp.banner(f'RONDE N°{round["name"]} ({status})                                      ', 99)
+            header = tp.header(["Match"], 97, align="center")
             print(header)
             for match in matchs:
                 match_str = ""
@@ -77,10 +85,10 @@ class TournamentView:
                         match_str += f"{player_name} ({player_chess_piece_color}) VS "
                     colors.remove(player_chess_piece_color)
 
-                row = tp.row(match_str.split(","), 50, align="center")
+                row = tp.row(match_str.split(","), 97, align="center")
                 print(row)                   
             
-            print(tp.bottom(1, 50))
+            print(tp.bottom(1, 97))
 
 
     def is_round_finish(self, round):

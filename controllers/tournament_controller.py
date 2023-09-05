@@ -157,8 +157,6 @@ class TournamentController:
                     tournament.rounds.append(round_serialized)
                     self.model.update_round_tournament(tournament, tournament.name)
             
-            
-
         
     def generate_next_round(self, rounds:list)->object:
         previous_round = rounds[-1]
@@ -208,10 +206,8 @@ class TournamentController:
         return list_tournament_results_sort
 
 
-
     def not_tournament_in_database(self):
         return True if self.model.not_tournament_in_database() else False
-
 
 
     def list_results(self, tournament):

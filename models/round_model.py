@@ -1,6 +1,5 @@
 from datetime import *
 from random import shuffle
-from functions import already_played_together
 class Round:
 
     def __init__(self, name=0) -> None:
@@ -12,8 +11,6 @@ class Round:
 
         self.matchs                = []
         
-    
-
 
     def __str__(self) -> str:
         message = f"{self.name} :"
@@ -48,8 +45,6 @@ class Round:
             index+=2
 
         return self.matchs
-    
-    
     
         
 
