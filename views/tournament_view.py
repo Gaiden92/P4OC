@@ -5,8 +5,7 @@ import random as r
 class TournamentView:
 
     def display_tournaments_menu(self):
-        # Display the Tournament menu #
-        print("=== TOURNAMENTS MENU ===")
+        tp.banner("TOURNAMENTS MENU       ")
         print("1. Create new Tournament")
         print("2. List all Tournaments")
         print("3. Manage a Tournament")
@@ -22,7 +21,7 @@ class TournamentView:
     
 
     def display_tournament_menu(self, tournament):
-        print(f"=== Manage Tournament : {tournament.name} ===")    
+        tp.banner(f"Manage Tournament : {tournament.name}       ")
         print("1. Enter match results")
         print("2. See Tournament classement")
         print("3. List Tournament")
@@ -119,7 +118,7 @@ class TournamentView:
         return description if information_is_ok(description) else self.ask_description_tournament()
 
     def ask_nb_turns(self):
-        nb_turns    = input("Entrer le nombre de tours du tournoi : ")
+        nb_turns  = input("Entrer le nombre de tours du tournoi : ")
 
         return nb_turns if ranking_is_ok(nb_turns) else self.ask_nb_turns()
     
@@ -141,12 +140,10 @@ class TournamentView:
 
             print(f'Vous allez entrer les résultats du match n°{nb_match} : {player1_name} VS {player2_name} ')
             for index,value in enumerate(player):
-                
                 score = input(f'Entrez le score du joueur {player[index][0]} : ')
-
                 player[index][1] += float(score)
-
             nb_match+=1
+            
         return matchs_list
 
 
