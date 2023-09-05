@@ -76,7 +76,6 @@ def verify_choice_match_number(choice, list_match):
 def already_played_together(rounds:list,players_names_list:list)->bool:
     for round in rounds:
         for match in round["matchs"]:
-            print(match)
             player1_name = match[0][0]
             player2_name = match[1][0]
             players_names = [player1_name, player2_name]
@@ -85,7 +84,6 @@ def already_played_together(rounds:list,players_names_list:list)->bool:
             for player in players_names_list:
                 if player in players_names:
                     counter += 1
-
                     if counter == 2:
                         return True
                     

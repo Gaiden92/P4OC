@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from random import shuffle
+from .match import Match
 class Round:
 
     def __init__(self, name=0) -> None:
@@ -11,12 +12,6 @@ class Round:
 
         self.matchs                = []
         
-
-    def __str__(self) -> str:
-        message = f"{self.name} :"
-
-        return message
-
 
     def serialize_round(self):
         dict_round = {
@@ -46,19 +41,3 @@ class Round:
 
         return self.matchs
     
-        
-
-class Match:
-    def __init__(self, player1, player2) -> None:
-        self.player1 = player1
-        self.player2 = player2
-
-        self.result = None
-    
-    def match_serialized(self):
-        list_match =    (
-                            self.player1,
-                            self.player2
-                        )
-
-        return list_match

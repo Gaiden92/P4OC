@@ -1,34 +1,5 @@
 from tinydb import TinyDB, Query
-
-class Player:
-
-    def __init__(self, lastname, firstname, gender, birthdate, rank) -> None:
-        self.lastname   = lastname
-        self.firstname  = firstname
-        self.gender     = gender
-        self.birthdate  = birthdate
-        self.rank       = rank
-
-
-    def __str__(self) -> str:
-        return  f"{self.lastname} | {self.firstname} | {self.birthdate} | {self.gender} | {self.rank} |"
-
-        # f'Nom : {self.lastname}\n'\
-        #         f'Prénom : {self.firstname}\n'\
-        #         f'Date de naissance : {self.birthdate}\n'\
-        #         f'Sexe : {self.gender}\n'\
-        #         f'Classement : {self.rank}\n'
-
-    def serialize_player(self):
-
-        player =   {
-                        'lastname'  : self.lastname,
-                        'firstname' : self.firstname,
-                        'gender'    : self.gender,
-                        'birthdate' : self.birthdate,
-                        'rank'      : self.rank
-                    }
-        return player
+from classes.player import Player
 
 class PlayerModel:
     def __init__(self, database) -> None:
@@ -38,15 +9,8 @@ class PlayerModel:
 
 
     def create_player(self, player):
-        self.player_table.insert(   
-                                    {
-                                        'lastname'  : player.lastname,
-                                        'firstname' : player.firstname,
-                                        'gender'    : player.gender,
-                                        'birthdate' : player.birthdate,
-                                        'rank'      : player.rank
-                                    }   
-                                )
+        player_serialize = player.serialize_player()
+        self.player_table.insert(player_serialize)
 
 
     def get_all_players(self):
@@ -83,5 +47,4 @@ class PlayerModel:
         if self.player_table.remove((self.player_query.lastname == lastname) and (self.player_query.firstname == firstname)):
             return True
         else:
-            False
-        
+            return False

@@ -21,7 +21,7 @@ class TournamentView:
     
 
     def display_tournament_menu(self, tournament):
-        tp.banner(f"Manage : {tournament.name}     ")
+        tp.banner(f"Manage : {tournament.name}     ", 20)
         print("1. Enter match results")
         print("2. See Tournament classement")
         print("3. List Tournament")
@@ -163,3 +163,37 @@ class TournamentView:
         for index, player in enumerate(results):
                 print(tp.row([player["name"], player["score"], index+1 ],15))
         print(tp.bottom(3,15))
+
+
+    def display_players_to_add(self,list_players:list)->list:
+        list_choices_players = []
+        
+        while True:
+            # tableau
+            header = tp.header(["Numéro du joueur", "Nom", "Prénom"], 20)
+            print(header)
+            for index, player in enumerate(list_players):
+                row = tp.row([index+1, player.firstname, player.lastname], 20)
+                print(row)
+            print(tp.bottom(3,20))
+
+            # on demande à l'utilisateur
+            user_choice = input("Séléctionner le joueur à enregistrer au tournoi et appuyez sur entrée : ")
+            
+            if ranking_is_ok(user_choice) and int(user_choice) <= len(list_players) and int(user_choice) > 0:
+                player_add = list_players.pop(int(user_choice)-1)
+                player_add_lastname = player_add.lastname
+                player_add_firstname = player_add.firstname 
+                print(f'Vous avez ajouté : {player_add_lastname} {player_add_firstname}')
+                list_choices_players.append(player_add)
+                        
+                continu = ""
+                while continu != "y" or continu != "n":
+                    continu = input("Voulez-vous ajouter un autre joueur ? [y/n]")
+                    if continu == "n":
+                        return list_choices_players
+                    elif continu == "y":
+                        break
+                
+
+                

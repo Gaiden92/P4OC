@@ -1,7 +1,9 @@
-from models.tournament_model import *
-from models.player_model import *
-from  views.tournament_view import *
-from models.round_model import Round
+from models.tournament_model import TournamentModel, Tournament
+from models.player_model import PlayerModel
+from  views.tournament_view import TournamentView
+from classes.round import Round
+import functions as f
+from datetime import datetime, date
 
 class TournamentController:
     def __init__(self, database) -> None:
@@ -58,37 +60,41 @@ class TournamentController:
     def create_tournament(self):
         # vérification des entrées de l'utilisateur
         name = self.view.ask_name_tournament()
-        if not information_is_ok(name):
+        if not f.information_is_ok(name):
             return self.view.ask_name_tournament()
         
         location = self.view.ask_location_tournament()
-        if not information_is_ok(location):
+        if not f.information_is_ok(location):
             return self.view.ask_location_tournament()
         
         description = self.view.ask_description_tournament()
-        if not information_is_ok(description):
+        if not f.information_is_ok(description):
             return self.view.ask_description_tournament()
         
         nb_turns = self.view.ask_nb_turns()
-        if not ranking_is_ok(nb_turns):
+        if not f.ranking_is_ok(nb_turns):
             return self.view.ask_nb_turns()
         
         list_players = []
         list_players_serialized = []
-
-
         # ajout des joueurs au tournoi
         for player in self.player_model.get_all_players():
             list_players.append(player)
+
+        # demander à l'utilisateur les joueurs qu'ils souhaitent enregistrer
+        list_all_tournament_players = self.view.display_players_to_add(list_players)
+
+        #serialisation de la liste des joueurs
+        for player in list_all_tournament_players:
             list_players_serialized.append(player.serialize_player())
 
         # création du 1er round
         rounds_list = []
         rounds = Round(1)
-        rounds.matchs = rounds.generate_first_round(list_players)
+        
+        rounds.matchs = rounds.generate_first_round(list_all_tournament_players)
         rounds_serialize = rounds.serialize_round()
         rounds_list.append(rounds_serialize)
-
 
         tournament = Tournament(name, location, rounds_list, list_players_serialized, description, nb_turns)
 
@@ -169,13 +175,11 @@ class TournamentController:
         for match in previous_round["matchs"]:
 
             for player in match:
-
                 list_player = [player[0], player[1]]
                 list_players.append(list_player)
 
         # trier par score
         liste_trier_par_score = sorted(list_players, key= lambda player : float(player[1]), reverse=True)
-
 
         for i in range(0, len(liste_trier_par_score), 2):
             player1 = liste_trier_par_score[i]
@@ -186,7 +190,7 @@ class TournamentController:
                 candidate = liste_trier_par_score[j]
                 
                 # vérifie si player1 et le candidat n'ont pas déjà joué ensemble
-                if not already_played_together(rounds, [player1, candidate]):
+                if not f.already_played_together(rounds, [player1, candidate]):
                     player2 = candidate
                     break
 

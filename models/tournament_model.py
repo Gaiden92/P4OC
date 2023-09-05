@@ -1,19 +1,6 @@
 from datetime import date
 from tinydb import TinyDB, Query
-
-
-class Tournament:
-
-    def __init__(self, name:str, localisation:str, rounds:list, players:list, description: str, nb_turn=4, date=date.today(), end_date="") -> None:
-        self.name           = name
-        self.date           = str(date)
-        self.localisation   = localisation
-        self.nb_turn        = nb_turn
-        self.rounds         = rounds
-        self.players        = players
-        self.description    = description
-        self.end_date       = end_date
-        
+from classes.tournament import Tournament
 
 class TournamentModel:
     def __init__(self, database):
@@ -21,7 +8,6 @@ class TournamentModel:
         self.tournament_query = Query()
         self.tournament_table = self.db.table("tournois")
  
-
 
     def create_tournament(self, tournament):
         """
