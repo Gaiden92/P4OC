@@ -1,2 +1,11 @@
 # Environnement virtuel
 /env
+
+# Cache
+/__pycache__
+
+# Options VScode
+/.vscode
+
+# Test
+test.py
