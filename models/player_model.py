@@ -18,6 +18,7 @@ class PlayerModel:
         for player in self.player_table.all():
             all_players_list.append(
                                         Player( 
+                                                    player['id'],
                                                     player['lastname'], 
                                                     player['firstname'], 
                                                     player['gender'], 
@@ -32,7 +33,7 @@ class PlayerModel:
     def get_player(self, lastname, firstname):
         player = self.player_table.get(self.player_query.lastname == lastname and self.player_query.firstname == firstname)
         if player:
-            return Player(player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank']) 
+            return Player(player['id'], player['lastname'], player['firstname'], player['gender'], player['birthdate'], player['rank']) 
         else:
             return None    
 

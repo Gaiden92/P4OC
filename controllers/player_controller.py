@@ -45,13 +45,14 @@ class PlayerController:
         """
         players = self.model.get_all_players()
         if players:
-            self.view.display_all_players(players)
+            sorted_list_players = sorted(players, key= lambda player : player.lastname)
+            self.view.display_all_players(sorted_list_players)
         else:
             self.view.no_existing_players_view()
 
 
     def create_player(self):
-
+        
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
@@ -73,7 +74,7 @@ class PlayerController:
             return self.view.ask_rank()
 
         
-        self.model.create_player(Player(lastname, firstname, gender, birthdate, rank))
+        self.model.create_player(Player("", lastname, firstname, gender, birthdate, rank))
         self.view.success_add_player_view()
         self.add_player_continu()
 

@@ -141,6 +141,7 @@ class TournamentView:
             print(f'Vous allez entrer les résultats du match n°{nb_match} : {player1_name} VS {player2_name} ')
             for index,value in enumerate(player):
                 score = input(f'Entrez le score du joueur {player[index][0]} : ')
+
                 player[index][1] += float(score)
             nb_match+=1
             
@@ -176,6 +177,7 @@ class TournamentView:
                 row = tp.row([index+1, player.firstname, player.lastname], 20)
                 print(row)
             print(tp.bottom(3,20))
+            
 
             # on demande à l'utilisateur
             user_choice = input("Séléctionner le joueur à enregistrer au tournoi et appuyez sur entrée : ")
@@ -186,7 +188,9 @@ class TournamentView:
                 player_add_firstname = player_add.firstname 
                 print(f'Vous avez ajouté : {player_add_lastname} {player_add_firstname}')
                 list_choices_players.append(player_add)
-                        
+                if len(list_players) == 0:
+                    print("Vous avez ajouté tous les joueurs.")
+                    return list_choices_players
                 continu = ""
                 while continu != "y" or continu != "n":
                     continu = input("Voulez-vous ajouter un autre joueur ? [y/n]")

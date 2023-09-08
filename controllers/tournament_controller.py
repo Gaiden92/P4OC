@@ -157,7 +157,8 @@ class TournamentController:
 
                 if round["name"] == int(tournament.nb_turn):
                     tournament.end_date = str(date.today())
-                    tournament_winner = self.get_tournament_results_by_tournament(tournament)[0]
+                    tournament_results = self.get_tournament_results_by_tournament(tournament)
+                    tournament_winner = tournament_results[0]
                     self.view.tournament_is_over(tournament_winner)
                     self.model.update_round_tournament(tournament, tournament.name)
                 else:
@@ -166,8 +167,52 @@ class TournamentController:
                     round_serialized = next_round.serialize_round()
                     tournament.rounds.append(round_serialized)
                     self.model.update_round_tournament(tournament, tournament.name)
+
+    def already_played_together(self, rounds:list,players_names_list:list)->bool:
+        for round in rounds:
+            for match in round["matchs"]:
+                player1_name = match[0][0]
+                player2_name = match[1][0]
+                players_names = [player1_name, player2_name]
+                counter = 0
+
+                for player in players_names_list:
+                    if player in players_names:
+                        counter += 1
+                        if counter == 2:
+                            return True
+                        
+        return False
+    
+    def match_pairing(self, rounds, list_trier):
+        index_player1 = 0
+        index_player2 = index_player1 + 1
+        matchs = []
+        while index_player1 < len(list_trier):
+
             
-        
+            try:
+                if self.already_played_together(rounds, [list_trier[index_player1][0], list_trier[index_player2][0]]):
+                    index_player2 += 1
+            except IndexError:
+                break
+            else:
+                try:
+                    matchs.append([list_trier[index_player1], list_trier[index_player2]])
+                except IndexError:
+                    matchs.append([list_trier[0], list_trier[1]])
+                try:    
+                    list_trier.remove(list_trier[index_player2])
+                except IndexError:
+                    list_trier.remove(list_trier[1])
+                try:
+                    list_trier.remove(list_trier[index_player1])
+                except:
+                    list_trier.remove(list_trier[0])
+                index_player2 = index_player1+1
+
+        return matchs
+
     def generate_next_round(self, rounds:list)->object:
         previous_round = rounds[-1]
         new_round = Round(previous_round["name"]+1)
@@ -181,22 +226,8 @@ class TournamentController:
         # trier par score
         liste_trier_par_score = sorted(list_players, key= lambda player : float(player[1]), reverse=True)
 
-        for i in range(0, len(liste_trier_par_score), 2):
-            player1 = liste_trier_par_score[i]
-            player2 = None
+        new_round.matchs = self.match_pairing(rounds, liste_trier_par_score)
         
-            # recherche d'un partenaire pour player1
-            for j in range(i + 1, len(liste_trier_par_score)):
-                candidate = liste_trier_par_score[j]
-                
-                # vérifie si player1 et le candidat n'ont pas déjà joué ensemble
-                if not f.already_played_together(rounds, [player1, candidate]):
-                    player2 = candidate
-                    break
-
-                
-            if player2 is not None:
-                new_round.matchs.append([player1, candidate])
         return new_round
 
 
@@ -233,3 +264,18 @@ class TournamentController:
            
     
     
+        # for i in range(0, len(liste_trier_par_score), 2):
+        #     player1 = liste_trier_par_score[i]
+        #     player2 = None
+        
+        #     # recherche d'un partenaire pour player1
+        #     for j in range(i + 1, len(liste_trier_par_score)):
+        #         candidate = liste_trier_par_score[j]
+                
+        #         # vérifie si player1 et le candidat n'ont pas déjà joué ensemble
+        #         if not f.already_played_together(rounds, [player1, candidate]):
+        #             player2 = candidate
+        #             break
+
+        #     if player2 is not None:
+        #         new_round.matchs.append([player1, candidate])

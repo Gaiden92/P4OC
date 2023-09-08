@@ -36,11 +36,12 @@ class PlayerView:
         print(f"Nombre de joueurs total : {nb_player}")
         headers = tp.header(
                                 [
+                                    'Classement',
+                                    'Id',
                                     'Nom', 
                                     'Prénom', 
                                     'Genre', 
-                                    'Né le', 
-                                    'Classement'
+                                    'Né le'
                                 ],
                                 20, 
                                 align="center"
@@ -50,17 +51,19 @@ class PlayerView:
             print(
                     tp.row(
                                 [
+                                    player.rank,
+                                    player.id,
                                     player.lastname, 
                                     player.firstname, 
                                     player.gender, 
-                                    player.birthdate, 
-                                    player.rank
+                                    player.birthdate
+                                    
                                 ], 
                                 20, 
                                 align="left"
                             )
                 )
-        print(tp.bottom(5, 20))
+        print(tp.bottom(6, 20))
 
     def display_player_view(self, player:object)->None:
         """Affiche les caractéristiques d'un joueur présent en base de donnée.
@@ -69,19 +72,19 @@ class PlayerView:
             player (object): le joueur dont les caractéristiques doivent être affichés
         """
         headers = tp.header(
-                                ["Nom", "Prénom", "Genre", "Né le", "Classement"], 
+                                ["Classement", "Id","Nom", "Prénom", "Genre", "Né le"], 
                                 20, 
                                 align="center"
                             )
         
         row = tp.row(
-                        [player.lastname, player.firstname, player.gender, player.birthdate, player.rank], 
+                        [player.rank, player.id, player.lastname, player.firstname, player.gender, player.birthdate], 
                         20, 
                         align="left"
                     )
         print(headers)
         print(row)
-        print(tp.bottom(5, 20))
+        print(tp.bottom(6, 20))
 
         
 
