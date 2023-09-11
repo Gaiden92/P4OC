@@ -28,6 +28,7 @@ class Round:
     generate_first_round(self, list_players):
         Génére le 1er tour à partir de la liste des joueurs inscrits au tournoi
     """
+
     def __init__(self, name: int = 0) -> None:
         """Construit tous les attributs nécessaire pour l'objet Round.
 

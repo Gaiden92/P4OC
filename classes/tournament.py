@@ -26,8 +26,8 @@ class Tournament:
         le numéro du tour actuel du tournoi
 
     """
-    def __init__(
 
+    def __init__(
         self,
         name: str,
         localisation: str,
@@ -65,7 +65,7 @@ class Tournament:
         self.players = players
         self.description = description
         self.end_date = end_date
-        if len(self.rounds) >= current_round-1:
+        if len(self.rounds) >= current_round - 1:
             self.current_round = len(self.rounds)
         else:
             self.current_round = current_round

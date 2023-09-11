@@ -27,9 +27,18 @@ class Player:
     generate_id(self):
         Génére un id unique pour le joueur.
     """
+
     ID = []
 
-    def __init__(self, id: str, lastname: str, firstname: str, gender: str, birthdate: str, rank: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        lastname: str,
+        firstname: str,
+        gender: str,
+        birthdate: str,
+        rank: str,
+    ) -> None:
         """Construit tous les attributs nécessaire pour l'objet Player.
 
         Paramètres

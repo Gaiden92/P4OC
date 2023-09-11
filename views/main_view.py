@@ -7,7 +7,7 @@ from controllers.player_controller import PlayerController
 
 class MainView:
     def __init__(self, database) -> None:
-        self.db = "db.json"
+        self.db = database
         self.tournament_controller = TournamentController(database)
         self.player_controller = PlayerController(database)
         self.report_view = ReportView(self.db)

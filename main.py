@@ -2,7 +2,7 @@ from views.main_view import MainView
 
 
 def main():
-    launch = MainView("db.json")
+    launch = MainView("database/db.json")
     launch.display_main_programm_view()
 
 
