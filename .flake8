@@ -7,5 +7,4 @@ exclude=
     .gitignore,
     env/,
     db.json,
-    requirements.txt,
-    test.py
+    requirements.txt

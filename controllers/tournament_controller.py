@@ -100,10 +100,10 @@ class TournamentController:
         rounds_list.append(rounds_serialize)
 
         tournament = Tournament(
-            name, 
-            location, 
-            rounds_list, 
-            list_players_serialized, 
+            name,
+            location,
+            rounds_list,
+            list_players_serialized,
             description,
             nb_turns
         )
@@ -283,7 +283,7 @@ class TournamentController:
     def get_all_tournament_players(self):
         name = self.view.ask_name_tournament()
         tournament = self.model.get_tournament_by_name(name)
-        
+
         if tournament:
             players = tournament.players
             sorted_list_players = sorted(players, key=lambda k: k["lastname"])
