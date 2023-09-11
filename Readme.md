@@ -32,8 +32,8 @@ Dans Windows Powershell, naviguer vers le dossier souhaité.
     $ git clone https://github.com/Gaiden92/P4OC.git
 
 ###### Activer l'environnement virtuel
-    $ cd P4_OC 
-    $ python -m venv env 
+    $ cd P4OC
+    $ python -m venv env
     $ ~env\scripts\activate
     
 ###### Installer les paquets requis
@@ -54,7 +54,7 @@ Dans le terminal, naviguer vers le dossier souhaité.
     $ git clone https://github.com/Gaiden92/P4OC.git
 
 ###### Activer l'environnement virtuel
-    $ cd P4_OC 
+    $ cd P4OC 
     $ python3 -m venv env 
     $ source env/bin/activate
     

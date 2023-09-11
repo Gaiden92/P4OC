@@ -2,8 +2,6 @@
 max-line-length = 119
 
 exclude=
-    .vscode/,
-    __pycache__/
     .gitignore,
     env/,
     db.json,
