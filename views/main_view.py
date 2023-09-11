@@ -1,13 +1,16 @@
-import tableprint  as tp
+import tableprint as tp
+
+from .report_view import ReportView
 from controllers.tournament_controller import TournamentController
 from controllers.player_controller import PlayerController
+
 
 class MainView:
     def __init__(self, database) -> None:
         self.db = "db.json"
         self.tournament_controller = TournamentController(database)
         self.player_controller = PlayerController(database)
-
+        self.report_view = ReportView(self.db)
 
     def display_main_programm_view(self):
         while True:
@@ -19,12 +22,12 @@ class MainView:
 
             choice = input("Votre choix: ")
             match choice:
-                case  "1":
+                case "1":
                     self.tournament_controller.get_tournaments_menu()
-                case  "2":
+                case "2":
                     self.player_controller.get_players_menu()
                 case "3":
-                    pass
+                    self.report_view.display_report_view()
                 case "q":
                     exit()
                 case _:

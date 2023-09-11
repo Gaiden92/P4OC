@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 119
+
+exclude=
+    .vscode/,
+    __pycache__/
+    .gitignore,
+    env/,
+    db.json,
+    requirements.txt,
+    test.py
