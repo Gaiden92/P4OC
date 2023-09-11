@@ -6,7 +6,34 @@ from .match import Match
 
 
 class Round:
-    def __init__(self, name=0) -> None:
+    """Une classe représentant un tour.
+
+    Attributs
+    ----------
+    name : str
+        le nom du tour
+    start_date : str
+        la date de début du tour
+    start_hour : str
+        l'heuere de début du tour
+    end_date : str
+        la date de fin du tour
+    end_hour : str
+        l'heure de fin du tour
+
+    Methodes
+    -------
+    serialize_round(self):
+        Convertie un objet Round en un dictionnaire.
+    generate_first_round(self, list_players):
+        Génére le 1er tour à partir de la liste des joueurs inscrits au tournoi
+    """
+    def __init__(self, name: int = 0) -> None:
+        """Construit tous les attributs nécessaire pour l'objet Round.
+
+        Paramètres:
+            name -- Le nom du tour (default: {0})
+        """
         self.name = name
         self.start_date = str(date.today())
         self.start_hour = str(datetime.now().time().strftime("%H:%M:%S"))
@@ -15,7 +42,12 @@ class Round:
 
         self.matchs = []
 
-    def serialize_round(self):
+    def serialize_round(self) -> dict:
+        """Convertie un objet Round en un dictionnaire.
+
+        Retourne:
+            Un dictionnaire contenant les informations du tour.
+        """
         dict_round = {
             "name": self.name,
             "start_date": self.start_date,
@@ -27,7 +59,15 @@ class Round:
 
         return dict_round
 
-    def generate_first_round(self, list_players):
+    def generate_first_round(self, list_players: list) -> list:
+        """Génére le 1er tour à partir de la liste des joueurs inscrits au tournoi
+
+        Arguments:
+            list_players -- une liste de joueurs
+
+        Retourne:
+            une liste d'objet <Match>
+        """
         shuffle(list_players)
         length_sorted_list = len(list_players)
 
@@ -38,7 +78,7 @@ class Round:
             match = Match(
                 [list_players[index].firstname, score1],
                 [list_players[index + 1].firstname, score2],
-            ).match_serialized()
+            ).serialize_match()
             self.matchs.append(match)
             index += 2
 
