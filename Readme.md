@@ -1,4 +1,4 @@
-![chess_club](img/logo-chess-tournament.jpg)
+![chess_club](img/logo-chess-tournament.JPG)
 
 # Projet 4 DA-Python OC (Fouchal Sami)
 ***Livrable du Projet 4 du parcours D-A Python d'OpenClassrooms : application de gestion de tournoi d'échecs***
@@ -77,6 +77,6 @@ Dans le terminal, naviguer vers le dossier souhaité.
 
 _Dernier rapport exporté :_
 
-![latest_report](img/flake-report.jpg)
+![latest_report](img/flake8-report.JPG)
 
 <div id='id-section2'></div>
