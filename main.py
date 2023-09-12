@@ -2,8 +2,8 @@ from views.main_view import MainView
 
 
 def main():
-    launch = MainView("database/db.json")
-    launch.display_main_programm_view()
+    main_menu = MainView("database/db.json")
+    main_menu.display_main_menu()
 
 
 if __name__ == "__main__":

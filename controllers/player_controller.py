@@ -4,7 +4,21 @@ import functions as f
 
 
 class PlayerController:
-    def __init__(self, database) -> None:
+    """ "Une classe représentant le controller de la classe <Player>.
+
+    Attributs
+    ----------
+    database : str
+        La base de donnée à gérer
+
+    """
+
+    def __init__(self, database: str) -> None:
+        """Construit tous les attributs nécessaires de la classe.
+
+        Arguments:
+            database -- La base de donnée à gérer
+        """
         self.model = PlayerModel(database)
         self.view = PlayerView()
 
@@ -47,7 +61,16 @@ class PlayerController:
         else:
             self.view.no_existing_players_view()
 
-    def create_player(self):
+    def create_player(self) -> None:
+        """Contrôle l'intégralité des données utilisateurs entrées lors de la création
+            d'un joueur.
+
+        Valeurs de retour:
+            Si une condition est fausse :
+                La vue relative au contrôle des données ayant échoué.
+            Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour l'enregistrement du joueur
+            en base de donnée.
+        """
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
@@ -75,12 +98,24 @@ class PlayerController:
             self.view.success_add_player_view()
         self.add_player_continu()
 
-    def add_player_continu(self):
+    def add_player_continu(self) -> None:
+        """Contrôle le choix de l'utilisateur s'il souhaite continuait à
+        ajouter des joueurs.
+        """
         choice = self.view.ask_add_another_player()
         if choice == "y":
             self.create_player()
 
-    def update_player(self):
+    def update_player(self) -> None:
+        """Contrôle l'intégralité des données utilisateurs entrées lors de la modification
+            d'un joueur.
+
+        Valeurs de retour:
+            Si une condition est fausse :
+                La vue relative au contrôle des données ayant échoué.
+            Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour la modification du joueur
+            en base de donnée et la vue nécessaire est appelée pour informer l'utilisateur.
+        """
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
@@ -104,7 +139,16 @@ class PlayerController:
         else:
             return self.view.failed_editing_player_view()
 
-    def remove_player(self):
+    def remove_player(self) -> None:
+        """Contrôle l'intégralité des données utilisateurs entrées lors de la suppression
+            d'un joueur.
+
+        Valeurs de retour:
+            Si une condition est fausse :
+                La vue relative au contrôle des données ayant échoué.
+            Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour la suppression du joueur
+            en base de donnée et la vue nécessaire est appelée pour informer l'utilisateur.
+        """
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
             return self.view.ask_lastname()

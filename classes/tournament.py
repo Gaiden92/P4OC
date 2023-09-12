@@ -39,7 +39,7 @@ class Tournament:
         end_date: str = "",
         current_round: int = 1,
     ) -> None:
-        """Une classe qui représente un tournoi
+        """Construit tous les attributs nécessaire pour l'objet Round.
 
         Arguments:
             name -- le nom du tournoi
@@ -48,7 +48,7 @@ class Tournament:
             players -- la liste des joueurs du tournoi
             description -- la description du tournoi
 
-        Keyword Arguments:
+        Keywords Arguments:
             nb_turn -- le nombre de tour du tournoi (default: {4})
             date -- la date de début du tournoi (default: {date.today()})
             end_date -- la date de fin du tournoi (default: {""})

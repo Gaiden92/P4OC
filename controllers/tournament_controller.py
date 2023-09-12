@@ -10,12 +10,28 @@ import functions as f
 
 
 class TournamentController:
-    def __init__(self, database) -> None:
+    """ "Une classe représentant le controller de la classe <Tournament>.
+    Elle fait le lien entre le model et la vue de la classe <Tournament>.
+
+    Attributs
+    ----------
+    database : str
+        La base de donnée à gérer
+
+    """
+    def __init__(self, database: str) -> None:
+        """Construit tous les attributs nécessaires de la classe.
+
+        Arguments:
+            database -- la base de donnée à gérer.
+        """
         self.model = TournamentModel(database)
         self.view = TournamentView()
         self.player_model = PlayerModel(database)
 
-    def get_tournaments_menu(self):
+    def get_tournaments_menu(self) -> None:
+        """Méthode effectuant le contrôle des entrées utilisateurs du menu principal des tournois.
+        """
         while True:
             choice = self.view.display_tournaments_menu()
             match choice:
@@ -34,7 +50,9 @@ class TournamentController:
                 case _:
                     self.view.invalid_choice()
 
-    def get_tournament_menu(self):
+    def get_tournament_menu(self) -> None:
+        """Méthode effectuant le contrôle des entrées utilisateurs du menu d"un tournoi spécifique.
+        """
         if self.not_tournament_in_database():
             self.view.display_not_tournament_in_db()
         else:
@@ -52,15 +70,19 @@ class TournamentController:
                             self.list_tournament_by_name(name)
                         case "4":
                             self.update_tournament(name)
+                            return
                         case "5":
                             self.model.delete_tournament(name)
                             return
                         case "b":
                             return
                         case _:
-                            print("Choix invalide. Veuillez réessayer.")
+                            self.view.invalid_choice()
 
-    def create_tournament(self):
+    def create_tournament(self) -> None:
+        """Méthode effectuant le contrôle des entrées utilisateurs pour la création
+        d"un tournoi.
+        """
         # vérification des entrées de l'utilisateur
         name = self.view.ask_name_tournament()
         if not f.information_is_ok(name):
@@ -99,36 +121,55 @@ class TournamentController:
         rounds_serialize = rounds.serialize_round()
         rounds_list.append(rounds_serialize)
 
+        # création de l'objet <Tournoi> pour sauvegarde en base de donnée
         tournament = Tournament(
-            name,
-            location,
-            rounds_list,
-            list_players_serialized,
-            description,
-            nb_turns
+            name, location, rounds_list, list_players_serialized, description, nb_turns
         )
 
-        print(tournament)
         if self.model.create_tournament(tournament):
             self.view.success_creation_tournament()
         else:
             self.view.failed_creation_tournament()
 
-    def list_tournaments(self):
+    def list_tournaments(self) -> None:
+        """Méthode effectuant le contrôle de l'existance des tournois en base de donnée.
+        Le controleur appel la vue qui affichera tous les tournois présent est en base de donnée
+        ou si aucun tournoi n'est présent, elle appelera la vue concernée.
+        """
         if self.not_tournament_in_database():
             return self.view.display_not_tournament_in_db()
         else:
             tournaments = self.model.get_tournaments()
             self.view.display_tournaments(tournaments)
 
-    def list_tournament_by_name(self, name):
+    def list_tournament_by_name(self, name: str) -> None:
+        """Méthode effectuant le contrôle de l'existance du tournoi passé en argument.
+        Le controleur appel la vue spécifique selon si le tournoi est en base de donnée ou si aucun
+        tournoi de ce nom n'est présent.
+
+        Arguments:
+            name -- le nom du tournoi à afficher
+
+        Valeurs de retour:
+            Si le tournoi est en base de donnée :
+                la vue affichant les caractéristiques du tournoi.
+            Sinon :
+                la vue affichant un message indiquant à l'utilisateur que le tournoi
+                demandé n'est pas présent en base de donnée.
+        """
         if self.not_tournament_in_database():
             return self.view.display_not_tournament_in_db()
         else:
             tournament = self.model.get_tournament_by_name(name)
             self.view.display_tournament(tournament)
 
-    def update_tournament(self, name=""):
+    def update_tournament(self, name="") -> None:
+        """Méthode effectuant le contrôle de l'existance du tournoi passé en argument
+        pour effectuer une modification de ce dernier.
+
+        Keyword Arguments:
+            name -- le nom du tournoi à modifier (default: {""})
+        """
         if self.not_tournament_in_database():
             self.view.display_not_tournament_in_db()
         else:
@@ -136,15 +177,28 @@ class TournamentController:
             update = self.view.ask_update_tournament()
 
             self.model.update_tournament(update, name)
+            
 
-    def delete_tournament(self):
+    def delete_tournament(self) -> None:
+        """Méthode effectuant le contrôle de l'existance d'un tournoi en base de donnée
+        pour effectuer une suppression de ce dernier.
+        """
         if self.not_tournament_in_database():
-            return self.view.display_not_tournament_in_db()
+            self.view.display_not_tournament_in_db()
         else:
             name = self.view.ask_name_tournament()
             self.model.delete_tournament(name)
 
-    def enter_match_result(self, tournament):
+    def enter_match_result(self, tournament: object) -> None:
+        """Méthode effectuant le contrôle des entrées utilisateurs pour enregistrer les résultats des matchs
+        et générer le prochain tour.
+
+        Arguments:
+            tournament -- un objet <tournament>
+
+        Valeurs de retour:
+            la vue spécifique selon le cas rencontré.
+        """
         if self.not_tournament_in_database():
             return self.view.display_not_tournament_in_db()
         else:
@@ -180,6 +234,16 @@ class TournamentController:
                     self.model.update_round_tournament(tournament, tournament.name)
 
     def already_played_together(self, rounds: list, players_names_list: list) -> bool:
+        """Méthode vérifiant si des joueurs se sont déjà renconrtrés lors des tours précédents.
+
+        Arguments:
+            rounds -- la liste des tours du tournoi
+            players_names_list -- la liste des joueurs du tournoi
+
+        Valeurs de retour:
+            Vrai si : les 2 joueurs se sont déjà rencontrés
+            Faux si : les 2 joueurs ne se sont pas encore rencontrés
+        """
         for round in rounds:
             for match in round["matchs"]:
                 player1_name = match[0][0]
@@ -195,7 +259,16 @@ class TournamentController:
 
         return False
 
-    def match_pairing(self, rounds, list_trier):
+    def match_pairing(self, rounds: list, list_trier: list) -> list:
+        """Méthode effectuant les pairs des matchs.
+
+        Arguments:
+            rounds -- la liste des tours du tournoi
+            list_trier -- la liste des joueurs trier par score
+
+        Valeurs de retour:
+            la liste des matchs du prochain tour.
+        """
         index_player1 = 0
         index_player2 = index_player1 + 1
         matchs = []
@@ -223,6 +296,14 @@ class TournamentController:
         return matchs
 
     def generate_next_round(self, rounds: list) -> object:
+        """Méthode générant le prochain tour.
+
+        Arguments:
+            rounds -- la liste des tours précedent du tournoi
+
+        Valeurs de retour:
+            le tour suivant sous forme d'un objet <round>
+        """
         previous_round = rounds[-1]
         new_round = Round(previous_round["name"] + 1)
         list_players = []
@@ -240,7 +321,15 @@ class TournamentController:
 
         return new_round
 
-    def get_tournament_results_by_tournament(self, tournament):
+    def get_tournament_results_by_tournament(self, tournament:object) -> list:
+        """Méthode qui récupère les résultats du dernier tour du tournoi.
+
+        Arguments:
+            tournament -- un objet <tournament>
+
+        Valeurs de retour:
+            la liste des résultats trier par score.
+        """
         last_round = tournament.rounds[-1]
         matchs = last_round["matchs"]
         list_tournament_results = []
@@ -257,14 +346,32 @@ class TournamentController:
 
         return list_tournament_results_sort
 
-    def not_tournament_in_database(self):
+    def not_tournament_in_database(self) -> bool:
+        """Méthode vérifiant l'existence d'au moins un tournoi en base de donnée
+
+        Valeurs de retour:
+            True si au moins un tournoi existe sinon False 
+        """
         return True if self.model.not_tournament_in_database() else False
 
-    def list_results(self, tournament):
+    def list_results(self, tournament: object) -> None:
+        """Méthode appelant la vue d'un tournoi afin d'afficher le résultat de ce dernier.
+
+        Arguments:
+            tournament -- un objet <tournament>
+
+        Valeur de retour:
+            None
+        """
         results = self.get_tournament_results_by_tournament(tournament)
         return self.view.display_tournament_results(results)
 
-    def list_name_and_date(self):
+    def list_name_and_date(self) -> None:
+        """Méthode appelant la vue d'un tournoi afin d'afficher le nom et la date de ce dernier
+
+        Valeurs de retour:
+            None
+        """
         name = self.view.ask_name_tournament()
         tournament = self.model.get_tournament_by_name(name)
         if tournament:
@@ -272,7 +379,12 @@ class TournamentController:
         else:
             self.view.display_not_tournament_in_db()
 
-    def list_round_and_match(self):
+    def list_round_and_match(self) -> None:
+        """Méthode appelant la vue d'un tournoi afin d'afficher ses tours et ses matchs
+
+        Valeurs de retour:
+            None
+        """
         name = self.view.ask_name_tournament()
         tournament = self.model.get_tournament_by_name(name)
         if tournament:
@@ -280,7 +392,12 @@ class TournamentController:
         else:
             self.view.display_not_tournament_in_db()
 
-    def get_all_tournament_players(self):
+    def get_all_tournament_players(self) -> None:
+        """Méthode appelant la vue d'un tournoi afin d'afficher tous les joueurs participant 
+
+        Valeurs de retour:
+            None
+        """
         name = self.view.ask_name_tournament()
         tournament = self.model.get_tournament_by_name(name)
 

@@ -12,7 +12,7 @@ class MainView:
         self.player_controller = PlayerController(database)
         self.report_view = ReportView(self.db)
 
-    def display_main_programm_view(self):
+    def display_main_menu(self):
         while True:
             tp.banner("MAIN MENU          ")
             print("1. Manage Tournaments")
