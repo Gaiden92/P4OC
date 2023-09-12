@@ -37,7 +37,6 @@ class Player:
         firstname: str,
         gender: str,
         birthdate: str,
-        rank: str,
     ) -> None:
         """Construit tous les attributs nécessaire pour l'objet Player.
 
@@ -53,8 +52,6 @@ class Player:
             le sexe du joueur
         birthdate : str
             la date de naissance du joueur
-        rank : str
-            le classement du joueur
         """
         if id == "":
             self.id = self.generate_id()
@@ -64,7 +61,6 @@ class Player:
         self.firstname = firstname
         self.gender = gender
         self.birthdate = birthdate
-        self.rank = rank
 
         Player.ID.append(self.id)
 
@@ -80,7 +76,6 @@ class Player:
             "firstname": self.firstname,
             "gender": self.gender,
             "birthdate": self.birthdate,
-            "rank": self.rank,
         }
         return player
 

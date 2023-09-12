@@ -48,7 +48,6 @@ class PlayerModel:
                     player["firstname"],
                     player["gender"],
                     player["birthdate"],
-                    player["rank"],
                 )
             )
         return all_players_list
@@ -77,7 +76,6 @@ class PlayerModel:
                 player["firstname"],
                 player["gender"],
                 player["birthdate"],
-                player["rank"],
             )
         else:
             return None

@@ -34,14 +34,13 @@ class PlayerView:
         nb_player = len(players)
         print(f"Nombre de joueurs total : {nb_player}")
         headers = tp.header(
-            ["Classement", "Id", "Nom", "Prénom", "Genre", "Né le"], 20, align="center"
+            ["Id", "Nom", "Prénom", "Genre", "Né le"], 20, align="center"
         )
         print(headers)
         for player in players:
             print(
                 tp.row(
                     [
-                        player.rank,
                         player.id,
                         player.lastname,
                         player.firstname,
@@ -52,7 +51,7 @@ class PlayerView:
                     align="left",
                 )
             )
-        print(tp.bottom(6, 20))
+        print(tp.bottom(5, 20))
 
     def display_player_view(self, player: object) -> None:
         """Affiche les caractéristiques d'un joueur présent en base de donnée.
@@ -61,12 +60,11 @@ class PlayerView:
             player (object): le joueur dont les caractéristiques doivent être affichés
         """
         headers = tp.header(
-            ["Classement", "Id", "Nom", "Prénom", "Genre", "Né le"], 20, align="center"
+            ["Id", "Nom", "Prénom", "Genre", "Né le"], 20, align="center"
         )
 
         row = tp.row(
             [
-                player.rank,
                 player.id,
                 player.lastname,
                 player.firstname,
@@ -78,7 +76,7 @@ class PlayerView:
         )
         print(headers)
         print(row)
-        print(tp.bottom(6, 20))
+        print(tp.bottom(5, 20))
 
     def ask_lastname(self) -> str:
         """Demande à l'utilisateur son nom de famille.
@@ -147,7 +145,7 @@ class PlayerView:
             str : le choix de l'utilisateur si entrée valide sinon la fonction est rappellée.
         """
         column = input(
-            "Quelle colonne souhaitez vous modifier : \n 1. Nom\n 2. Prénom\n 3. Genre\n 4. Birthdate\n 5. Rank`\n "
+            "Quelle colonne souhaitez vous modifier : \n 1. Nom\n 2. Prénom\n 3. Genre\n 4. Birthdate\n "
         )
 
         return column if f.verify_column_to_update(column) else self.ask_column_update()

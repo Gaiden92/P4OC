@@ -229,7 +229,7 @@ class TournamentView:
         players = tournament.players
         tp.banner(f"Player of {tournament.name} ")
         header = tp.header(
-            ["id", "lastname", "firstname", "gender", "birthdate", "rank"], width=20
+            ["id", "lastname", "firstname", "gender", "birthdate"], width=20
         )
         print(header)
         for player in players:
@@ -237,7 +237,7 @@ class TournamentView:
             row = tp.row(list_values, width=20)
             print(row)
 
-        bottom = tp.bottom(6, width=20)
+        bottom = tp.bottom(5, width=20)
 
         print(bottom)
 

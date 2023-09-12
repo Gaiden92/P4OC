@@ -50,9 +50,6 @@ def verify_data(column_name: str, data) -> bool:
         case "4":
             return False if not birth_is_ok(data) else True
 
-        case "5":
-            return False if not ranking_is_ok(data) else True
-
 
 def get_column_name_by_number(number):
     match number:
@@ -64,8 +61,6 @@ def get_column_name_by_number(number):
             column_name = "gender"
         case "4":
             column_name = "birthdate"
-        case "5":
-            column_name = "rank"
         case _:
             print("")
     return column_name

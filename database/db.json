@@ -1,36 +1,32 @@
 {
     "players": {
         "1": {
-            "id": "AN7640",
-            "lastname": "Fouchal",
-            "firstname": "Sami",
-            "gender": "h",
-            "birthdate": "02-08-1987",
-            "rank": "2"
-        },
-        "2": {
-            "id": "JW5336",
-            "lastname": "Couchy",
-            "firstname": "Terry",
-            "gender": "h",
-            "birthdate": "06-07-1987",
-            "rank": "2"
-        },
-        "3": {
-            "id": "QS1106",
+            "id": "SI0635",
             "lastname": "Agouassey",
             "firstname": "Akrey",
             "gender": "h",
-            "birthdate": "11-09-1980",
-            "rank": "1"
+            "birthdate": "06-09-1975"
+        },
+        "2": {
+            "id": "EY1335",
+            "lastname": "Fouchal",
+            "firstname": "Sami",
+            "gender": "h",
+            "birthdate": "02-08-1987"
+        },
+        "3": {
+            "id": "JQ9403",
+            "lastname": "Couchy",
+            "firstname": "Terry",
+            "gender": "h",
+            "birthdate": "06-07-1987"
         },
         "4": {
-            "id": "YH3528",
-            "lastname": "Bougerdani",
-            "firstname": "Kenza",
+            "id": "EB1427",
+            "lastname": "Fouchal",
+            "firstname": "Nassima",
             "gender": "f",
-            "birthdate": "06-12-1990",
-            "rank": "5"
+            "birthdate": "01-10-1988"
         }
     },
     "tournois": {
@@ -40,151 +36,60 @@
             "nb_turn": 4,
             "players": [
                 {
-                    "id": "YH3528",
-                    "lastname": "Bougerdani",
-                    "firstname": "Kenza",
-                    "gender": "f",
-                    "birthdate": "06-12-1990",
-                    "rank": "5"
-                },
-                {
-                    "id": "QS1106",
+                    "id": "SI0635",
                     "lastname": "Agouassey",
                     "firstname": "Akrey",
                     "gender": "h",
-                    "birthdate": "11-09-1980",
-                    "rank": "1"
+                    "birthdate": "06-09-1975"
                 },
                 {
-                    "id": "AN7640",
+                    "id": "EY1335",
                     "lastname": "Fouchal",
                     "firstname": "Sami",
                     "gender": "h",
-                    "birthdate": "02-08-1987",
-                    "rank": "2"
+                    "birthdate": "02-08-1987"
                 },
                 {
-                    "id": "JW5336",
+                    "id": "JQ9403",
                     "lastname": "Couchy",
                     "firstname": "Terry",
                     "gender": "h",
-                    "birthdate": "06-07-1987",
-                    "rank": "2"
+                    "birthdate": "06-07-1987"
+                },
+                {
+                    "id": "EB1427",
+                    "lastname": "Fouchal",
+                    "firstname": "Nassima",
+                    "gender": "f",
+                    "birthdate": "01-10-1988"
                 }
             ],
             "rounds": [
                 {
                     "name": 1,
                     "start_date": "2023-09-12",
-                    "start_hour": "12:08:28",
-                    "end_date": "2023-09-12",
-                    "end_hour": "12:12:57",
+                    "start_hour": "16:37:28",
+                    "end_date": "",
+                    "end_hour": "",
                     "matchs": [
                         [
                             [
-                                "Kenza",
-                                1.0
+                                "Sami",
+                                0
                             ],
                             [
-                                "Sami",
-                                0.0
+                                "Nassima",
+                                0
                             ]
                         ],
                         [
                             [
                                 "Akrey",
-                                0.5
+                                0
                             ],
                             [
                                 "Terry",
-                                0.5
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 2,
-                    "start_date": "2023-09-12",
-                    "start_hour": "12:12:57",
-                    "end_date": "2023-09-12",
-                    "end_hour": "12:13:50",
-                    "matchs": [
-                        [
-                            [
-                                "Kenza",
-                                2.0
-                            ],
-                            [
-                                "Akrey",
-                                0.5
-                            ]
-                        ],
-                        [
-                            [
-                                "Terry",
-                                0.5
-                            ],
-                            [
-                                "Sami",
-                                1.0
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 3,
-                    "start_date": "2023-09-12",
-                    "start_hour": "12:13:50",
-                    "end_date": "2023-09-12",
-                    "end_hour": "12:14:14",
-                    "matchs": [
-                        [
-                            [
-                                "Kenza",
-                                3.0
-                            ],
-                            [
-                                "Akrey",
-                                0.5
-                            ]
-                        ],
-                        [
-                            [
-                                "Sami",
-                                1.5
-                            ],
-                            [
-                                "Terry",
-                                1.0
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 4,
-                    "start_date": "2023-09-12",
-                    "start_hour": "12:14:14",
-                    "end_date": "2023-09-12",
-                    "end_hour": "12:14:19",
-                    "matchs": [
-                        [
-                            [
-                                "Kenza",
-                                4.0
-                            ],
-                            [
-                                "Terry",
-                                1.0
-                            ]
-                        ],
-                        [
-                            [
-                                "Sami",
-                                1.5
-                            ],
-                            [
-                                "Akrey",
-                                1.5
+                                0
                             ]
                         ]
                     ]
@@ -192,8 +97,8 @@
             ],
             "description": "aucune",
             "date": "2023-09-12",
-            "end_date": "2023-09-12",
-            "current_round": 4
+            "end_date": "",
+            "current_round": 1
         }
     }
 }

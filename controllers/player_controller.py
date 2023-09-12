@@ -87,10 +87,7 @@ class PlayerController:
         if not f.birth_is_ok(birthdate):
             return self.view.ask_birth_date()
 
-        rank = self.view.ask_rank()
-        if not f.ranking_is_ok(rank):
-            return self.view.ask_rank()
-        player = Player("", lastname, firstname, gender, birthdate, rank)
+        player = Player("", lastname, firstname, gender, birthdate)
         if self.model.get_player(player.lastname, player.firstname):
             self.view.player_already_exist_view(player)
         else:
