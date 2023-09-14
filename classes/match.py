@@ -14,7 +14,7 @@ class Match:
         Convertie un objet Match en une liste.
     """
 
-    def __init__(self, player1, player2) -> None:
+    def __init__(self, player1: list, player2: list) -> None:
         """Construit tous les attributs nécessaire pour l'objet Match.
 
         Paramètres
@@ -26,6 +26,12 @@ class Match:
         """
         self.player1 = player1
         self.player2 = player2
+
+        self.player1_id = player1[0]
+        self.player1_score = player1[1]
+
+        self.player2_id = player2[0]
+        self.player2_score = player2[1]
 
     def serialize_match(self) -> list:
         """

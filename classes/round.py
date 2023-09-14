@@ -77,8 +77,8 @@ class Round:
             score1 = 0
             score2 = 0
             match = Match(
-                [list_players[index].firstname, score1],
-                [list_players[index + 1].firstname, score2],
+                [list_players[index].id, score1],
+                [list_players[index + 1].id, score2],
             ).serialize_match()
             self.matchs.append(match)
             index += 2

@@ -122,3 +122,16 @@ class PlayerModel:
             return True
         else:
             return False
+
+    def get_player_by_id(self, id: str) -> object:
+        player = self.player_table.get(self.player_query.id == id)
+        if player:
+            return Player(
+                player["id"],
+                player["lastname"],
+                player["firstname"],
+                player["gender"],
+                player["birthdate"],
+            )
+        else:
+            return None

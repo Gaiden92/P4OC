@@ -123,3 +123,8 @@ class TournamentModel:
 
     def not_tournament_in_database(self):
         return len(self.tournament_table) == 0
+
+    def update_players_tournament(self, list, name) -> None:
+        self.tournament_table.update(
+            {"players": list}, self.tournament_query.name == name
+        )
