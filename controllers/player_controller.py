@@ -71,6 +71,15 @@ class PlayerController:
             Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour l'enregistrement du joueur
             en base de donnée.
         """
+        id_player = self.view.ask_id()
+
+        if self.model.get_player_by_id(id_player):
+            self.view.id_already_exist_view(id_player)
+            return self.create_player()
+        
+        if not f.id_is_ok(id_player):
+            return self.view.ask_id()
+            
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
@@ -87,7 +96,7 @@ class PlayerController:
         if not f.birth_is_ok(birthdate):
             return self.view.ask_birth_date()
 
-        player = Player("", lastname, firstname, gender, birthdate)
+        player = Player(id_player, lastname, firstname, gender, birthdate)
         if self.model.get_player(player.lastname, player.firstname):
             self.view.player_already_exist_view(player)
         else:

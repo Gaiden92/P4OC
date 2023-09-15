@@ -1,3 +1,11 @@
+def id_is_ok(id_player: str):
+    for caractere, index in enumerate(id_player):
+        print(id_player)
+        if id_player[0:2].isalpha() and id_player[2:].isdigit() and len(id_player) == 6:
+            return True
+        else:
+            return False
+
 def information_is_ok(variable) -> bool:
     variable = variable.strip()
 

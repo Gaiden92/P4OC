@@ -53,10 +53,8 @@ class Player:
         birthdate : str
             la date de naissance du joueur
         """
-        if id == "":
-            self.id = self.generate_id()
-        else:
-            self.id = id
+
+        self.id = id
         self.lastname = lastname
         self.firstname = firstname
         self.gender = gender
@@ -79,17 +77,3 @@ class Player:
         }
         return player
 
-    def generate_id(self) -> str:
-        """Génére un id unique pour le joueur.
-
-        Retourne:
-            L'id unique du joueur sous forme d'une chaine de caractère si la condition
-            est vrai, sinon la fonction se rappelle.
-        """
-        letter = string.ascii_uppercase
-        number = string.digits
-        letter_str = "".join(random.choice(letter) for _ in range(2))
-        number_str = "".join(random.choice(number) for _ in range(4))
-        id_player = letter_str + number_str
-
-        return id_player if id_player not in Player.ID else self.generate_id()

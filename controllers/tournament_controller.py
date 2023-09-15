@@ -85,7 +85,9 @@ class TournamentController:
         """Méthode effectuant le contrôle des entrées utilisateurs pour la création
         d"un tournoi.
         """
+        
         # vérification des entrées de l'utilisateur
+
         name = self.view.ask_name_tournament()
         if not f.information_is_ok(name):
             return self.view.ask_name_tournament()
