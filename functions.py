@@ -6,6 +6,7 @@ def id_is_ok(id_player: str):
         else:
             return False
 
+
 def information_is_ok(variable) -> bool:
     variable = variable.strip()
 

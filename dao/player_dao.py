@@ -1,10 +1,10 @@
 from tinydb import TinyDB
 from tinydb import Query
 
-from classes.player import Player
+from models.player import Player
 
 
-class PlayerModel:
+class PlayerDao:
     """ "Une classe représentant le model de la classe <Player>.
 
     Attributs

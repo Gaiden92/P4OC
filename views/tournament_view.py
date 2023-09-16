@@ -48,7 +48,7 @@ class TournamentView:
                 "Lieu",
                 "Date de début",
                 "Date de fin",
-                "Ronde en cours",
+                "Tour actuel",
                 "Description",
             ],
             width=20,
@@ -72,51 +72,26 @@ class TournamentView:
         print(row)
         print(bottom)
 
-    # def display_rounds(self, rounds):
-    #     for round in rounds:
-    #         matchs = round["matchs"]
-    #         status = "terminé" if self.is_round_finish(round) else "en cours"
-    #         tp.banner(
-    #             f'RONDE N°{round["name"]} ({status})                                                 ',
-    #             120,
-    #         )
-    #         header = tp.header(["Matchs"], 118, align="center")
-    #         print(header)
-    #         for match in matchs:
-    #             match_str = ""
-    #             colors = ["blancs", "noirs"]
-    #             for index, informations_player in enumerate(match):
-    #                 player_name = informations_player[0]
-    #                 player_score = informations_player[1]
-    #                 player_chess_piece_color = random.choice(colors)
-    #                 if index == len(match) - 1:
-    #                     match_str += f"{player_name} {player_score} ({player_chess_piece_color})"
-    #                 else:
-    #                     match_str += f"{player_name} {player_score} ({player_chess_piece_color}) VS "
-    #                 colors.remove(player_chess_piece_color)
-    #             row = tp.row(match_str.split(","), 118, align="center")
-    #             print(row)
-    #         print(tp.bottom(1, 118))
 
-    def display_round(self, rounds: list) -> None:
+    def display_rounds(self, rounds: list) -> None:
         for index, round in enumerate(rounds):
             if round["end_date"] == "":
-                banner = f"Tour n°{index+1} - en cours                                          "
+                banner = f"Tour n°{index+1} - en cours     "
             else:
-                banner = f"Tour n°{index+1} - terminé                                           "
-            tp.banner(banner, 103)
+                banner = f"Tour n°{index+1} - terminé      "
+            tp.banner(banner)
             header = tp.header(
                 [
                     "Match",
                     "Player 1",
                     "Couleur P1",
+                    "Score P1",
                     "",
                     "Player 2",
                     "Couleur P2",
-                    "Score P1",
-                    "Score P2",
+                    "Score P2"
                 ],
-                15,
+                15
             )
             bottom = tp.bottom(8, 15)
 
@@ -133,13 +108,13 @@ class TournamentView:
                         round["matchs"].index(matchs) + 1,
                         f'{player1["lastname"]} {player1["firstname"][0:3]}.',
                         player1_chess_piece_color,
+                        player1["score"],
                         "vs",
                         f'{player2["lastname"]} {player2["firstname"][0:3]}.',
                         player2_chess_piece_color,
-                        player1["score"],
-                        player2["score"],
+                        player2["score"]
                     ],
-                    15,
+                    15
                 )
                 print(row)
             print(bottom)
@@ -199,9 +174,7 @@ class TournamentView:
             player1_id = player1[0]
             player2_id = player2[0]
             print(
-                f"Vous allez entrer les résultats du match n°{nb_match} :\
-                        {player1_id} VS\
-                        {player2_id}"
+                f"Vous allez entrer les résultats du match n°{nb_match} : {player1_id} VS {player2_id}"
             )
 
             for index, value in enumerate(player):

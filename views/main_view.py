@@ -10,7 +10,7 @@ class MainView:
         self.db = database
         self.tournament_controller = TournamentController(database)
         self.player_controller = PlayerController(database)
-        self.report_view = ReportView(self.db)
+        self.report_view = ReportView(database)
 
     def display_main_menu(self):
         while True:

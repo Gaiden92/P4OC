@@ -1,11 +1,286 @@
 {
     "players": {
         "1": {
-            "id": "AB6565",
-            "lastname": "Fouchak",
+            "id": "AB1010",
+            "lastname": "Couchy",
+            "firstname": "Terry",
+            "gender": "h",
+            "birthdate": "06-07-1987"
+        },
+        "2": {
+            "id": "AC2115",
+            "lastname": "Fouchal",
             "firstname": "Sami",
             "gender": "h",
             "birthdate": "02-08-1987"
+        },
+        "3": {
+            "id": "BC0645",
+            "lastname": "Bougerdani",
+            "firstname": "Kenza",
+            "gender": "f",
+            "birthdate": "01-06-1990"
+        },
+        "4": {
+            "id": "BN1245",
+            "lastname": "Agouassey",
+            "firstname": "Akrey",
+            "gender": "h",
+            "birthdate": "06-09-1980"
+        },
+        "5": {
+            "id": "GH6547",
+            "lastname": "Pottier",
+            "firstname": "Hedi",
+            "gender": "h",
+            "birthdate": "01-11-1983"
+        },
+        "6": {
+            "id": "TY0645",
+            "lastname": "Masson",
+            "firstname": "Maeva",
+            "gender": "f",
+            "birthdate": "01-08-1989"
+        },
+        "7": {
+            "id": "DF1415",
+            "lastname": "Fouchal",
+            "firstname": "Ouahid",
+            "gender": "h",
+            "birthdate": "03-05-1983"
+        },
+        "8": {
+            "id": "GH1469",
+            "lastname": "Fouchal",
+            "firstname": "Nassima",
+            "gender": "f",
+            "birthdate": "01-10-1990"
+        },
+        "9": {
+            "id": "TR1415",
+            "lastname": "Sekhaine",
+            "firstname": "Thomas",
+            "gender": "h",
+            "birthdate": "20-12-1989"
+        },
+        "10": {
+            "id": "HJ1412",
+            "lastname": "Sekhaine",
+            "firstname": "Romain",
+            "gender": "h",
+            "birthdate": "11-06-1991"
+        }
+    },
+    "tournois": {
+        "1": {
+            "name": "Tournoi des rois",
+            "localisation": "Suresnes",
+            "nb_turn": 4,
+            "players": [
+                {
+                    "id": "AB1010",
+                    "cumulate_score": 0.5
+                },
+                {
+                    "id": "AC2115",
+                    "cumulate_score": 0.5
+                },
+                {
+                    "id": "BC0645",
+                    "cumulate_score": 1.0
+                },
+                {
+                    "id": "BN1245",
+                    "cumulate_score": 2.0
+                }
+            ],
+            "rounds": [
+                {
+                    "name": 1,
+                    "start_date": "2023-09-16",
+                    "start_hour": "13:15:35",
+                    "end_date": "2023-09-16",
+                    "end_hour": "13:16:02",
+                    "matchs": [
+                        [
+                            [
+                                "BN1245",
+                                1.0
+                            ],
+                            [
+                                "AC2115",
+                                0.0
+                            ]
+                        ],
+                        [
+                            [
+                                "AB1010",
+                                0.5
+                            ],
+                            [
+                                "BC0645",
+                                0.5
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": 2,
+                    "start_date": "2023-09-16",
+                    "start_hour": "13:16:02",
+                    "end_date": "2023-09-16",
+                    "end_hour": "13:16:20",
+                    "matchs": [
+                        [
+                            [
+                                "BN1245",
+                                1.0
+                            ],
+                            [
+                                "AB1010",
+                                0.0
+                            ]
+                        ],
+                        [
+                            [
+                                "BC0645",
+                                0.5
+                            ],
+                            [
+                                "AC2115",
+                                0.5
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": 3,
+                    "start_date": "2023-09-16",
+                    "start_hour": "13:16:20",
+                    "end_date": "",
+                    "end_hour": "",
+                    "matchs": [
+                        [
+                            [
+                                "BN1245",
+                                0
+                            ],
+                            [
+                                "BC0645",
+                                0
+                            ]
+                        ],
+                        [
+                            [
+                                "AB1010",
+                                0
+                            ],
+                            [
+                                "AC2115",
+                                0
+                            ]
+                        ]
+                    ]
+                }
+            ],
+            "description": "aucune",
+            "date": "2023-09-16",
+            "end_date": "",
+            "current_round": 3
+        },
+        "2": {
+            "name": "Tournoi des reines",
+            "localisation": "Courbevoie",
+            "nb_turn": 6,
+            "players": [
+                {
+                    "id": "AB1010",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "AC2115",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "BN1245",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "BC0645",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "TY0645",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "DF1415",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "GH6547",
+                    "cumulate_score": 0
+                },
+                {
+                    "id": "GH1469",
+                    "cumulate_score": 0
+                }
+            ],
+            "rounds": [
+                {
+                    "name": 1,
+                    "start_date": "2023-09-16",
+                    "start_hour": "13:55:22",
+                    "end_date": "",
+                    "end_hour": "",
+                    "matchs": [
+                        [
+                            [
+                                "AC2115",
+                                0
+                            ],
+                            [
+                                "GH1469",
+                                0
+                            ]
+                        ],
+                        [
+                            [
+                                "BC0645",
+                                0
+                            ],
+                            [
+                                "AB1010",
+                                0
+                            ]
+                        ],
+                        [
+                            [
+                                "BN1245",
+                                0
+                            ],
+                            [
+                                "GH6547",
+                                0
+                            ]
+                        ],
+                        [
+                            [
+                                "TY0645",
+                                0
+                            ],
+                            [
+                                "DF1415",
+                                0
+                            ]
+                        ]
+                    ]
+                }
+            ],
+            "description": "aucune",
+            "date": "2023-09-16",
+            "end_date": "",
+            "current_round": 1
         }
     }
 }

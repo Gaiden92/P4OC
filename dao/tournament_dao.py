@@ -1,10 +1,10 @@
 from tinydb import TinyDB
 from tinydb import Query
 
-from classes.tournament import Tournament
+from models.tournament import Tournament
 
 
-class TournamentModel:
+class TournamentDao:
     def __init__(self, database):
         self.db = TinyDB(database, indent=4, separators=(",", ": "))
         self.tournament_query = Query()

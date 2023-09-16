@@ -87,7 +87,7 @@ class PlayerView:
         player_id = input("Quel est l'id du joueur? ")
 
         return player_id if f.id_is_ok(player_id) else self.ask_id()
-    
+
     def ask_lastname(self) -> str:
         """Demande à l'utilisateur son nom de famille.
 
@@ -205,12 +205,10 @@ class PlayerView:
         print(
             f"Le joueur : {player.lastname} {player.firstname} existe déjà en base de donnée ! "
         )
-    
-    def id_already_exist_view(self, id_player:str):
+
+    def id_already_exist_view(self, id_player: str):
         """Informe l'utilisateur que l'id existe déjà en base de donnée"""
-        print(
-            f"L'id n°{id_player} existe déjà en base de donnée ! "
-        )
+        print(f"L'id n°{id_player} existe déjà en base de donnée ! ")
 
     # Si le choix est in valide
     def invalid_choice(self):

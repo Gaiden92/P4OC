@@ -1,7 +1,3 @@
-import random
-import string
-
-
 class Player:
     """Une classe qui représente un joueur.
 
@@ -76,4 +72,3 @@ class Player:
             "birthdate": self.birthdate,
         }
         return player
-

@@ -1,12 +1,13 @@
 from datetime import datetime
 from datetime import date
+import copy
 
-from models.tournament_model import TournamentModel
-from classes.tournament import Tournament
-from classes.match import Match
-from models.player_model import PlayerModel
+from dao.tournament_dao import TournamentDao
+from models.tournament import Tournament
+from models.match import Match
+from dao.player_dao import PlayerDao
 from views.tournament_view import TournamentView
-from classes.round import Round
+from models.round import Round
 import functions as f
 
 
@@ -27,9 +28,9 @@ class TournamentController:
         Arguments:
             database -- la base de donnée à gérer.
         """
-        self.model = TournamentModel(database)
+        self.dao = TournamentDao(database)
         self.view = TournamentView()
-        self.player_model = PlayerModel(database)
+        self.player_dao = PlayerDao(database)
 
     def get_tournaments_menu(self) -> None:
         """Méthode effectuant le contrôle des entrées utilisateurs du menu principal des tournois."""
@@ -57,7 +58,7 @@ class TournamentController:
             self.view.display_not_tournament_in_db()
         else:
             name = self.view.ask_name_tournament()
-            tournament = self.model.get_tournament_by_name(name)
+            tournament = self.dao.get_tournament_by_name(name)
             if tournament:
                 while True:
                     choice = self.view.display_tournament_menu(tournament)
@@ -72,7 +73,7 @@ class TournamentController:
                             self.update_tournament(name)
                             return
                         case "5":
-                            self.model.delete_tournament(name)
+                            self.dao.delete_tournament(name)
                             return
                         case "6":
                             self.transform_rounds_for_display(tournament)
@@ -85,7 +86,7 @@ class TournamentController:
         """Méthode effectuant le contrôle des entrées utilisateurs pour la création
         d"un tournoi.
         """
-        
+
         # vérification des entrées de l'utilisateur
 
         name = self.view.ask_name_tournament()
@@ -107,7 +108,7 @@ class TournamentController:
         list_players = []
         list_players_serialized = []
         # ajout des joueurs au tournoi
-        for player in self.player_model.get_all_players():
+        for player in self.player_dao.get_all_players():
             list_players.append(player)
 
         # demander à l'utilisateur les joueurs qu'ils souhaitent enregistrer
@@ -130,7 +131,7 @@ class TournamentController:
             name, location, rounds_list, list_players_serialized, description, nb_turns
         )
 
-        if self.model.create_tournament(tournament):
+        if self.dao.create_tournament(tournament):
             self.view.success_creation_tournament()
         else:
             self.view.failed_creation_tournament()
@@ -143,7 +144,7 @@ class TournamentController:
         if self.not_tournament_in_database():
             return self.view.display_not_tournament_in_db()
         else:
-            tournaments = self.model.get_tournaments()
+            tournaments = self.dao.get_tournaments()
             self.view.display_tournaments(tournaments)
 
     def list_tournament_by_name(self, name: str) -> None:
@@ -164,7 +165,7 @@ class TournamentController:
         if self.not_tournament_in_database():
             return self.view.display_not_tournament_in_db()
         else:
-            tournament = self.model.get_tournament_by_name(name)
+            tournament = self.dao.get_tournament_by_name(name)
             self.view.display_tournament(tournament)
 
     def update_tournament(self, name="") -> None:
@@ -180,7 +181,7 @@ class TournamentController:
             name = self.view.ask_name_tournament() if name == "" else name
             update = self.view.ask_update_tournament()
 
-            self.model.update_tournament(update, name)
+            self.dao.update_tournament(update, name)
 
     def delete_tournament(self) -> None:
         """Méthode effectuant le contrôle de l'existance d'un tournoi en base de donnée
@@ -190,7 +191,7 @@ class TournamentController:
             self.view.display_not_tournament_in_db()
         else:
             name = self.view.ask_name_tournament()
-            self.model.delete_tournament(name)
+            self.dao.delete_tournament(name)
 
     def enter_match_result(self, tournament: object) -> None:
         """Méthode effectuant le contrôle des entrées utilisateurs pour enregistrer les résultats des matchs
@@ -229,7 +230,7 @@ class TournamentController:
                     )
                     tournament_winner = tournament_results[0]
                     self.view.tournament_is_over(tournament_winner)
-                    self.model.update_round_tournament(tournament, tournament.name)
+                    self.dao.update_round_tournament(tournament, tournament.name)
 
                 else:
                     # mise à jour des score accumulé des joueurs du tournoi
@@ -240,14 +241,14 @@ class TournamentController:
                                 player["cumulate_score"] += dict_players[
                                     "cumulate_score"
                                 ]
-                    self.model.update_players_tournament(players, tournament.name)
+                    self.dao.update_players_tournament(players, tournament.name)
 
                     # création du prochain round
                     next_round = self.generate_next_round(tournament)
                     round_serialized = next_round.serialize_round()
                     tournament.rounds.append(round_serialized)
                     tournament.current_round += 1
-                    self.model.update_round_tournament(tournament, tournament.name)
+                    self.dao.update_round_tournament(tournament, tournament.name)
 
     def already_played_together(self, rounds: list, players_names_list: list) -> bool:
         """Méthode vérifiant si des joueurs se sont déjà rencontrés lors des tours précédents.
@@ -368,7 +369,7 @@ class TournamentController:
         Valeurs de retour:
             True si au moins un tournoi existe sinon False
         """
-        return True if self.model.not_tournament_in_database() else False
+        return True if self.dao.not_tournament_in_database() else False
 
     def list_results(self, tournament: object) -> None:
         """Méthode appelant la vue d'un tournoi afin d'afficher le résultat de ce dernier.
@@ -389,7 +390,7 @@ class TournamentController:
             None
         """
         name = self.view.ask_name_tournament()
-        tournament = self.model.get_tournament_by_name(name)
+        tournament = self.dao.get_tournament_by_name(name)
         if tournament:
             return self.view.display_tournament(tournament)
         else:
@@ -402,7 +403,7 @@ class TournamentController:
             None
         """
         name = self.view.ask_name_tournament()
-        tournament = self.model.get_tournament_by_name(name)
+        tournament = self.dao.get_tournament_by_name(name)
         if tournament:
             return self.transform_rounds_for_display(tournament)
         else:
@@ -415,11 +416,11 @@ class TournamentController:
             None
         """
         name = self.view.ask_name_tournament()
-        tournament = self.model.get_tournament_by_name(name)
+        tournament = self.dao.get_tournament_by_name(name)
 
         if tournament:
             list_object_players = [
-                self.player_model.get_player_by_id(player["id"])
+                self.player_dao.get_player_by_id(player["id"])
                 for player in tournament.players
             ]
             list_dict_players = [
@@ -433,43 +434,37 @@ class TournamentController:
 
     def transform_rounds_for_display(self, tournament: object) -> list:
         rounds = tournament.rounds
-        new_rounds = []
+        new_rounds = copy.deepcopy(rounds)
 
-        for round in rounds:
-            new_round = {}
-            new_round["name"] = round["name"]
-            new_round["start_date"] = round["start_date"]
-            new_round["start_hour"] = round["start_hour"]
-            new_round["end_date"] = round["end_date"]
-            new_round["end_hour"] = round["end_hour"]
-            new_round["matchs"] = round["matchs"]
+        for round in new_rounds:
             new_matchs = []
-            for matchs in new_round["matchs"]:
-                player1 = matchs[0]
-                player2 = matchs[1]
-                match = Match(player1, player2)
-                player1_object = self.player_model.get_player_by_id(match.player1_id)
-                player2_object = self.player_model.get_player_by_id(match.player2_id)
-                new_match = [
-                    {
-                        "id": player1_object.id,
-                        "lastname": player1_object.lastname,
-                        "firstname": player1_object.firstname,
-                        "score": match.player1_score,
-                    },
-                    {
-                        "id": player2_object.id,
-                        "lastname": player2_object.lastname,
-                        "firstname": player2_object.firstname,
-                        "score": match.player2_score,
-                    },
-                ]
-                new_matchs.append(new_match)
-            new_round["matchs"] = new_matchs
+            for match in round["matchs"]:
+                player1 = match[0]
+                player2 = match[1]
+                match_object = Match(player1, player2)
 
-            new_rounds.append(new_round)
+                player1_object = self.player_dao.get_player_by_id(match_object.player1_id)
+                player2_object = self.player_dao.get_player_by_id(match_object.player2_id)
+                dict_match = [
+                                {
+                                    "id": player1_object.id,
+                                    "lastname": player1_object.lastname,
+                                    "firstname": player1_object.firstname,
+                                    "score": match_object.player1_score
+                                },
+                                {
+                                    "id": player2_object.id,
+                                    "lastname": player2_object.lastname,
+                                    "firstname": player2_object.firstname,
+                                    "score": match_object.player2_score
+                                }
+                            ]
 
-        return self.view.display_round(new_rounds)
+                new_matchs.append(dict_match)
+
+            round["matchs"] = new_matchs
+
+        return self.view.display_rounds(new_rounds)
 
     def add_players_to_tournament(self, list_players: list):
         list_choices_players = []

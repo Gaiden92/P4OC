@@ -1,4 +1,5 @@
-from models.player_model import PlayerModel, Player
+from dao.player_dao import PlayerDao
+from models.player import Player
 from views.player_view import PlayerView
 import functions as f
 
@@ -19,7 +20,7 @@ class PlayerController:
         Arguments:
             database -- La base de donnée à gérer
         """
-        self.model = PlayerModel(database)
+        self.model = PlayerDao(database)
         self.view = PlayerView()
 
     def get_players_menu(self) -> None:
@@ -68,7 +69,7 @@ class PlayerController:
         Valeurs de retour:
             Si une condition est fausse :
                 La vue relative au contrôle des données ayant échoué.
-            Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour l'enregistrement du joueur
+            Si toutes les conditions sont vraies, le <PlayerDao> est appelé pour l'enregistrement du joueur
             en base de donnée.
         """
         id_player = self.view.ask_id()
@@ -76,10 +77,10 @@ class PlayerController:
         if self.model.get_player_by_id(id_player):
             self.view.id_already_exist_view(id_player)
             return self.create_player()
-        
+
         if not f.id_is_ok(id_player):
             return self.view.ask_id()
-            
+
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
             return self.view.ask_lastname()
@@ -119,7 +120,7 @@ class PlayerController:
         Valeurs de retour:
             Si une condition est fausse :
                 La vue relative au contrôle des données ayant échoué.
-            Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour la modification du joueur
+            Si toutes les conditions sont vraies, le <PlayerDao> est appelé pour la modification du joueur
             en base de donnée et la vue nécessaire est appelée pour informer l'utilisateur.
         """
         lastname = self.view.ask_lastname()
@@ -152,7 +153,7 @@ class PlayerController:
         Valeurs de retour:
             Si une condition est fausse :
                 La vue relative au contrôle des données ayant échoué.
-            Si toutes les conditions sont vraies, le <PlayerModel> est appelé pour la suppression du joueur
+            Si toutes les conditions sont vraies, le <PlayerDao> est appelé pour la suppression du joueur
             en base de donnée et la vue nécessaire est appelée pour informer l'utilisateur.
         """
         lastname = self.view.ask_lastname()
