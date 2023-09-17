@@ -1,29 +1,26 @@
 class Match:
-    """Une classe qui représente un match.
+    """A class that represents a match.
 
-    Attributs
-    ----------
-    joueur1 : list
-        le nom et le score du joueur1
-    joueur2 : list
-        le nom et le score du joueur2
+        Attributes
+        ----------
+        player1: list
+            player name and score1
+        player2: list
+            player name and score2
 
-    Methodes
-    -------
-    match_serialized(self):
-        Convertie un objet Match en une liste.
+        Methods
+        -------
+        match_serialized(self):
+            Convert a Match object to a list.
     """
 
     def __init__(self, player1: list, player2: list) -> None:
         """Construit tous les attributs nécessaire pour l'objet Match.
-
-        Paramètres
-        ----------
-            joueur1 : list
-                le nom et le score du joueur1
-            joueur2 : list
-                le nom et le score du joueur2
+        Arguments:
+            player1 -- le nom et le score du joueur1
+            player2 -- le nom et le score du joueur2
         """
+        
         self.player1 = player1
         self.player2 = player2
 
@@ -35,13 +32,13 @@ class Match:
 
     def serialize_match(self) -> list:
         """
-        Convertie un objet Match en une liste.
+        Converts a Match object to a list.
 
-        Paramètres
+        Settings
         ----------
         None
 
-        Retourne
+        Return
         -------
         list
         """

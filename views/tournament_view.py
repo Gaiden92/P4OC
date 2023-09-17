@@ -51,9 +51,9 @@ class TournamentView:
                 "Tour actuel",
                 "Description",
             ],
-            width=20,
+            width=[25, 20, 15, 15, 12,20],
         )
-        bottom = tp.bottom(6, 20)
+        bottom = tp.bottom(6, width=[25, 20, 15, 15, 12, 20])
         print(header)
         # Display one tournament by his name #
         row = tp.row(
@@ -67,13 +67,13 @@ class TournamentView:
                 tournament.current_round,
                 tournament.description,
             ],
-            20,
+            width=[25, 20, 15, 15, 12, 20],
         )
         print(row)
         print(bottom)
 
 
-    def display_rounds(self, rounds: list) -> None:
+    def display_rounds_view(self, rounds: list) -> None:
         for index, round in enumerate(rounds):
             if round["end_date"] == "":
                 banner = f"Tour n°{index+1} - en cours     "
@@ -82,39 +82,31 @@ class TournamentView:
             tp.banner(banner)
             header = tp.header(
                 [
-                    "Match",
+                    "Match #",
                     "Player 1",
-                    "Couleur P1",
                     "Score P1",
                     "",
                     "Player 2",
-                    "Couleur P2",
                     "Score P2"
                 ],
-                15
+                width=[8, 30, 8, 2, 30,8]
             )
-            bottom = tp.bottom(8, 15)
+            bottom = tp.bottom(6, width=[8, 30, 8, 2, 30,8])
 
             print(header)
             for matchs in round["matchs"]:
-                colors = ["blancs", "noirs"]
-                player1_chess_piece_color = random.choice(colors)
-                colors.remove(player1_chess_piece_color)
-                player2_chess_piece_color = colors[0]
                 player1 = matchs[0]
                 player2 = matchs[1]
                 row = tp.row(
                     [
                         round["matchs"].index(matchs) + 1,
-                        f'{player1["lastname"]} {player1["firstname"][0:3]}.',
-                        player1_chess_piece_color,
+                        f'{player1["id"]} - {player1["lastname"]} {player1["firstname"][0:3]}.',
                         player1["score"],
                         "vs",
-                        f'{player2["lastname"]} {player2["firstname"][0:3]}.',
-                        player2_chess_piece_color,
+                        f'{player2["id"]} - {player2["lastname"]} {player2["firstname"][0:3]}.',
                         player2["score"]
                     ],
-                    15
+                    width=[8, 30, 8, 2, 30,8]
                 )
                 print(row)
             print(bottom)
@@ -168,30 +160,25 @@ class TournamentView:
         nb_match = 1
         list_player_cumulate_points = []
         while nb_match <= len(matchs_list):
-            player = matchs_list[int(nb_match) - 1]
-            player1 = player[0]
-            player2 = player[1]
-            player1_id = player1[0]
-            player2_id = player2[0]
-            print(
-                f"Vous allez entrer les résultats du match n°{nb_match} : {player1_id} VS {player2_id}"
-            )
+            players = matchs_list[int(nb_match) - 1]
 
-            for index, value in enumerate(player):
-                score = input(f"Entrez le score du joueur {player[index][0]} : ")
-                player[index][1] = float(score)
+            print(f'Vous allez entrer les résultats du match n°{nb_match} :')
+
+            for index, player in enumerate(players):
+                score = input(f'Entrez le score du joueur n°{index+1} : ')
+                players[index][1] = float(score)
                 dict_player_point = {}
-                dict_player_point["id"] = player[index][0]
+                dict_player_point["id"] = player[0]
                 dict_player_point["cumulate_score"] = float(score)
                 list_player_cumulate_points.append(dict_player_point)
             nb_match += 1
-
+  
         return matchs_list, list_player_cumulate_points
 
     def tournament_is_over(self, winner):
         print("Le tournoi est fini ! ")
         print(
-            f'le vainqueur du tournoi est le joueur : {winner["id"]} avec un score final de {winner["cumulate_score"]}'
+            f'le vainqueur du tournoi est le joueur n°{winner["id"]} - {winner["lastname"]} {winner["firstname"]} avec un score final de {winner["cumulate_score"]}'
         )
 
     def forbidden_modify_tournament(self, tournament):
@@ -203,13 +190,19 @@ class TournamentView:
         print("Il n'y a aucun tournoi en base de donnée !")
 
     def display_tournament_results(self, results):
-        header = tp.header(["Id joueur", "Score", "Classement"], 15)
+        header = tp.header(["Joueur", "Score", "Classement"], width=[30, 5, 11])
         print(header)
         for index, player in enumerate(results):
-            print(tp.row([player["id"], player["cumulate_score"], index + 1], 15))
-        print(tp.bottom(3, 15))
+            print(tp.row(   [
+                                f'{player["id"]} - {player["lastname"]} {player["firstname"]}',
+                                player["cumulate_score"], index + 1
+                            ],
+                            width=[30, 5, 11]
+                        )
+                )
+        print(tp.bottom(3, width=[30, 5, 11]))
 
-    def display_players_to_add(self, list_players: list) -> list:
+    def display_players_to_add(self, list_players: list) -> object:
         # tableau
         header = tp.header(["Numéro du joueur", "Prénom", "Nom"], 20)
         print(header)
@@ -240,36 +233,24 @@ class TournamentView:
 
         print(bottom)
 
-    # Si le choix est in valide
+    # Si le choix est invalide
     def invalid_choice(self):
-        print("Choix invalide. Veuillez réessayer.")
-
-    def ask_filter(self, list_players):
-        new_list_players = []
-        name = input("Entrez le nom : ")
-        for player in list_players:
-            if player.lastname == name:
-                new_list_players.append(player)
-
-        if len(new_list_players) == 0:
-            print("Vous avez ajouté tous les joueurs.")
-            return
-        choice_filter = self.display_players_to_add(new_list_players)
-        if (
-            f.ranking_is_ok(choice_filter)
-            and int(choice_filter) <= len(new_list_players)
-            and int(choice_filter) > 0
-        ):
-            new_list_players.pop(int(choice_filter) - 1)
-            player_add = list_players.pop(int(choice_filter) - 1)
-            player_add_lastname = player_add.lastname
-            player_add_firstname = player_add.firstname
-            print(f"Vous avez ajouté : {player_add_lastname} {player_add_firstname}")
-
-            return player_add
+        print("Choix invalide. Veuillez choisir un joueur valide ou 'b' pour terminer.")
 
     def success_player_add_to_tournament(self, player_add: object):
         player_add_lastname = player_add.lastname
         player_add_firstname = player_add.firstname
 
-        print(f"Vous avez ajouté : {player_add_lastname} {player_add_firstname}")
+        print(f"Vous avez ajouté : {player_add_lastname} {player_add_firstname}.")
+
+    def user_add_all_players(self):
+        print("Vous avez ajouté tous les joueurs.")
+
+    def ask_name_for_filter(self):
+        name = input("Entrer un nom : ")
+        return name
+
+# colors = ["blancs", "noirs"]
+#                 player1_chess_piece_color = random.choice(colors)
+#                 colors.remove(player1_chess_piece_color)
+#                 player2_chess_piece_color = colors[0]

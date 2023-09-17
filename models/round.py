@@ -6,34 +6,34 @@ from .match import Match
 
 
 class Round:
-    """Une classe représentant un tour.
+    """A class representing a round.
 
-    Attributs
+    Attributes
     ----------
-    name : str
-        le nom du tour
-    start_date : str
-        la date de début du tour
-    start_hour : str
-        l'heuere de début du tour
-    end_date : str
-        la date de fin du tour
-    end_hour : str
-        l'heure de fin du tour
+    name:str
+        the name of the tour
+    start_date: str
+        the start date of the tour
+    start_hour: str
+        start time of the tour
+    end_date: str
+        the end date of the tour
+    end_hour: str
+        end time of the tour
 
-    Methodes
+    Methods
     -------
     serialize_round(self):
-        Convertie un objet Round en un dictionnaire.
+        Converts a Round object to a dictionary.
     generate_first_round(self, list_players):
-        Génére le 1er tour à partir de la liste des joueurs inscrits au tournoi
+        Generates the 1st round from the list of players registered for the tournament
     """
 
     def __init__(self, name: int = 0) -> None:
-        """Construit tous les attributs nécessaire pour l'objet Round.
+        """Constructs all the necessary attributes for the Round object.
 
-        Paramètres:
-            name -- Le nom du tour (default: {0})
+        Keyword Arguments:
+            name -- The name of the tour (default: {0})
         """
         self.name = name
         self.start_date = str(date.today())
@@ -44,10 +44,10 @@ class Round:
         self.matchs = []
 
     def serialize_round(self) -> dict:
-        """Convertie un objet Round en un dictionnaire.
+        """Converts a Round object to a dictionary.
 
-        Retourne:
-            Un dictionnaire contenant les informations du tour.
+        Returns:
+            A dictionary containing tour information.
         """
         dict_round = {
             "name": self.name,
@@ -61,13 +61,13 @@ class Round:
         return dict_round
 
     def generate_first_round(self, list_players: list) -> list:
-        """Génére le 1er tour à partir de la liste des joueurs inscrits au tournoi
+        """Generates the 1st round from the list of players registered for the tournament
 
         Arguments:
-            list_players -- une liste de joueurs
+            list_players -- list of players
 
-        Retourne:
-            une liste d'objet <Match>
+        Returns:
+            _description_ list of <Match> objects
         """
         shuffle(list_players)
         length_sorted_list = len(list_players)

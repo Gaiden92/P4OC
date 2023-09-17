@@ -2,29 +2,28 @@ from datetime import date
 
 
 class Tournament:
-    """Une classe représentant un tournoi.
+    """A class representing a tournament.
 
-    Attributs
+    Attributes
     ----------
-    name : str
-        le nom du tournoi
-    localisation : str
-        l'endroit où à lieu le tournoi
-    rounds : list
-        la liste des tours du tournoi
-    players : list
-        la liste des joueurs du tournoi
-    description : str
-        la description du tournoi
-    nb_turn : int
-        le nombre de tour du tournoi
-    date : str
-        la date de début du tournoi
-    end_date : str
-        la date de fin du tournoi
-    current_round : int
-        le numéro du tour actuel du tournoi
-
+    name:str
+        the name of the tournament
+    location: str
+        the place where the tournament takes place
+    rounds: list
+        the list of tournament rounds
+    players: list
+        the list of tournament players
+    description: str
+        tournament description
+    nb_turn: int
+        the number of rounds of the tournament
+    date:str
+        the start date of the tournament
+    end_date: str
+        the end date of the tournament
+    current_round: int
+        the number of the current round of the tournament
     """
 
     def __init__(
@@ -39,20 +38,21 @@ class Tournament:
         end_date: str = "",
         current_round: int = 1,
     ) -> None:
-        """Construit tous les attributs nécessaire pour l'objet Round.
+        """_summary_
+    Constructs all the necessary attributes for the Round object.
 
         Arguments:
-            name -- le nom du tournoi
-            localisation -- l'endroit où à lieu le tournoi
-            rounds -- la liste des tours du tournoi
-            players -- la liste des joueurs du tournoi
-            description -- la description du tournoi
+            name -- the name of the tournament
+            localisation -- the place where the tournament takes place
+            rounds -- the list of tournament rounds
+            players -- the list of tournament players
+            description -- the description of the tournament
 
-        Keywords Arguments:
-            nb_turn -- le nombre de tour du tournoi (default: {4})
-            date -- la date de début du tournoi (default: {date.today()})
-            end_date -- la date de fin du tournoi (default: {""})
-            current_round -- le numéro du tour actuel du tournoi (default: {1})
+        Keyword Arguments:
+            nb_turn -- the number of rounds of the tournament (default: {4})
+            date -- the start date of the tournament (default: {date.today()})
+            end_date -- the end date of the tournament (default: {""})
+            current_round -- the number of the current round of the tournament (default: {1})
         """
         self.name = name
         self.date = str(date)

@@ -1,27 +1,27 @@
 class Player:
-    """Une classe qui représente un joueur.
+    """A class that represents a player.
 
-    Attributs
+    Attributes
     ----------
-    id : str
-        l'id du joueur
-    lastname : str
-        le nom de famille du joueur
-    firstname : str
-        le prénom du joueur
-    gender : str
-        le sexe du joueur
-    birthdate : str
-        la date de naissance du joueur
-    rank : str
-        le classement du joueur
+    id: str
+        player id
+    lastname: str
+        the player's last name
+    firstname: str
+        the player's first name
+    gender: str
+        the gender of the player
+    birthdate: str
+        the player's date of birth
+    rank: str
+        player ranking
 
-    Methodes
+    Methods
     -------
     serialize_player(self):
-        Convertit un objet Player en un dictionnaire.
+        Converts a Player object to a dictionary.
     generate_id(self):
-        Génére un id unique pour le joueur.
+        Generates a unique id for the player.
     """
 
     ID = []
@@ -34,20 +34,14 @@ class Player:
         gender: str,
         birthdate: str,
     ) -> None:
-        """Construit tous les attributs nécessaire pour l'objet Player.
+        """Constructs all necessary attributes for the Player object.
 
-        Paramètres
-        ----------
-        id : str
-            l'id du joueur
-        lastname : str
-            le nom de famille du joueur
-        firstname : str
-            le prénom du joueur
-        gender : str
-            le sexe du joueur
-        birthdate : str
-            la date de naissance du joueur
+        Arguments:
+            id -- player id
+            lastname -- the player's last name
+            firstname -- the player's first name
+            gender -- the gender of the player
+            birthdate -- the player's date of birth
         """
 
         self.id = id
@@ -56,13 +50,14 @@ class Player:
         self.gender = gender
         self.birthdate = birthdate
 
+        # List contenant tous les id des joueurs
         Player.ID.append(self.id)
 
     def serialize_player(self) -> dict:
-        """Convertit un objet Player en un dictionnaire.
+        """Converts a Player object to a dictionary.
 
-        Retourne:
-            Un dictionnaire contenant les information du joueur.
+        Returns:
+            A dictionary containing player information.
         """
         player = {
             "id": self.id,

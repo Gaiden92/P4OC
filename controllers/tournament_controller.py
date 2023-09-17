@@ -6,7 +6,9 @@ from dao.tournament_dao import TournamentDao
 from models.tournament import Tournament
 from models.match import Match
 from dao.player_dao import PlayerDao
+
 from views.tournament_view import TournamentView
+from views.player_view import PlayerView
 from models.round import Round
 import functions as f
 
@@ -66,7 +68,7 @@ class TournamentController:
                         case "1":
                             self.enter_match_result(tournament)
                         case "2":
-                            self.list_results(tournament)
+                            self.display_results(tournament)
                         case "3":
                             self.list_tournament_by_name(name)
                         case "4":
@@ -76,7 +78,7 @@ class TournamentController:
                             self.dao.delete_tournament(name)
                             return
                         case "6":
-                            self.transform_rounds_for_display(tournament)
+                            self.display_rounds(tournament)
                         case "b":
                             return
                         case _:
@@ -209,14 +211,14 @@ class TournamentController:
             if tournament.end_date != "":
                 self.view.forbidden_modify_tournament(tournament)
             else:
-                self.transform_rounds_for_display(tournament)
-
+                rounds_for_display = self.transform_rounds_for_display(tournament)
+                self.view.display_rounds_view(rounds_for_display)
+                
                 for round in tournament.rounds:
                     if round["end_date"] == "":
                         matchs = round["matchs"]
-                        list_match, list_player_cumulate_points = self.view.ask_results(
-                            matchs
-                        )
+                        list_match, list_player_cumulate_points = self.view.ask_results(matchs)
+
                         round["matchs"] = list_match
                         round["end_date"] = str(date.today())
                         round["end_hour"] = str(
@@ -225,9 +227,7 @@ class TournamentController:
 
                 if round["name"] == tournament.nb_turn:
                     tournament.end_date = str(date.today())
-                    tournament_results = self.get_tournament_results_by_tournament(
-                        tournament
-                    )
+                    tournament_results = self.transform_results_for_display(tournament)
                     tournament_winner = tournament_results[0]
                     self.view.tournament_is_over(tournament_winner)
                     self.dao.update_round_tournament(tournament, tournament.name)
@@ -245,8 +245,8 @@ class TournamentController:
 
                     # création du prochain round
                     next_round = self.generate_next_round(tournament)
-                    round_serialized = next_round.serialize_round()
-                    tournament.rounds.append(round_serialized)
+                    next_round_serialize = next_round.serialize_round()
+                    tournament.rounds.append(next_round_serialize)
                     tournament.current_round += 1
                     self.dao.update_round_tournament(tournament, tournament.name)
 
@@ -371,18 +371,6 @@ class TournamentController:
         """
         return True if self.dao.not_tournament_in_database() else False
 
-    def list_results(self, tournament: object) -> None:
-        """Méthode appelant la vue d'un tournoi afin d'afficher le résultat de ce dernier.
-
-        Arguments:
-            tournament -- un objet <tournament>
-
-        Valeur de retour:
-            None
-        """
-        results = self.get_tournament_results_by_tournament(tournament)
-        return self.view.display_tournament_results(results)
-
     def list_name_and_date(self) -> None:
         """Méthode appelant la vue d'un tournoi afin d'afficher le nom et la date de ce dernier
 
@@ -405,7 +393,7 @@ class TournamentController:
         name = self.view.ask_name_tournament()
         tournament = self.dao.get_tournament_by_name(name)
         if tournament:
-            return self.transform_rounds_for_display(tournament)
+            return self.display_rounds(tournament)
         else:
             self.view.display_not_tournament_in_db()
 
@@ -464,20 +452,37 @@ class TournamentController:
 
             round["matchs"] = new_matchs
 
-        return self.view.display_rounds(new_rounds)
+        return new_rounds
+    
+    def display_rounds(self, tournament):
+        news_rounds = self.transform_rounds_for_display(tournament)
+        self.view.display_rounds_view(news_rounds)
 
     def add_players_to_tournament(self, list_players: list):
         list_choices_players = []
         while True:
             if len(list_players) == 0:
-                print("Vous avez ajouté tous les joueurs.")
+                self.view.user_add_all_players()
                 return list_choices_players
 
             choice = self.view.display_players_to_add(list_players)
             if choice == "f":
-                filtered_player = self.view.ask_filter(list_players)
-                if filtered_player:
-                    list_choices_players.append(filtered_player)
+                # Filtrer les joueurs par nom
+                name = self.view.ask_name_for_filter()
+                if name:
+                    filtered_list_players = [player for player in list_players if player.lastname == name]
+                    filtered_choice = self.view.display_players_to_add(filtered_list_players)
+                    if filtered_choice.isdigit() and 1 <= int(filtered_choice) <= len(filtered_list_players):
+                        player_filtered_to_add = filtered_list_players[int(filtered_choice) - 1]
+                        list_players.remove(player_filtered_to_add)
+                        self.view.success_player_add_to_tournament(player_filtered_to_add)
+                        list_choices_players.append(player_filtered_to_add)
+        
+            elif choice.isdigit() and 1 <= int(choice) <= len(list_players):
+                player_add = list_players[int(choice) - 1]
+                list_players.remove(player_add)
+                self.view.success_player_add_to_tournament(player_add)
+                list_choices_players.append(player_add)
 
             elif (
                 choice == "b"
@@ -487,11 +492,29 @@ class TournamentController:
                 return list_choices_players
 
             else:
-                if (
-                    f.ranking_is_ok(choice)
-                    and int(choice) <= len(list_players)
-                    and int(choice) > 0
-                ):
-                    player_add = list_players.pop(int(choice) - 1)
-                    self.view.success_player_add_to_tournament(player_add)
-                    list_choices_players.append(player_add)
+                self.view.invalid_choice()
+
+    def transform_results_for_display(self, tournament: object) -> list:
+        tournament_players = tournament.players
+        new_tournament_players = []
+
+        for player in tournament_players:
+            player_id = player["id"]
+            player_cumulate_score = player["cumulate_score"]
+            new_player = self.player_dao.get_player_by_id(player_id)
+            dict_player = {
+                            "id" : new_player.id,
+                            "lastname" : new_player.lastname,
+                            "firstname" : new_player.firstname,
+                            "cumulate_score" : player_cumulate_score
+                            }
+             
+            new_tournament_players.append(dict_player)
+        sorted_new_tournament_players = sorted(new_tournament_players, key= lambda player : player["cumulate_score"], reverse= True)
+
+        return sorted_new_tournament_players
+    
+
+    def display_results(self, tournament: object) -> None:
+        results = self.transform_results_for_display(tournament)
+        self.view.display_tournament_results(results)

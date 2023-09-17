@@ -5,26 +5,21 @@ import functions as f
 
 
 class PlayerController:
-    """ "Une classe représentant le controller de la classe <Player>.
-
-    Attributs
-    ----------
-    database : str
-        La base de donnée à gérer
+    """A class representing the controller of the <Player> class.
 
     """
-
     def __init__(self, database: str) -> None:
-        """Construit tous les attributs nécessaires de la classe.
+        """Constructs all necessary attributes of the class.
 
         Arguments:
-            database -- La base de donnée à gérer
+            database -- The database to manage
         """
-        self.model = PlayerDao(database)
+        self.dao = PlayerDao(database)
         self.view = PlayerView()
 
     def get_players_menu(self) -> None:
-        """Contrôle les entrées du menu joueur"""
+        """Controls player menu user's entries
+        """
         choice = self.view.display_players_menu()
 
         match choice:
@@ -44,18 +39,19 @@ class PlayerController:
                 self.view.invalid_choice()
 
     def list_player_controller(self) -> None:
-        """Contrôle si un joueur est présent dans la base de donnée"""
+        """Check if a player is present in the database
+        """
         lastname = self.view.ask_lastname()
         firstname = self.view.ask_firstname()
-        player = self.model.get_player(lastname, firstname)
+        player = self.dao.get_player(lastname, firstname)
         if player:
             self.view.display_player_view(player)
         else:
             self.view.no_existing_players_view()
 
     def list_players_controller(self) -> None:
-        """Contrôle si un/des joueur(s) est/sont présent(s) dans la base de donnée"""
-        players = self.model.get_all_players()
+        """Checks if at least one player is present in the database"""
+        players = self.dao.get_all_players()
         if players:
             sorted_list_players = sorted(players, key=lambda player: player.lastname)
             self.view.display_all_players(sorted_list_players)
@@ -63,18 +59,18 @@ class PlayerController:
             self.view.no_existing_players_view()
 
     def create_player(self) -> None:
-        """Contrôle l'intégralité des données utilisateurs entrées lors de la création
-            d'un joueur.
+        """Controls all user data entered during creation of a player.
 
-        Valeurs de retour:
-            Si une condition est fausse :
-                La vue relative au contrôle des données ayant échoué.
-            Si toutes les conditions sont vraies, le <PlayerDao> est appelé pour l'enregistrement du joueur
-            en base de donnée.
+        Returns:
+            if False :
+                the failed data check view.
+            if True :
+                the <PlayerDao> is called for player registration
+                    in the database.
         """
         id_player = self.view.ask_id()
 
-        if self.model.get_player_by_id(id_player):
+        if self.dao.get_player_by_id(id_player):
             self.view.id_already_exist_view(id_player)
             return self.create_player()
 
@@ -98,30 +94,30 @@ class PlayerController:
             return self.view.ask_birth_date()
 
         player = Player(id_player, lastname, firstname, gender, birthdate)
-        if self.model.get_player(player.lastname, player.firstname):
+        if self.dao.get_player(player.lastname, player.firstname):
             self.view.player_already_exist_view(player)
         else:
-            self.model.create_player(player)
+            self.dao.create_player(player)
             self.view.success_add_player_view()
         self.add_player_continu()
 
     def add_player_continu(self) -> None:
-        """Contrôle le choix de l'utilisateur s'il souhaite continuait à
-        ajouter des joueurs.
+        """Controls all user data entered during creation
+            of a player.
         """
         choice = self.view.ask_add_another_player()
         if choice == "y":
             self.create_player()
 
     def update_player(self) -> None:
-        """Contrôle l'intégralité des données utilisateurs entrées lors de la modification
-            d'un joueur.
+        """Controls the completeness of user data entered during modification
+            of a player.
 
-        Valeurs de retour:
-            Si une condition est fausse :
-                La vue relative au contrôle des données ayant échoué.
-            Si toutes les conditions sont vraies, le <PlayerDao> est appelé pour la modification du joueur
-            en base de donnée et la vue nécessaire est appelée pour informer l'utilisateur.
+        Returns:
+            If a condition is false:
+                The failed data check view.
+            If all conditions are true, the <PlayerDao> is called for player modification
+                in the database and the necessary view is called to inform the user.
         """
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
@@ -141,20 +137,21 @@ class PlayerController:
 
         column_name = f.get_column_name_by_number(column_number)
 
-        if self.model.update_player(update, column_name, lastname, firstname):
+        if self.dao.update_player(update, column_name, lastname, firstname):
             return self.view.success_editing_player_view()
         else:
             return self.view.failed_editing_player_view()
 
     def remove_player(self) -> None:
-        """Contrôle l'intégralité des données utilisateurs entrées lors de la suppression
-            d'un joueur.
+        """Checks the completeness of user data entered when deleting
+            of a player.
 
-        Valeurs de retour:
-            Si une condition est fausse :
-                La vue relative au contrôle des données ayant échoué.
-            Si toutes les conditions sont vraies, le <PlayerDao> est appelé pour la suppression du joueur
-            en base de donnée et la vue nécessaire est appelée pour informer l'utilisateur.
+        Returns:
+            If a condition is false:
+                the failed data check view.
+            If all conditions are true:
+                the <PlayerDao> is called for player deletion
+                in the database and the necessary view is called to inform the user.
         """
         lastname = self.view.ask_lastname()
         if not f.information_is_ok(lastname):
@@ -167,7 +164,7 @@ class PlayerController:
         lastname = lastname.capitalize()
         firstname = firstname.capitalize()
 
-        if self.model.delete_player(lastname, firstname):
+        if self.dao.delete_player(lastname, firstname):
             self.view.success_remove_player_view()
         else:
             self.view.player_no_exist_view()
