@@ -20,7 +20,7 @@ class Match:
             player1 -- le nom et le score du joueur1
             player2 -- le nom et le score du joueur2
         """
-        
+
         self.player1 = player1
         self.player2 = player2
 

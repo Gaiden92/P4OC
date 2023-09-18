@@ -5,12 +5,20 @@ from controllers.tournament_controller import TournamentController
 
 
 class ReportView:
-    def __init__(self, database) -> None:
+    """A class representing the report view."""
+
+    def __init__(self, database: str) -> None:
+        """Constructs all necessary attributes of the class.
+
+        Arguments:
+            database -- The database to manage
+        """
         self.db = database
         self.player_controller = PlayerController(database)
         self.tournament_controller = TournamentController(database)
 
-    def display_report_view(self):
+    def display_report_view(self) -> None:
+        """Displaying the report menu"""
         while True:
             tp.banner("Report view          ")
             print("1. List all players by name")
@@ -27,7 +35,7 @@ class ReportView:
                 case "2":
                     self.tournament_controller.list_tournaments()
                 case "3":
-                    self.tournament_controller.list_tournament_by_name()
+                    self.tournament_controller.list_tournament_date_and_name()
                 case "4":
                     self.tournament_controller.get_all_tournament_players()
                 case "5":

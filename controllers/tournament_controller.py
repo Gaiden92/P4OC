@@ -13,9 +13,8 @@ import functions as f
 
 
 class TournamentController:
-    """A class representing the controller of the <Tournament> class.
+    """A class representing the controller of the <Tournament> class."""
 
-    """
     def __init__(self, database: str) -> None:
         """Constructs all necessary attributes of the class.
 
@@ -27,8 +26,7 @@ class TournamentController:
         self.player_dao = PlayerDao(database)
 
     def get_tournaments_menu(self) -> None:
-        """Method for controlling user input from the tournament main menu.
-        """
+        """Method for controlling user input from the tournament main menu."""
         while True:
             choice = self.view.display_tournaments_menu()
             match choice:
@@ -48,8 +46,7 @@ class TournamentController:
                     self.view.invalid_choice()
 
     def get_tournament_menu(self) -> None:
-        """Method for controlling user entries in the menu of a specific tournament.
-        """
+        """Method for controlling user entries in the menu of a specific tournament."""
         if self.none_tournament_register():
             self.view.display_not_tournament_in_db()
         else:
@@ -84,7 +81,7 @@ class TournamentController:
         Returns:
             None
         """
-        
+
         # vérification des entrées de l'utilisateur
         name = self.view.ask_name_tournament()
         if not f.information_is_ok(name):
@@ -209,11 +206,13 @@ class TournamentController:
             else:
                 rounds_for_display = self.transform_rounds_for_display(tournament)
                 self.view.display_rounds_view(rounds_for_display)
-                
+
                 for round in tournament.rounds:
                     if round["end_date"] == "":
                         matchs = round["matchs"]
-                        list_match, list_player_cumulate_points = self.view.ask_results(matchs)
+                        list_match, list_player_cumulate_points = self.view.ask_results(
+                            matchs
+                        )
 
                         round["matchs"] = list_match
                         round["end_date"] = str(date.today())
@@ -248,11 +247,6 @@ class TournamentController:
 
     def already_played_together(self, rounds: list, players_names_list: list) -> bool:
         """Method checking if players have already met in previous rounds.
-        Arguments:
-            rounds -- 
-            players_names_list -- 
-        Return values:
-            
 
         Arguments:
             rounds -- the list of tournament rounds
@@ -373,6 +367,19 @@ class TournamentController:
         """
         return True if self.dao.none_tournament_register() else False
 
+    def list_tournament_date_and_name(self) -> bool:
+        """Method get a tournament by his name in database.
+
+        Returns:
+            bool
+        """
+        name = self.view.ask_name_tournament()
+        tournament = self.dao.get_tournament_by_name(name)
+        if tournament:
+            self.view.display_tournament(tournament)
+        else:
+            self.view.display_no_tournament_name_in_db(name)
+
     def list_round_and_match(self) -> None:
         """Method calling a tournament view to display its rounds and matches
 
@@ -416,7 +423,7 @@ class TournamentController:
             tournament -- a tournament object
 
         Returns:
-            list : a list of rounds 
+            list : a list of rounds
         """
         rounds = tournament.rounds
         new_rounds = copy.deepcopy(rounds)
@@ -428,29 +435,33 @@ class TournamentController:
                 player2 = match[1]
                 match_object = Match(player1, player2)
 
-                player1_object = self.player_dao.get_player_by_id(match_object.player1_id)
-                player2_object = self.player_dao.get_player_by_id(match_object.player2_id)
+                player1_object = self.player_dao.get_player_by_id(
+                    match_object.player1_id
+                )
+                player2_object = self.player_dao.get_player_by_id(
+                    match_object.player2_id
+                )
                 dict_match = [
-                                {
-                                    "id": player1_object.id,
-                                    "lastname": player1_object.lastname,
-                                    "firstname": player1_object.firstname,
-                                    "score": match_object.player1_score
-                                },
-                                {
-                                    "id": player2_object.id,
-                                    "lastname": player2_object.lastname,
-                                    "firstname": player2_object.firstname,
-                                    "score": match_object.player2_score
-                                }
-                            ]
+                    {
+                        "id": player1_object.id,
+                        "lastname": player1_object.lastname,
+                        "firstname": player1_object.firstname,
+                        "score": match_object.player1_score,
+                    },
+                    {
+                        "id": player2_object.id,
+                        "lastname": player2_object.lastname,
+                        "firstname": player2_object.firstname,
+                        "score": match_object.player2_score,
+                    },
+                ]
 
                 new_matchs.append(dict_match)
 
             round["matchs"] = new_matchs
 
         return new_rounds
-    
+
     def display_rounds(self, tournament: object) -> None:
         """Method for displaying the rounds of a tournament
 
@@ -480,14 +491,24 @@ class TournamentController:
                 # Filtrer les joueurs par nom
                 name = self.view.ask_name_for_filter()
                 if name:
-                    filtered_list_players = [player for player in list_players if player.lastname == name]
-                    filtered_choice = self.view.display_players_to_add(filtered_list_players)
-                    if filtered_choice.isdigit() and 1 <= int(filtered_choice) <= len(filtered_list_players):
-                        player_filtered_to_add = filtered_list_players[int(filtered_choice) - 1]
+                    filtered_list_players = [
+                        player for player in list_players if player.lastname == name
+                    ]
+                    filtered_choice = self.view.display_players_to_add(
+                        filtered_list_players
+                    )
+                    if filtered_choice.isdigit() and 1 <= int(filtered_choice) <= len(
+                        filtered_list_players
+                    ):
+                        player_filtered_to_add = filtered_list_players[
+                            int(filtered_choice) - 1
+                        ]
                         list_players.remove(player_filtered_to_add)
-                        self.view.success_player_add_to_tournament(player_filtered_to_add)
+                        self.view.success_player_add_to_tournament(
+                            player_filtered_to_add
+                        )
                         list_choices_players.append(player_filtered_to_add)
-        
+
             elif choice.isdigit() and 1 <= int(choice) <= len(list_players):
                 player_add = list_players[int(choice) - 1]
                 list_players.remove(player_add)
@@ -511,7 +532,7 @@ class TournamentController:
             tournament -- a tournament object
 
         Returns:
-            list : sorted by cumulate score result 
+            list : sorted by cumulate score result
         """
         tournament_players = tournament.players
         new_tournament_players = []
@@ -521,14 +542,18 @@ class TournamentController:
             player_cumulate_score = player["cumulate_score"]
             new_player = self.player_dao.get_player_by_id(player_id)
             dict_player = {
-                            "id" : new_player.id,
-                            "lastname" : new_player.lastname,
-                            "firstname" : new_player.firstname,
-                            "cumulate_score" : player_cumulate_score
-                            }
-             
+                "id": new_player.id,
+                "lastname": new_player.lastname,
+                "firstname": new_player.firstname,
+                "cumulate_score": player_cumulate_score,
+            }
+
             new_tournament_players.append(dict_player)
-        sorted_new_tournament_players = sorted(new_tournament_players, key= lambda player : player["cumulate_score"], reverse= True)
+        sorted_new_tournament_players = sorted(
+            new_tournament_players,
+            key=lambda player: player["cumulate_score"],
+            reverse=True,
+        )
 
         return sorted_new_tournament_players
 

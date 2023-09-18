@@ -6,13 +6,21 @@ from controllers.player_controller import PlayerController
 
 
 class MainView:
-    def __init__(self, database) -> None:
+    """A class representing the view of the main programm"""
+
+    def __init__(self, database: str) -> None:
+        """Constructs all necessary attributes of the class.
+
+        Arguments:
+            database -- The database to manage
+        """
         self.db = database
         self.tournament_controller = TournamentController(database)
         self.player_controller = PlayerController(database)
         self.report_view = ReportView(database)
 
-    def display_main_menu(self):
+    def display_main_menu(self) -> None:
+        """Displaying the main menu"""
         while True:
             tp.banner("MAIN MENU          ")
             print("1. Manage Tournaments")

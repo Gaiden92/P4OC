@@ -7,7 +7,7 @@ from models.tournament import Tournament
 class TournamentDao:
     """A class representing the tournament table for the <Tournament> class.
     """
-    def __init__(self, database:str) -> None:
+    def __init__(self, database: str) -> None:
         """Constructs all the attributes necessary for the class.
 
         Arguments:
@@ -43,7 +43,7 @@ class TournamentDao:
         else:
             return False
 
-    def get_tournaments(self)-> object:
+    def get_tournaments(self) -> object:
         """Function allowing you to retrieve all tournaments in the database.
 
         Returns:
@@ -128,7 +128,7 @@ class TournamentDao:
             self.tournament_query.name == name,
         )
 
-    def delete_tournament(self, name: str) -> bool| None:
+    def delete_tournament(self, name: str) -> bool | None:
         """Delete a tournament by his name.
 
         Arguments:

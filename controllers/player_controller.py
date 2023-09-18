@@ -5,9 +5,8 @@ import functions as f
 
 
 class PlayerController:
-    """A class representing the controller of the <Player> class.
+    """A class representing the controller of the <Player> class."""
 
-    """
     def __init__(self, database: str) -> None:
         """Constructs all necessary attributes of the class.
 
@@ -18,8 +17,7 @@ class PlayerController:
         self.view = PlayerView()
 
     def get_players_menu(self) -> None:
-        """Controls player menu user's entries
-        """
+        """Controls player menu user's entries"""
         choice = self.view.display_players_menu()
 
         match choice:
@@ -39,8 +37,7 @@ class PlayerController:
                 self.view.invalid_choice()
 
     def list_player_controller(self) -> None:
-        """Check if a player is present in the database
-        """
+        """Check if a player is present in the database"""
         lastname = self.view.ask_lastname()
         firstname = self.view.ask_firstname()
         player = self.dao.get_player(lastname, firstname)
@@ -103,7 +100,7 @@ class PlayerController:
 
     def add_player_continu(self) -> None:
         """Controls all user data entered during creation
-            of a player.
+        of a player.
         """
         choice = self.view.ask_add_another_player()
         if choice == "y":
