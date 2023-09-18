@@ -1,10 +1,10 @@
 import random
 
-import functions as f
+from models.user_entry import UserEntry
 import tableprint as tp
 
 
-class TournamentView:
+class TournamentView(UserEntry):
     """A class representing the view for a class <tournament>"""
 
     def display_tournaments_menu(self) -> str:
@@ -159,7 +159,7 @@ class TournamentView:
         """
         name = input("Entrer le nom du tournoi : ")
 
-        return name if f.information_is_ok(name) else self.ask_name_tournament()
+        return name if self.information_is_ok(name) else self.ask_name_tournament()
 
     def ask_location_tournament(self) -> str:
         """Asks tournament's location
@@ -171,7 +171,7 @@ class TournamentView:
 
         return (
             location
-            if f.information_is_ok(location)
+            if self.information_is_ok(location)
             else self.ask_location_tournament()
         )
 
@@ -185,7 +185,7 @@ class TournamentView:
 
         return (
             description
-            if f.information_is_ok(description)
+            if self.information_is_ok(description)
             else self.ask_description_tournament()
         )
 
@@ -197,7 +197,7 @@ class TournamentView:
         """
         nb_turns = input("Entrer le nombre de tours du tournoi : ")
 
-        return nb_turns if f.nb_turn_is_ok(nb_turns) else self.ask_nb_turns()
+        return nb_turns if self.nb_turn_is_ok(nb_turns) else self.ask_nb_turns()
 
     def ask_update_tournament(self) -> str:
         """Asks tournament's new name.
@@ -207,7 +207,7 @@ class TournamentView:
         """
         update = input("Merci d'entrer le nouveau nom du tournoi : ")
 
-        return update if f.information_is_ok(update) else self.ask_update_tournament()
+        return update if self.information_is_ok(update) else self.ask_update_tournament()
 
     def ask_results(self, matchs_list: list) -> tuple:
         """Asks tournament's results.

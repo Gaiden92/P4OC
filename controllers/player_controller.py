@@ -1,10 +1,10 @@
 from dao.player_dao import PlayerDao
 from models.player import Player
 from views.player_view import PlayerView
-import functions as f
+from models.user_entry import UserEntry
 
 
-class PlayerController:
+class PlayerController(UserEntry):
     """A class representing the controller of the <Player> class."""
 
     def __init__(self, database: str) -> None:
@@ -71,23 +71,23 @@ class PlayerController:
             self.view.id_already_exist_view(id_player)
             return self.create_player()
 
-        if not f.id_is_ok(id_player):
+        if not self.id_is_ok(id_player):
             return self.view.ask_id()
 
         lastname = self.view.ask_lastname()
-        if not f.information_is_ok(lastname):
+        if not self.information_is_ok(lastname):
             return self.view.ask_lastname()
 
         firstname = self.view.ask_firstname()
-        if not f.information_is_ok(firstname):
+        if not self.information_is_ok(firstname):
             return self.view.ask_firstname()
 
         gender = self.view.ask_gender()
-        if not f.gender_is_ok(gender):
+        if not self.gender_is_ok(gender):
             return self.view.ask_gender()
 
         birthdate = self.view.ask_birth_date()
-        if not f.birth_is_ok(birthdate):
+        if not self.birth_is_ok(birthdate):
             return self.view.ask_birth_date()
 
         player = Player(id_player, lastname, firstname, gender, birthdate)
@@ -117,22 +117,22 @@ class PlayerController:
                 in the database and the necessary view is called to inform the user.
         """
         lastname = self.view.ask_lastname()
-        if not f.information_is_ok(lastname):
+        if not self.information_is_ok(lastname):
             return self.view.ask_lastname()
 
         firstname = self.view.ask_firstname()
-        if not f.information_is_ok(firstname):
+        if not self.information_is_ok(firstname):
             return self.view.ask_firstname()
 
         column_number = self.view.ask_column_update()
-        if not f.verify_column_to_update(column_number):
+        if not self.verify_column_to_update(column_number):
             return self.view.ask_column_update()
 
         update = self.view.ask_data(column_number)
-        if not f.verify_data(column_number, update):
+        if not self.verify_data(column_number, update):
             return self.view.ask_data(column_number)
 
-        column_name = f.get_column_name_by_number(column_number)
+        column_name = self.get_column_name_by_number(column_number)
 
         if self.dao.update_player(update, column_name, lastname, firstname):
             return self.view.success_editing_player_view()
@@ -151,11 +151,11 @@ class PlayerController:
                 in the database and the necessary view is called to inform the user.
         """
         lastname = self.view.ask_lastname()
-        if not f.information_is_ok(lastname):
+        if not self.information_is_ok(lastname):
             return self.view.ask_lastname()
 
         firstname = self.view.ask_firstname()
-        if not f.information_is_ok(firstname):
+        if not self.information_is_ok(firstname):
             return self.view.ask_firstname()
 
         lastname = lastname.capitalize()

@@ -9,10 +9,10 @@ from dao.player_dao import PlayerDao
 
 from views.tournament_view import TournamentView
 from models.round import Round
-import functions as f
+from models.user_entry import UserEntry 
 
 
-class TournamentController:
+class TournamentController(UserEntry):
     """A class representing the controller of the <Tournament> class."""
 
     def __init__(self, database: str) -> None:
@@ -84,19 +84,19 @@ class TournamentController:
 
         # vérification des entrées de l'utilisateur
         name = self.view.ask_name_tournament()
-        if not f.information_is_ok(name):
+        if not self.information_is_ok(name):
             return self.view.ask_name_tournament()
 
         location = self.view.ask_location_tournament()
-        if not f.information_is_ok(location):
+        if not self.information_is_ok(location):
             return self.view.ask_location_tournament()
 
         description = self.view.ask_description_tournament()
-        if not f.information_is_ok(description):
+        if not self.information_is_ok(description):
             return self.view.ask_description_tournament()
 
         nb_turns = self.view.ask_nb_turns()
-        if not f.nb_turn_is_ok(nb_turns):
+        if not self.nb_turn_is_ok(nb_turns):
             return self.view.ask_nb_turns()
 
         list_players = []

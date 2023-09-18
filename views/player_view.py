@@ -1,8 +1,8 @@
-import functions as f
+from models.user_entry import UserEntry
 import tableprint as tp
 
 
-class PlayerView:
+class PlayerView(UserEntry):
     """A class representing the view for a class <player>"""
 
     def display_players_menu(self) -> str:
@@ -88,7 +88,7 @@ class PlayerView:
         """
         player_id = input("Quel est l'id du joueur? ")
 
-        return player_id if f.id_is_ok(player_id) else self.ask_id()
+        return player_id if self.id_is_ok(player_id) else self.ask_id()
 
     def ask_lastname(self) -> str:
         """Asks the player's lastname.
@@ -99,7 +99,7 @@ class PlayerView:
         """
         lastname = input("Quel est le nom du joueur? ")
 
-        return lastname if f.information_is_ok(lastname) else self.ask_lastname()
+        return lastname if self.information_is_ok(lastname) else self.ask_lastname()
 
     def ask_firstname(self) -> str:
         """Asks the player's firstname.
@@ -109,7 +109,7 @@ class PlayerView:
         """
         firstname = input("Quel est le prénom du joueur? ")
 
-        return firstname if f.information_is_ok(firstname) else self.ask_firstname()
+        return firstname if self.information_is_ok(firstname) else self.ask_firstname()
 
     def ask_gender(self) -> str:
         """Asks the player's gender.
@@ -119,7 +119,7 @@ class PlayerView:
         """
         gender = input("Quel est votre sexe (masculin ou féminin) ? \n [H/F]")
 
-        return gender if f.gender_is_ok(gender) else self.ask_gender()
+        return gender if self.gender_is_ok(gender) else self.ask_gender()
 
     def ask_birth_date(self) -> str:
         """Ask the player's birthdate.
@@ -129,7 +129,7 @@ class PlayerView:
         """
         birth_date = input("Quel est votre date de naissance (format dd-mm-yyyy) ? ")
 
-        return birth_date if f.birth_is_ok(birth_date) else self.ask_birth_date()
+        return birth_date if self.birth_is_ok(birth_date) else self.ask_birth_date()
 
     def ask_rank(self) -> str:
         """Asks the player's rank.
@@ -139,7 +139,7 @@ class PlayerView:
         """
         rank = input("Quel est le rang du joueur ? ")
 
-        return rank if f.ranking_is_ok(rank) else self.ask_rank()
+        return rank if self.ranking_is_ok(rank) else self.ask_rank()
 
     def ask_add_another_player(self) -> str:
         """Asks the user if they want to add a new player
@@ -149,7 +149,7 @@ class PlayerView:
         """
         continu = input("Voulez-vous ajouter un autre joueur ? [y/n] ")
 
-        return continu if f.verify_continu(continu) else self.ask_add_another_player()
+        return continu if self.verify_continu(continu) else self.ask_add_another_player()
 
     def ask_column_update(self) -> str:
         """Asks the user which player data to modify
@@ -161,7 +161,7 @@ class PlayerView:
             "Quelle colonne souhaitez vous modifier : \n 1. Nom\n 2. Prénom\n 3. Genre\n 4. Birthdate\n "
         )
 
-        return column if f.verify_column_to_update(column) else self.ask_column_update()
+        return column if self.verify_column_to_update(column) else self.ask_column_update()
 
     def ask_data(self, column_name: str) -> str:
         """Asks to the user to enter the new player characteristic
@@ -173,7 +173,7 @@ class PlayerView:
             str : the user's choice
         """
         data = input("Entrer la nouvelle donnée :  ")
-        return data if f.verify_data(column_name, data) else self.ask_data(column_name)
+        return data if self.verify_data(column_name, data) else self.ask_data(column_name)
 
     def success_add_player_view(self) -> None:
         """Informs the user that the player was successfully created"""
