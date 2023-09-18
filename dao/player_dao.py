@@ -5,39 +5,33 @@ from models.player import Player
 
 
 class PlayerDao:
-    """ "Une classe représentant le model de la classe <Player>.
-
-    Attributs
-    ----------
-    database : str
-        La base de donnée avec laquelle le model communiquera.
-
+    """A class representing the player table for the <Player> class.
     """
 
-    def __init__(self, database) -> None:
-        """Construit tous les attributs nécessaires au model.
+    def __init__(self, database: str) -> None:
+        """Constructs all the attributes necessary for the class.
 
         Arguments:
-            database -- La base de donnée avec laquelle le model communiquera.
+            database -- The database with which the class will communicate.
         """
         self.db = TinyDB(database, indent=4, separators=(",", ": "))
         self.player_table = self.db.table("players")
         self.player_query = Query()
 
     def create_player(self, player: object) -> None:
-        """La méthode permet d'ajouter un joueur en base de donnée.
+        """The method allows you to add a player to the database.
 
         Arguments:
-            player -- un objet <player>
+            player -- a <player> object
         """
         player_serialize = player.serialize_player()
         self.player_table.insert(player_serialize)
 
     def get_all_players(self) -> list:
-        """Récupère la liste de tous les joueurs en base de donnée.
+        """Retrieves the list of all players in the database.
 
         Returns:
-            Tous les joueurs de la base de donnée sous forme d'une liste d'objet <player>
+             All players in the database as a list of <player> objects
         """
         all_players_list = []
         for player in self.player_table.all():
@@ -53,17 +47,16 @@ class PlayerDao:
         return all_players_list
 
     def get_player(self, lastname: str, firstname: str) -> None | object:
-        """Récupère un joueur dont le nom et prénom on été indiqués en paramètres.
+        """Retrieves a player whose first and last name were indicated in the parameters.
 
         Arguments:
-            lastname -- le nom du joueur
-            firstname -- le prénom du joueur
+            lastname -- the player's name
+            firstname -- the player's first name
 
         Returns:
-            Si le joueur est présent en base de donnée :
-                un objet <player> contenant les informations du joueur
-            Sinon :
-                None
+            If the player is present in the database:
+                a <player> object containing player information
+            else None
         """
         player = self.player_table.get(
             self.player_query.lastname == lastname
@@ -83,17 +76,17 @@ class PlayerDao:
     def update_player(
         self, updates: list, column: str, lastname: str, firstname: str
     ) -> bool:
-        """Mets à jour les données d'un joueur en effectuant une recherche par nom et prénom.
+        """Update a player's data by searching by firstname and lastname.
 
         Arguments:
-            updates -- la nouvelle donnée
-            column -- la colonne à mettre à jour (nom, prénom, age,...)
-            lastname -- le nom du joueur
-            firstname -- le prénom du joueur
+            updates -- the new data
+            column -- the column to update (lastame, firstname, age,...)
+            lastname -- the player's lastname
+            firstname -- the player's firstname
 
-        Retourne:
-            bool : Si la mise à jour a été effectuée, la fonction retourne True
-                   Sinon la fonction retourne False
+        Returns:
+            bool: If the update was performed, the function returns True
+                   else the function returns False
         """
         if self.player_table.update(
             {column: updates},
@@ -105,15 +98,15 @@ class PlayerDao:
             return False
 
     def delete_player(self, lastname: str, firstname: str) -> bool:
-        """Supprimer un joueur en effectuant une recherche par nom et prénom.
+        """Remove a player by searching by firstname and lastname.
 
         Arguments:
-            lastname -- le nom du joueur
-            firstname -- le prénom du joueur
+            lastname -- the player's lastname
+            firstname -- the player's firstname
 
-        Retourne:
-            bool : Si la suppression a été effectuée, la fonction retourne True
-                   Sinon la fonction retourne False
+        Returns:
+            bool: If deletion was performed, the function returns True
+                  else the function returns False
         """
         if self.player_table.remove(
             (self.player_query.lastname == lastname)
@@ -124,6 +117,14 @@ class PlayerDao:
             return False
 
     def get_player_by_id(self, id: str) -> object:
+        """Retrieve a player object by his id
+
+        Arguments:
+            id -- a player's id
+
+        Returns:
+            a <player> object
+        """
         player = self.player_table.get(self.player_query.id == id)
         if player:
             return Player(

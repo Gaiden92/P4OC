@@ -27,7 +27,7 @@ class ReportView:
                 case "2":
                     self.tournament_controller.list_tournaments()
                 case "3":
-                    self.tournament_controller.list_name_and_date()
+                    self.tournament_controller.list_tournament_by_name()
                 case "4":
                     self.tournament_controller.get_all_tournament_players()
                 case "5":
