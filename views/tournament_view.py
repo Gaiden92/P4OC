@@ -351,9 +351,12 @@ class TournamentView(UserEntryController):
         print(bottom)
 
     # Si le choix est invalide
-    def invalid_choice(self) -> None:
+    def invalid_choice(self, message_error: str ="") -> None:
         """Informs the user that is choice is invalid."""
-        print("Choix invalide. Veuillez choisir un joueur valide ou [b] pour terminer.")
+        if message_error == "":
+            print("Choix invalide. Veuillez choisir un joueur valide ou [b] pour terminer.")
+        else:
+            print(message_error)
 
     def success_player_add_to_tournament(self, player_add: object) -> None:
         """Display the user add to the tournament.

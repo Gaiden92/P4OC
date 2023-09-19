@@ -522,7 +522,16 @@ class TournamentController(UserEntryController):
                 return list_choices_players
 
             else:
-                self.view.invalid_choice()
+                if choice != "b":
+                    self.view.invalid_choice()
+                if choice == "b" and not len(list_choices_players) >= 4:
+                    message_error = "Vous devez sélectionner un minimum de 4 joueurs"
+                    self.view.invalid_choice(message_error)
+                if choice == "b" and not len(list_choices_players) % 2 == 0:
+                    message_error = "Vous devez selectionner un nombre de joueurs paires"
+                    self.view.invalid_choice(message_error)
+
+                    
 
     def transform_results_for_display(self, tournament: object) -> list:
         """Method for generating a list from a tournament object

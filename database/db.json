@@ -203,296 +203,12 @@
             "current_round": 3
         },
         "2": {
-            "name": "Tournoi des rois",
-            "localisation": "Suresnes",
-            "nb_turn": 4,
-            "players": [
-                {
-                    "id": "AB1010",
-                    "cumulate_score": 0.0
-                },
-                {
-                    "id": "AC2115",
-                    "cumulate_score": 1.0
-                },
-                {
-                    "id": "BC0645",
-                    "cumulate_score": 0.0
-                },
-                {
-                    "id": "BN1245",
-                    "cumulate_score": 1.0
-                }
-            ],
-            "rounds": [
-                {
-                    "name": 1,
-                    "start_date": "2023-09-18",
-                    "start_hour": "21:51:22",
-                    "end_date": "2023-09-18",
-                    "end_hour": "21:51:43",
-                    "matchs": [
-                        [
-                            [
-                                "BN1245",
-                                1.0
-                            ],
-                            [
-                                "BC0645",
-                                0.0
-                            ]
-                        ],
-                        [
-                            [
-                                "AB1010",
-                                0.0
-                            ],
-                            [
-                                "AC2115",
-                                1.0
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 2,
-                    "start_date": "2023-09-18",
-                    "start_hour": "21:51:44",
-                    "end_date": "",
-                    "end_hour": "",
-                    "matchs": [
-                        [
-                            [
-                                "AC2115",
-                                0
-                            ],
-                            [
-                                "BN1245",
-                                0
-                            ]
-                        ],
-                        [
-                            [
-                                "AB1010",
-                                0
-                            ],
-                            [
-                                "BC0645",
-                                0
-                            ]
-                        ]
-                    ]
-                }
-            ],
-            "description": "aucune",
-            "date": "2023-09-18",
-            "end_date": "",
-            "current_round": 2
-        },
-        "3": {
             "name": "Tournoi des reines",
             "localisation": "Suresnes",
             "nb_turn": 4,
             "players": [
                 {
-                    "id": "AC2115",
-                    "cumulate_score": 0.5
-                },
-                {
                     "id": "AB1010",
-                    "cumulate_score": 3.0
-                },
-                {
-                    "id": "DF1415",
-                    "cumulate_score": 1.5
-                },
-                {
-                    "id": "BC0645",
-                    "cumulate_score": 1.5
-                },
-                {
-                    "id": "BN1245",
-                    "cumulate_score": 1.5
-                },
-                {
-                    "id": "AB5555",
-                    "cumulate_score": 1.0
-                }
-            ],
-            "rounds": [
-                {
-                    "name": 1,
-                    "start_date": "2023-09-19",
-                    "start_hour": "14:16:57",
-                    "end_date": "2023-09-19",
-                    "end_hour": "14:18:25",
-                    "matchs": [
-                        [
-                            [
-                                "BN1245",
-                                1.0
-                            ],
-                            [
-                                "AC2115",
-                                0.0
-                            ]
-                        ],
-                        [
-                            [
-                                "BC0645",
-                                0.5
-                            ],
-                            [
-                                "DF1415",
-                                0.5
-                            ]
-                        ],
-                        [
-                            [
-                                "AB5555",
-                                0.0
-                            ],
-                            [
-                                "AB1010",
-                                1.0
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 2,
-                    "start_date": "2023-09-19",
-                    "start_hour": "14:18:25",
-                    "end_date": "2023-09-19",
-                    "end_hour": "14:19:07",
-                    "matchs": [
-                        [
-                            [
-                                "AB1010",
-                                1.0
-                            ],
-                            [
-                                "BN1245",
-                                0.0
-                            ]
-                        ],
-                        [
-                            [
-                                "DF1415",
-                                0.5
-                            ],
-                            [
-                                "AC2115",
-                                0.5
-                            ]
-                        ],
-                        [
-                            [
-                                "BC0645",
-                                1.0
-                            ],
-                            [
-                                "AB5555",
-                                0.0
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 3,
-                    "start_date": "2023-09-19",
-                    "start_hour": "14:19:07",
-                    "end_date": "2023-09-19",
-                    "end_hour": "14:19:13",
-                    "matchs": [
-                        [
-                            [
-                                "AB1010",
-                                1.0
-                            ],
-                            [
-                                "BC0645",
-                                0.0
-                            ]
-                        ],
-                        [
-                            [
-                                "DF1415",
-                                0.5
-                            ],
-                            [
-                                "BN1245",
-                                0.5
-                            ]
-                        ],
-                        [
-                            [
-                                "AC2115",
-                                0.0
-                            ],
-                            [
-                                "AB5555",
-                                1.0
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "name": 4,
-                    "start_date": "2023-09-19",
-                    "start_hour": "14:19:13",
-                    "end_date": "2023-09-19",
-                    "end_hour": "14:19:20",
-                    "matchs": [
-                        [
-                            [
-                                "AB1010",
-                                1.0
-                            ],
-                            [
-                                "DF1415",
-                                0.0
-                            ]
-                        ],
-                        [
-                            [
-                                "BC0645",
-                                0.0
-                            ],
-                            [
-                                "BN1245",
-                                1.0
-                            ]
-                        ],
-                        [
-                            [
-                                "AB5555",
-                                0.5
-                            ],
-                            [
-                                "AC2115",
-                                0.5
-                            ]
-                        ]
-                    ]
-                }
-            ],
-            "description": "aucune",
-            "date": "2023-09-19",
-            "end_date": "2023-09-19",
-            "current_round": 4
-        },
-        "4": {
-            "name": "Tournoi des cinqs",
-            "localisation": "Courbevoie",
-            "nb_turn": 4,
-            "players": [
-                {
-                    "id": "AB1010",
-                    "cumulate_score": 0
-                },
-                {
-                    "id": "DF1415",
                     "cumulate_score": 0
                 },
                 {
@@ -506,33 +222,19 @@
                 {
                     "id": "BN1245",
                     "cumulate_score": 0
-                },
-                {
-                    "id": "GH6547",
-                    "cumulate_score": 0
                 }
             ],
             "rounds": [
                 {
                     "name": 1,
                     "start_date": "2023-09-19",
-                    "start_hour": "16:04:26",
+                    "start_hour": "16:31:29",
                     "end_date": "",
                     "end_hour": "",
                     "matchs": [
                         [
                             [
-                                "BN1245",
-                                0
-                            ],
-                            [
-                                "DF1415",
-                                0
-                            ]
-                        ],
-                        [
-                            [
-                                "AC2115",
+                                "AB1010",
                                 0
                             ],
                             [
@@ -542,11 +244,11 @@
                         ],
                         [
                             [
-                                "AB1010",
+                                "BN1245",
                                 0
                             ],
                             [
-                                "GH6547",
+                                "AC2115",
                                 0
                             ]
                         ]
