@@ -1,10 +1,10 @@
 from dao.player_dao import PlayerDao
 from models.player import Player
 from views.player_view import PlayerView
-from models.user_entry import UserEntry
+from controllers.user_entry_controller import UserEntryController
 
 
-class PlayerController(UserEntry):
+class PlayerController(UserEntryController):
     """A class representing the controller of the <Player> class."""
 
     def __init__(self, database: str) -> None:

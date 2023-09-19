@@ -1,8 +1,8 @@
-from models.user_entry import UserEntry
+from controllers.user_entry_controller import UserEntryController
 import tableprint as tp
 
 
-class PlayerView(UserEntry):
+class PlayerView(UserEntryController):
     """A class representing the view for a class <player>"""
 
     def display_players_menu(self) -> str:

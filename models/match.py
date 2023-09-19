@@ -1,17 +1,17 @@
 class Match:
     """A class that represents a match.
 
-        Attributes
-        ----------
-        player1: list
-            player name and score1
-        player2: list
-            player name and score2
+    Attributes
+    ----------
+    player1: list
+        player name and score1
+    player2: list
+        player name and score2
 
-        Methods
-        -------
-        match_serialized(self):
-            Convert a Match object to a list.
+    Methods
+    -------
+    match_serialized(self):
+        Convert a Match object to a list.
     """
 
     def __init__(self, player1: list, player2: list) -> None:

@@ -1,10 +1,10 @@
 import random
 
-from models.user_entry import UserEntry
+from controllers.user_entry_controller import UserEntryController
 import tableprint as tp
 
 
-class TournamentView(UserEntry):
+class TournamentView(UserEntryController):
     """A class representing the view for a class <tournament>"""
 
     def display_tournaments_menu(self) -> str:
@@ -55,10 +55,37 @@ class TournamentView(UserEntry):
         Arguments:
             tournaments -- object : a tournament
         """
+        header = tp.header(
+            [
+                "Nom",
+                "Lieu",
+                "Date de début",
+                "Date de fin",
+                "Tour actuel",
+                "Description",
+            ],
+            width=[25, 20, 15, 15, 12, 20],
+        )
 
+        bottom = tp.bottom(6, width=[25, 20, 15, 15, 12, 20])
+        print(header)
         for tournament in tournaments:
-            self.display_tournament(tournament)
-            print()
+            row = tp.row(
+            [
+                tournament.name,
+                tournament.localisation,
+                tournament.date,
+                tournament.end_date
+                if self.is_tournament_finish(tournament)
+                else "en cours",
+                tournament.current_round,
+                tournament.description,
+            ],
+            width=[25, 20, 15, 15, 12, 20],
+        )
+            print(row)
+        print(bottom)
+        
 
     def display_tournament(self, tournament: object) -> None:
         """Display one tournament

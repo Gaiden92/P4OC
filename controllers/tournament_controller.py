@@ -6,13 +6,12 @@ from dao.tournament_dao import TournamentDao
 from models.tournament import Tournament
 from models.match import Match
 from dao.player_dao import PlayerDao
-
 from views.tournament_view import TournamentView
 from models.round import Round
-from models.user_entry import UserEntry 
+from controllers.user_entry_controller import UserEntryController
 
 
-class TournamentController(UserEntry):
+class TournamentController(UserEntryController):
     """A class representing the controller of the <Tournament> class."""
 
     def __init__(self, database: str) -> None:

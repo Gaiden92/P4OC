@@ -39,20 +39,20 @@ class Tournament:
         current_round: int = 1,
     ) -> None:
         """_summary_
-    Constructs all the necessary attributes for the Round object.
+        Constructs all the necessary attributes for the Round object.
 
-        Arguments:
-            name -- the name of the tournament
-            localisation -- the place where the tournament takes place
-            rounds -- the list of tournament rounds
-            players -- the list of tournament players
-            description -- the description of the tournament
+            Arguments:
+                name -- the name of the tournament
+                localisation -- the place where the tournament takes place
+                rounds -- the list of tournament rounds
+                players -- the list of tournament players
+                description -- the description of the tournament
 
-        Keyword Arguments:
-            nb_turn -- the number of rounds of the tournament (default: {4})
-            date -- the start date of the tournament (default: {date.today()})
-            end_date -- the end date of the tournament (default: {""})
-            current_round -- the number of the current round of the tournament (default: {1})
+            Keyword Arguments:
+                nb_turn -- the number of rounds of the tournament (default: {4})
+                date -- the start date of the tournament (default: {date.today()})
+                end_date -- the end date of the tournament (default: {""})
+                current_round -- the number of the current round of the tournament (default: {1})
         """
         self.name = name
         self.date = str(date)
