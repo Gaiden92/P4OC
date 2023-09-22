@@ -219,7 +219,7 @@ class TournamentController(UserEntryController):
                             datetime.now().time().strftime("%H:%M:%S")
                         )
                 # vérification s'ils s'agit du dernier tour
-                if round["name"] == tournament.nb_turn:
+                if tournament.current_round == tournament.nb_turn:
                     tournament.end_date = str(date.today())
                     tournament_results = self.transform_results_for_display(tournament)
                     tournament_winner = tournament_results[0]
@@ -321,7 +321,7 @@ class TournamentController(UserEntryController):
         """
         list_rounds = tournament.rounds
         last_round = list_rounds[-1]
-        next_round = Round(last_round["name"] + 1)
+        next_round = Round(tournament.current_round + 1)
         list_players = tournament.players
 
         # trier par score

@@ -252,12 +252,21 @@ class TournamentView(UserEntryController):
 
             for index, player in enumerate(players):
                 player_chess_piece_color = random.choice(colors)
-                score = input(f"Entrez le score du J{index+1} (couleurs du joueur : {player_chess_piece_color}) : ")
+                
+                
+                while True:
+                    try:
+                        score = input(f"Entrez le score du J{index+1} (couleurs du joueur : {player_chess_piece_color}) : ")
+                        score_float = float(score)
+                        break
+                    except ValueError:
+                        print("Vous devez entrer un nombre !")
+                    
                 colors.remove(player_chess_piece_color)
-                players[index][1] = float(score)
+                players[index][1] = score_float
                 dict_player_point = {}
                 dict_player_point["id"] = player[0]
-                dict_player_point["cumulate_score"] = float(score)
+                dict_player_point["cumulate_score"] = score_float
                 list_player_cumulate_points.append(dict_player_point)
             nb_match += 1
 
