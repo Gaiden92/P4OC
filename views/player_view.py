@@ -149,7 +149,9 @@ class PlayerView(UserEntryController):
         """
         continu = input("Voulez-vous ajouter un autre joueur ? [y/n] ")
 
-        return continu if self.verify_continu(continu) else self.ask_add_another_player()
+        return (
+            continu if self.verify_continu(continu) else self.ask_add_another_player()
+        )
 
     def ask_column_update(self) -> str:
         """Asks the user which player data to modify
@@ -161,7 +163,9 @@ class PlayerView(UserEntryController):
             "Quelle colonne souhaitez vous modifier : \n 1. Nom\n 2. Prénom\n 3. Genre\n 4. Birthdate\n "
         )
 
-        return column if self.verify_column_to_update(column) else self.ask_column_update()
+        return (
+            column if self.verify_column_to_update(column) else self.ask_column_update()
+        )
 
     def ask_data(self, column_name: str) -> str:
         """Asks to the user to enter the new player characteristic
@@ -173,7 +177,9 @@ class PlayerView(UserEntryController):
             str : the user's choice
         """
         data = input("Entrer la nouvelle donnée :  ")
-        return data if self.verify_data(column_name, data) else self.ask_data(column_name)
+        return (
+            data if self.verify_data(column_name, data) else self.ask_data(column_name)
+        )
 
     def success_add_player_view(self) -> None:
         """Informs the user that the player was successfully created"""

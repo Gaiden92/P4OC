@@ -49,7 +49,7 @@ class Round:
         Returns:
             A dictionary containing tour information.
         """
-        round_name = "Round n°"+ str(self.name)
+        round_name = "Round n°" + str(self.name)
         dict_round = {
             "name": round_name,
             "start_date": self.start_date,

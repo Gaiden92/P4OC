@@ -5,8 +5,7 @@ from models.player import Player
 
 
 class PlayerDao:
-    """A class representing the player table for the <Player> class.
-    """
+    """A class representing the player table for the <Player> class."""
 
     def __init__(self, database: str) -> None:
         """Constructs all the attributes necessary for the class.

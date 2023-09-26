@@ -71,21 +71,20 @@ class TournamentView(UserEntryController):
         print(header)
         for tournament in tournaments:
             row = tp.row(
-            [
-                tournament.name,
-                tournament.localisation,
-                tournament.date,
-                tournament.end_date
-                if self.is_tournament_finish(tournament)
-                else "en cours",
-                tournament.current_round,
-                tournament.description,
-            ],
-            width=[25, 20, 15, 15, 12, 20],
-        )
+                [
+                    tournament.name,
+                    tournament.localisation,
+                    tournament.date,
+                    tournament.end_date
+                    if self.is_tournament_finish(tournament)
+                    else "en cours",
+                    tournament.current_round,
+                    tournament.description,
+                ],
+                width=[25, 20, 15, 15, 12, 20],
+            )
             print(row)
         print(bottom)
-        
 
     def display_tournament(self, tournament: object) -> None:
         """Display one tournament
@@ -234,7 +233,9 @@ class TournamentView(UserEntryController):
         """
         update = input("Merci d'entrer le nouveau nom du tournoi : ")
 
-        return update if self.information_is_ok(update) else self.ask_update_tournament()
+        return (
+            update if self.information_is_ok(update) else self.ask_update_tournament()
+        )
 
     def ask_results(self, matchs_list: list) -> tuple:
         """Asks tournament's results.
@@ -252,16 +253,17 @@ class TournamentView(UserEntryController):
 
             for index, player in enumerate(players):
                 player_chess_piece_color = random.choice(colors)
-                
-                
+
                 while True:
                     try:
-                        score = input(f"Entrez le score du J{index+1} (couleurs du joueur : {player_chess_piece_color}) : ")
+                        score = input(
+                            f"Entrez le score du J{index+1} (couleurs du joueur : {player_chess_piece_color}) : "
+                        )
                         score_float = float(score)
                         break
                     except ValueError:
                         print("Vous devez entrer un nombre !")
-                    
+
                 colors.remove(player_chess_piece_color)
                 players[index][1] = score_float
                 dict_player_point = {}
@@ -360,10 +362,12 @@ class TournamentView(UserEntryController):
         print(bottom)
 
     # Si le choix est invalide
-    def invalid_choice(self, message_error: str ="") -> None:
+    def invalid_choice(self, message_error: str = "") -> None:
         """Informs the user that is choice is invalid."""
         if message_error == "":
-            print("Choix invalide. Veuillez choisir un joueur valide ou [b] pour terminer.")
+            print(
+                "Choix invalide. Veuillez choisir un joueur valide ou [b] pour terminer."
+            )
         else:
             print(message_error)
 

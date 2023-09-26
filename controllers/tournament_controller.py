@@ -319,8 +319,7 @@ class TournamentController(UserEntryController):
         Returns:
             the next round as a <round> object
         """
-        list_rounds = tournament.rounds
-        last_round = list_rounds[-1]
+
         next_round = Round(tournament.current_round + 1)
         list_players = tournament.players
 
@@ -528,10 +527,10 @@ class TournamentController(UserEntryController):
                     message_error = "Vous devez sélectionner un minimum de 4 joueurs"
                     self.view.invalid_choice(message_error)
                 if choice == "b" and not len(list_choices_players) % 2 == 0:
-                    message_error = "Vous devez selectionner un nombre de joueurs paires"
+                    message_error = (
+                        "Vous devez selectionner un nombre de joueurs paires"
+                    )
                     self.view.invalid_choice(message_error)
-
-                    
 
     def transform_results_for_display(self, tournament: object) -> list:
         """Method for generating a list from a tournament object

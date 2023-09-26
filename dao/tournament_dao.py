@@ -5,8 +5,8 @@ from models.tournament import Tournament
 
 
 class TournamentDao:
-    """A class representing the tournament table for the <Tournament> class.
-    """
+    """A class representing the tournament table for the <Tournament> class."""
+
     def __init__(self, database: str) -> None:
         """Constructs all the attributes necessary for the class.
 
@@ -103,7 +103,6 @@ class TournamentDao:
         )
 
     def update_round_tournament(self, updates: list, name: str) -> None:
-
         """Modify the round of a tournament via his name.
 
         Arguments:
