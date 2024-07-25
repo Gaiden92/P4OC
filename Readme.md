@@ -24,13 +24,13 @@ _Testé sous Windows 10 - Python version 3.12.3_
 ## Table des matières
 
 1. [Initialisation du projet](#id-section1)
-    1. [Windows](#id-section1-1)
-    2. [MacOS et Linux](#id-section1-2)
-    3. [Générer un rapport flake8](#id-section1-3)
+    I. [Windows](#id-section1-1)
+    II. [MacOS et Linux](#id-section1-2)
+    III. [Générer un rapport flake8](#id-section1-3)
 2. [Options des menus](#id-section2)
-    1. [Menu principal](#section2-1)
-    2. [Menu des tournois](#section2-2)
-    3. [Menu des joueurs](#section2-3)
+    I. [Menu principal](#section2-1)
+    II. [Menu des tournois](#section2-2)
+    III. [Menu des joueurs](#section2-3)
 
 
 
@@ -105,9 +105,13 @@ _Dernier rapport exporté :_
 
 ![main_menu](img/main-menu.JPG)
 
+<div id='id-section2-2'></div>
+
 #### II. Menu des tournois
 
 ![tournaments_menu](img/tournaments-menu.JPG)
+
+<div id='id-section2-3'></div>
 
 #### III. Menu des joueurs
 
