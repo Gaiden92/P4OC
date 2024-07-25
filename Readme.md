@@ -7,7 +7,7 @@
         <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=flat&logo=python&logoColor=white" alt="python-badge">
     </a>
     <a href="https://flake8.pycqa.org/en/latest/">
-        <img src="https://img.shields.io/badge/Flake8-flake8==6.1+-d71b60?style=flat" alt="Flake8">
+        <img src="https://img.shields.io/badge/Flake8-6.1+-d71b60?style=flat" alt="Flake8">
     </a>
     <a href="https://tinydb.readthedocs.io/en/latest/">
         <img src="https://img.shields.io/badge/TinyDb-4.8+-00838f?style=flat" alt="TinyDb">
@@ -31,6 +31,7 @@ _Testé sous Windows 10 - Python version 3.12.3_
     1. [Menu principal](#id-section2-1)
     2. [Menu des tournois](#id-section2-2)
     3. [Menu des joueurs](#id-section2-3)
+    4. [Menu des rapports](#id-section2-4)
 
 
 
@@ -116,3 +117,15 @@ _Dernier rapport exporté :_
 #### III. Menu des joueurs
 
 ![players_menu](img/players-menu.JPG)
+
+<div id='id-section2-4'></div>
+
+#### IV. Menu des rapports
+
+![reports_menu](img/reports-menu.JPG)
+
+###### Exemples de rapports :
+
+![reports_example](img/example-report1.JPG)
+
+![reports_example](img/example-report2.JPG)
