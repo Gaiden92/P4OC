@@ -25,7 +25,7 @@ _Testé sous Windows 10 - Python version 3.12.3_
 
 1. [Initialisation du projet](#id-section1)
     1. [Windows](#id-section1-1)
-    2 [MacOS et Linux](#id-section1-2)
+    2. [MacOS et Linux](#id-section1-2)
     3. [Générer un rapport flake8](#id-section1-3)
 2. [Options des menus](#id-section2)
     1. [Menu principal](#section2-1)
