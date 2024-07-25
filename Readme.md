@@ -28,9 +28,9 @@ _Testé sous Windows 10 - Python version 3.12.3_
     2. [MacOS et Linux](#id-section1-2)
     3. [Générer un rapport flake8](#id-section1-3)
 2. [Options des menus](#id-section2)
-    1. [Menu principal](#section2-1)
-    2. [Menu des tournois](#section2-2)
-    3. [Menu des joueurs](#section2-3)
+    1. [Menu principal](#id-section2-1)
+    2. [Menu des tournois](#id-section2-2)
+    3. [Menu des joueurs](#id-section2-3)
 
 
 
