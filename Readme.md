@@ -129,3 +129,5 @@ _Dernier rapport exporté :_
 ![reports_example](img/example-report1.JPG)
 
 ![reports_example](img/example-report2.JPG)
+
+![report_tournament](img/example-tournament.JPG)
